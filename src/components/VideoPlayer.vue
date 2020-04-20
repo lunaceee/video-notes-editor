@@ -27,6 +27,19 @@ export default {
   methods: {
     currentTime: function() {
       console.log(this.player.currentTime());
+      // Turn string into array
+      function toArray(key) {
+        if (!localStorage[key]) {
+          return [];
+        }
+        return localStorage[key].split(",").map(parseFloat);
+      }
+      let url = "https://www.youtube.com/watch?v=xjS6SftYQaQ";
+      let myArray = toArray(url);
+
+      myArray.push(this.player.currentTime());
+
+      localStorage[url] = myArray.toString();
     },
   },
   mounted() {

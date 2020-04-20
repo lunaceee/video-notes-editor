@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <video-player :options="videoOptions" />
+    <you-tube />
   </div>
 </template>
 
 <script>
 import VideoPlayer from "@/components/VideoPlayer.vue";
+import YouTube from "./components/YouTube.vue";
 
 export default {
   name: "VideoExample",
   components: {
     VideoPlayer,
+    YouTube,
   },
   data() {
     return {
@@ -19,10 +22,11 @@ export default {
         controls: true,
         responsive: true,
         muted: true,
+        techOrder: ["youtube"],
         sources: [
           {
-            src: "https://youtu.be/7y1xJAVZxXg",
-            type: "video/mp4",
+            type: "video/youtube",
+            src: "https://www.youtube.com/watch?v=xjS6SftYQaQ",
           },
         ],
         breakpoints: {
