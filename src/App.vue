@@ -1,17 +1,41 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <Player />
+    <video-player :options="videoOptions" />
   </div>
 </template>
 
 <script>
-import Player from "./components/player.vue";
+import VideoPlayer from "@/components/VideoPlayer.vue";
 
 export default {
-  name: "App",
+  name: "VideoExample",
   components: {
-    Player,
+    VideoPlayer,
+  },
+  data() {
+    return {
+      videoOptions: {
+        autoplay: false,
+        controls: true,
+        responsive: true,
+        muted: true,
+        sources: [
+          {
+            src: "https://youtu.be/7y1xJAVZxXg",
+            type: "video/mp4",
+          },
+        ],
+        breakpoints: {
+          tiny: 300,
+          xsmall: 400,
+          small: 500,
+          medium: 600,
+          large: 700,
+          xlarge: 800,
+          huge: 900,
+        },
+      },
+    };
   },
 };
 </script>
