@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <h1>Vue Videojs player</h1>
+
     <video-player :options="videoOptions" />
     <you-tube />
   </div>
@@ -21,23 +23,14 @@ export default {
         autoplay: false,
         controls: true,
         responsive: true,
-        muted: true,
+        muted: false,
         techOrder: ["youtube"],
         sources: [
           {
             type: "video/youtube",
-            src: "https://www.youtube.com/watch?v=xjS6SftYQaQ",
+            src: "https://www.youtube.com/watch?v=2LP3xyvkJEk",
           },
         ],
-        breakpoints: {
-          tiny: 300,
-          xsmall: 400,
-          small: 500,
-          medium: 600,
-          large: 700,
-          xlarge: 800,
-          huge: 900,
-        },
       },
     };
   },

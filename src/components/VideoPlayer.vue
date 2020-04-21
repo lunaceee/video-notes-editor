@@ -1,6 +1,10 @@
 <template>
   <div class="player">
-    <h1>Vue Videojs player</h1>
+    <form @submit.prevent="onSubmit">
+      <input v-model="youtube" type="text" placeholder="Insert URL" />
+
+      <input type="submit" />
+    </form>
     <video ref="videoPlayer" class="video-js"></video>
     <button v-on:click="currentTime">Save notes</button>
   </div>
@@ -22,6 +26,7 @@ export default {
   data() {
     return {
       player: null,
+      youtube: null,
     };
   },
   methods: {
@@ -34,12 +39,22 @@ export default {
         }
         return localStorage[key].split(",").map(parseFloat);
       }
-      let url = "https://www.youtube.com/watch?v=xjS6SftYQaQ";
+
+      let url = this.youtube;
+      console.log(url);
       let myArray = toArray(url);
 
       myArray.push(this.player.currentTime());
 
       localStorage[url] = myArray.toString();
+    },
+    onSubmit: function() {
+      console.log("submit");
+      this.player.src({
+        type: "video/youtube",
+        src: this.youtube,
+      });
+      this.youtube = null;
     },
   },
   mounted() {
