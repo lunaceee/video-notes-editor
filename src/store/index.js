@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import youtube from "videojs-youtube";
 
+"" + youtube; // hack for linter fixing
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
@@ -13,7 +15,7 @@ export const store = new Vuex.Store({
   },
   mutations: {
     updateUrl: (state, newUrl) => {
-      console.log("updateurl");
+      console.log("updateurl", newUrl);
       state.url = newUrl;
     },
   },

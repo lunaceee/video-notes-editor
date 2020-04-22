@@ -6,7 +6,6 @@
       <input type="submit" />
     </form>
     <video-player :options="videoOptions" />
-    <you-tube />
 
     <button v-on:click="currentTime">Save notes</button>
   </div>
@@ -14,13 +13,11 @@
 
 <script>
 import VideoPlayer from "@/components/VideoPlayer.vue";
-import YouTube from "./components/YouTube.vue";
 
 export default {
   name: "VideoExample",
   components: {
     VideoPlayer,
-    YouTube,
   },
   data() {
     return {

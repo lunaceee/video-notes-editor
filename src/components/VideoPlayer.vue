@@ -21,7 +21,7 @@ export default {
   computed: mapState(["url"]),
   watch: {
     url(newVal, oldVal) {
-      console.log("n", newVal, "o", oldVal);
+      console.log("n", newVal, "o", oldVal, "player", this.player.src());
       this.player.src({
         type: "video/youtube",
         src: newVal,
@@ -29,6 +29,7 @@ export default {
     },
   },
   mounted() {
+    console.log("mounted");
     this.player = videojs(
       this.$refs.videoPlayer,
       this.options,
