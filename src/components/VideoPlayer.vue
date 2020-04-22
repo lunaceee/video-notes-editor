@@ -15,22 +15,7 @@ export default {
   methods: {
     currentTime: function() {
       console.log(this.player.currentTime());
-      // Turn string into array
-      const toArray = (key) => {
-        if (!this.notes[key]) {
-          return [];
-        }
-        return this.notes[key].split(",").map(parseFloat);
-      };
-
-      console.log(this.url);
-      console.log(this.notes[this.url]);
-
-      let myArray = toArray(this.url);
-
-      myArray.push(this.player.currentTime());
-
-      this.$store.commit("updateNotes", myArray);
+      this.$store.commit("updateNotes", [this.url, this.player.currentTime()]);
     },
   },
   watch: {

@@ -13,17 +13,36 @@ export const store = new Vuex.Store({
   },
   getters: {
     url: (state) => state.url,
+    notes: (state) => {
+      console.log("notes getter");
+      let result = {};
+      Object.keys(state.notes).map((url) => {
+        result[url] = state.notes[url].split(",").map(parseFloat);
+      });
+      return result;
+    },
   },
   mutations: {
     updateUrl: (state, newUrl) => {
       console.log("updateurl", newUrl);
       state.url = newUrl;
     },
-    updateNotes: (state, newNotes) => {
-      console.log("updatenotes");
-      localStorage[state.url] = newNotes.toString();
+    updateNotes: (state, payload) => {
+      let url = payload[0];
+      let newNote = payload[1];
+      console.log("updatenotes", url, newNote);
+      const toArray = (key) => {
+        if (!state.notes[key]) {
+          return [];
+        }
+        return state.notes[key].split(",").map(parseFloat);
+      };
+      let myArray = toArray(state.url);
+      myArray.push(newNote);
 
-      state.notes[state.url] = newNotes.toString();
+      localStorage[state.url] = myArray.toString();
+
+      state.notes[state.url] = myArray.toString();
     },
   },
 });
