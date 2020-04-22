@@ -1,6 +1,7 @@
 <template>
   <div class="player">
     <video ref="videoPlayer" class="video-js"></video>
+    <button v-on:click="currentTime">Save notes</button>
   </div>
 </template>
 
@@ -10,15 +11,27 @@ import { mapState } from "vuex";
 
 export default {
   name: "VideoPlayer",
-  props: {
-    options: {
-      type: Object,
-      default() {
-        return {};
-      },
+  computed: mapState(["url"]),
+  methods: {
+    currentTime: function() {
+      console.log(this.player.currentTime());
+      // Turn string into array
+      function toArray(key) {
+        if (!localStorage[key]) {
+          return [];
+        }
+        return localStorage[key].split(",").map(parseFloat);
+      }
+
+      let url = this.url;
+
+      let myArray = toArray(url);
+
+      myArray.push(this.player.currentTime());
+
+      localStorage[url] = myArray.toString();
     },
   },
-  computed: mapState(["url"]),
   watch: {
     url(newVal, oldVal) {
       console.log("n", newVal, "o", oldVal, "player", this.player.src());
@@ -32,7 +45,19 @@ export default {
     console.log("mounted");
     this.player = videojs(
       this.$refs.videoPlayer,
-      this.options,
+      {
+        autoplay: false,
+        controls: true,
+        responsive: true,
+        muted: false,
+        techOrder: ["youtube"],
+        sources: [
+          {
+            type: "video/youtube",
+            src: "https://www.youtube.com/watch?v=2LP3xyvkJEk",
+          },
+        ],
+      },
       function onPlayerReady() {
         console.log("onPlayerReady", this);
       }
