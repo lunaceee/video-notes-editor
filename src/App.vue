@@ -1,9 +1,14 @@
 <template>
   <div id="app">
     <h1>Vue Videojs player</h1>
-
+    <form @submit.prevent="onSubmit">
+      <input type="text" placeholder="Insert URL" :value="newUrl" />
+      <input type="submit" />
+    </form>
     <video-player :options="videoOptions" />
     <you-tube />
+
+    <button v-on:click="currentTime">Save notes</button>
   </div>
 </template>
 
@@ -33,6 +38,31 @@ export default {
         ],
       },
     };
+  },
+  methods: {
+    onSubmit(e) {
+      console.log("value", e.target[0].value);
+
+      this.$store.commit("updateUrl", e.target[0].value);
+    },
+    currentTime: function() {
+      console.log(this.player.currentTime());
+      // Turn string into array
+      function toArray(key) {
+        if (!localStorage[key]) {
+          return [];
+        }
+        return localStorage[key].split(",").map(parseFloat);
+      }
+
+      let url = this.url;
+
+      let myArray = toArray(url);
+
+      myArray.push(this.player.currentTime());
+
+      localStorage[url] = myArray.toString();
+    },
   },
 };
 </script>

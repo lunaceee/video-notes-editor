@@ -1,17 +1,12 @@
 <template>
   <div class="player">
-    <form @submit.prevent="onSubmit">
-      <input v-model="youtube" type="text" placeholder="Insert URL" />
-
-      <input type="submit" />
-    </form>
     <video ref="videoPlayer" class="video-js"></video>
-    <button v-on:click="currentTime">Save notes</button>
   </div>
 </template>
 
 <script>
 import videojs from "video.js";
+import { mapState } from "vuex";
 
 export default {
   name: "VideoPlayer",
@@ -23,38 +18,14 @@ export default {
       },
     },
   },
-  data() {
-    return {
-      player: null,
-      youtube: null,
-    };
-  },
-  methods: {
-    currentTime: function() {
-      console.log(this.player.currentTime());
-      // Turn string into array
-      function toArray(key) {
-        if (!localStorage[key]) {
-          return [];
-        }
-        return localStorage[key].split(",").map(parseFloat);
-      }
-
-      let url = this.youtube;
-      console.log(url);
-      let myArray = toArray(url);
-
-      myArray.push(this.player.currentTime());
-
-      localStorage[url] = myArray.toString();
-    },
-    onSubmit: function() {
-      console.log("submit");
+  computed: mapState(["url"]),
+  watch: {
+    url(newVal, oldVal) {
+      console.log("n", newVal, "o", oldVal);
       this.player.src({
         type: "video/youtube",
-        src: this.youtube,
+        src: newVal,
       });
-      this.youtube = null;
     },
   },
   mounted() {
