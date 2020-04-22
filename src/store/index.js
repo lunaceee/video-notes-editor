@@ -7,8 +7,9 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    url: null,
+    url: "https://www.youtube.com/watch?v=2LP3xyvkJEk",
     player: null,
+    notes: Object.assign({}, localStorage),
   },
   getters: {
     url: (state) => state.url,
@@ -17,6 +18,12 @@ export const store = new Vuex.Store({
     updateUrl: (state, newUrl) => {
       console.log("updateurl", newUrl);
       state.url = newUrl;
+    },
+    updateNotes: (state, newNotes) => {
+      console.log("updatenotes");
+      localStorage[state.url] = newNotes.toString();
+
+      state.notes[state.url] = newNotes.toString();
     },
   },
 });

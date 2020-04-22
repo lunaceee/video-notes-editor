@@ -11,30 +11,32 @@ import { mapState } from "vuex";
 
 export default {
   name: "VideoPlayer",
-  computed: mapState(["url"]),
+  computed: mapState(["url", "notes"]),
   methods: {
     currentTime: function() {
       console.log(this.player.currentTime());
       // Turn string into array
-      function toArray(key) {
-        if (!localStorage[key]) {
+      const toArray = (key) => {
+        if (!this.notes[key]) {
           return [];
         }
-        return localStorage[key].split(",").map(parseFloat);
-      }
+        return this.notes[key].split(",").map(parseFloat);
+      };
 
-      let url = this.url;
+      console.log(this.url);
+      console.log(this.notes[this.url]);
 
-      let myArray = toArray(url);
+      let myArray = toArray(this.url);
 
       myArray.push(this.player.currentTime());
 
-      localStorage[url] = myArray.toString();
+      this.$store.commit("updateNotes", myArray);
     },
   },
   watch: {
     url(newVal, oldVal) {
       console.log("n", newVal, "o", oldVal, "player", this.player.src());
+      this.url = newVal;
       this.player.src({
         type: "video/youtube",
         src: newVal,
@@ -54,7 +56,7 @@ export default {
         sources: [
           {
             type: "video/youtube",
-            src: "https://www.youtube.com/watch?v=2LP3xyvkJEk",
+            src: this.url,
           },
         ],
       },
