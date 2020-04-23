@@ -14,12 +14,15 @@ export const store = new Vuex.Store({
   getters: {
     url: (state) => state.url,
     notes: (state) => {
-      console.log("notes getter");
       let result = {};
+      delete state.notes["loglevel:webpack-dev-server"];
+
       Object.keys(state.notes).map((url) => {
-        result[url] = state.notes[url].split(",").map(parseFloat);
+        console.log("notes getter", state.notes[url]);
+        result[url] = JSON.parse(state.notes[url]);
+        console.log(result);
       });
-      console.log("result", result);
+
       return result;
     },
   },
@@ -31,19 +34,23 @@ export const store = new Vuex.Store({
     updateNotes: (state, payload) => {
       let newNote = payload[1];
       console.log("newnote", newNote);
-      const toArray = (key) => {
+      const toObj = (key) => {
         if (!state.notes[key]) {
-          return [];
+          return {};
         }
-        return state.notes[key].split(",").map(parseFloat);
+        const newObj = JSON.parse(state.notes[key]);
+        console.log("new obj", newObj);
+        return newObj;
       };
-      let myArray = toArray(state.url);
-      myArray.push(newNote);
-      console.log("notes array", myArray);
+      let myObj = toObj(state.url);
 
-      localStorage[state.url] = myArray.toString();
+      myObj[newNote] = newNote;
 
-      state.notes[state.url] = myArray.toString();
+      localStorage[state.url] = JSON.stringify(myObj);
+
+      state.notes[state.url] = JSON.stringify(myObj);
+
+      console.log(localStorage[state.url]);
     },
   },
 });

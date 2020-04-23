@@ -15,7 +15,10 @@ export default {
   methods: {
     currentTime: function() {
       console.log(this.player.currentTime());
-      this.$store.commit("updateNotes", [this.url, this.player.currentTime()]);
+      return this.$store.commit("updateNotes", [
+        this.url,
+        this.player.currentTime(),
+      ]);
     },
   },
   watch: {

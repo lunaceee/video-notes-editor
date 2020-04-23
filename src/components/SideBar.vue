@@ -1,12 +1,6 @@
 <template>
   <div class="sidebar">
-    <li v-for="note in notes" :key="note">
-      <ul>
-        <li v-for="time in note" :key="time">
-          {{ time }}
-        </li>
-      </ul>
-    </li>
+    {{ notes }}
   </div></template
 >
 <script>

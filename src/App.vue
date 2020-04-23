@@ -3,7 +3,7 @@
     <h1>Vue Videojs player</h1>
     <form @submit.prevent="onSubmit">
       <input type="text" placeholder="Insert URL" :value="newUrl" />
-      <input type="submit" />
+      <input type="submit" value="Change URL" />
     </form>
     <video-player />
     <side-bar />
