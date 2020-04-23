@@ -6,21 +6,29 @@
       <input type="submit" />
     </form>
     <video-player />
+    <side-bar />
   </div>
 </template>
 
 <script>
 import VideoPlayer from "@/components/VideoPlayer.vue";
+import SideBar from "@/components/SideBar.vue";
 
 export default {
   name: "VideoExample",
   components: {
     VideoPlayer,
+    SideBar,
+  },
+  data() {
+    return { newUrl: "" };
   },
   methods: {
     onSubmit(e) {
-      console.log("value", e.target[0].value);
-      this.$store.commit("updateUrl", e.target[0].value);
+      this.newUrl = e.target[0].value;
+      console.log("new url", this.newUrl);
+      this.$store.commit("updateUrl", this.newUrl);
+      this.newUrl = null;
     },
   },
 };

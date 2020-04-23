@@ -7,9 +7,9 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    url: "https://www.youtube.com/watch?v=2LP3xyvkJEk",
+    url: "https://youtu.be/dy6D3QYnhSk",
     player: null,
-    notes: Object.assign({}, localStorage),
+    notes: Object.assign({}, localStorage), // instantiate notes as a copy of localStorage
   },
   getters: {
     url: (state) => state.url,
@@ -19,18 +19,18 @@ export const store = new Vuex.Store({
       Object.keys(state.notes).map((url) => {
         result[url] = state.notes[url].split(",").map(parseFloat);
       });
+      console.log("result", result);
       return result;
     },
   },
   mutations: {
     updateUrl: (state, newUrl) => {
-      console.log("updateurl", newUrl);
       state.url = newUrl;
+      console.log("updated url", state.url);
     },
     updateNotes: (state, payload) => {
-      let url = payload[0];
       let newNote = payload[1];
-      console.log("updatenotes", url, newNote);
+      console.log("newnote", newNote);
       const toArray = (key) => {
         if (!state.notes[key]) {
           return [];
@@ -39,6 +39,7 @@ export const store = new Vuex.Store({
       };
       let myArray = toArray(state.url);
       myArray.push(newNote);
+      console.log("notes array", myArray);
 
       localStorage[state.url] = myArray.toString();
 
