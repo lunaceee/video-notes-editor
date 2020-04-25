@@ -7,10 +7,18 @@
 
 <script>
 import videojs from "video.js";
+import { bus } from "../main";
 import { mapState } from "vuex";
 
 export default {
   name: "VideoPlayer",
+  data() {
+    return {
+      startTime: {
+        type: Number,
+      },
+    };
+  },
   computed: mapState(["url", "notes"]),
   methods: {
     currentTime: function() {
@@ -36,7 +44,7 @@ export default {
     this.player = videojs(
       this.$refs.videoPlayer,
       {
-        autoplay: false,
+        autoplay: true,
         controls: true,
         responsive: true,
         muted: false,
@@ -52,6 +60,10 @@ export default {
         console.log("onPlayerReady", this);
       }
     );
+    bus.$on("setStartTime", (value) => {
+      console.log("passed value", value);
+      this.player.currentTime(value);
+    });
   },
   beforeDestroy() {
     if (this.player) {

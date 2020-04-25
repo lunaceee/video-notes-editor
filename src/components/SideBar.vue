@@ -4,7 +4,7 @@
       <ul>
         <li v-for="value in note" :key="value.toString()">
           <div>
-            <button :value="value">Play</button>
+            <button :value="value" @click="setStartTime(value)">Play</button>
             <button @click="expandNote(value)">
               Edit
             </button>
@@ -30,9 +30,17 @@
 >
 <script>
 import { mapGetters } from "vuex";
+import { bus } from "../main";
+
 export default {
+  name: "SideBar",
   data() {
-    return { activeItem: null };
+    return {
+      startTime: {
+        type: Number,
+      },
+      activeItem: null,
+    };
   },
   computed: {
     ...mapGetters(["notes"]),
@@ -44,6 +52,10 @@ export default {
     collapseNote: function() {
       console.log("collapsed");
       this.activeItem = null;
+    },
+    setStartTime: function(value) {
+      this.startTime = value;
+      bus.$emit("setStartTime", value);
     },
   },
 };
