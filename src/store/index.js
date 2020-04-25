@@ -15,7 +15,7 @@ export const store = new Vuex.Store({
     url: (state) => state.url,
     notes: (state) => {
       let result = {};
-      delete state.notes["loglevel:webpack-dev-server"];
+      delete state.notes["loglevel:webpack-dev-server"]; // remove unuseful key value pairs from local storage
 
       Object.keys(state.notes).map((url) => {
         console.log("notes getter", state.notes[url]);
@@ -50,7 +50,7 @@ export const store = new Vuex.Store({
 
       state.notes[state.url] = JSON.stringify(myObj);
 
-      console.log(localStorage[state.url]);
+      // console.log(localStorage[state.url]);
     },
   },
 });
