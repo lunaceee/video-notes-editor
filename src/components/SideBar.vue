@@ -3,17 +3,24 @@
     <li v-for="note in notes" :key="note">
       <ul>
         <li v-for="value in note" :key="value.toString()">
-          {{ value }}
           <div>
             <button :value="value">Play</button>
             <button @click="expandNote(value)">
               Edit
             </button>
-
-            <div class="hidden" :class="{ active: activeItem === value }">
-              <textarea></textarea>
-              <button disabled>Save</button>
-              <button>Cancel</button>
+            <div
+              :class="{
+                active: activeItem === value,
+                hidden: activeItem !== value,
+              }"
+            >
+              <div>
+                <textarea></textarea>
+                <button disabled>Save</button>
+                <button @click="collapseNote">
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         </li>
@@ -25,7 +32,7 @@
 import { mapGetters } from "vuex";
 export default {
   data() {
-    return { activeItem: null, isHidden: "hidden" };
+    return { activeItem: null };
   },
   computed: {
     ...mapGetters(["notes"]),
@@ -33,7 +40,10 @@ export default {
   methods: {
     expandNote: function(value) {
       this.activeItem = value;
-      console.log(this.activeItem);
+    },
+    collapseNote: function() {
+      console.log("collapsed");
+      this.activeItem = null;
     },
   },
 };
