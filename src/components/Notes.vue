@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="value in foo" :key="value.toString()">
+    <li v-for="value in getNote" :key="value.toString()">
       <div>
         <button :value="value" @click="setStartTime(value)">Play</button>
         <button @click="expandNote(value)">
@@ -39,14 +39,12 @@ export default {
   props: {
     url: { type: String, required: true },
   },
-  computed: {
-    ...mapState(["rawNotes"]),
-    foo: function() {
-      let n = this.$store.getters.notes;
-      console.log("nnnnnnn", n);
-      return n[this.url];
+  computed: mapState({
+    notes: (state) => state.notes,
+    getNote() {
+      return this.$store.getters.getNote(this.url);
     },
-  },
+  }),
   watch: {
     rawNotes(newVal, oldVal) {
       console.log("n", newVal, "o", oldVal);

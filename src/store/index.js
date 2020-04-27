@@ -22,6 +22,10 @@ export const store = new Vuex.Store({
 
       return result;
     },
+    getNote: (state) => (url) => {
+      console.log("getNote");
+      return JSON.parse(state.rawNotes[url]);
+    },
   },
   mutations: {
     updateUrl: (state, newUrl) => {
@@ -48,7 +52,8 @@ export const store = new Vuex.Store({
 
       localStorage[url] = JSON.stringify(myObj);
 
-      state.rawNotes = localStorage;
+      // create a brand new object and copy localStorage into the object, rebind rawNotes to the new object
+      state.rawNotes = Object.assign({}, localStorage);
 
       // console.log(localStorage[state.url]);
     },
