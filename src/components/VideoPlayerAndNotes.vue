@@ -24,10 +24,5 @@ export default {
     ...mapState(["rawNotes"]),
     ...mapGetters(["notes"]),
   },
-  watch: {
-    rawNotes(newVal, oldVal) {
-      console.log("n", newVal, "o", oldVal);
-    },
-  },
 };
 </script>

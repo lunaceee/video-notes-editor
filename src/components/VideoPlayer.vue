@@ -54,7 +54,6 @@ export default {
       }
     );
     bus.$on("setStartTime", (value) => {
-      console.log("passed value", value);
       this.player.currentTime(value);
     });
   },

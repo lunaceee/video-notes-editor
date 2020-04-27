@@ -23,7 +23,6 @@ export default {
   methods: {
     onSubmit(e) {
       this.newUrl = e.target[0].value;
-      console.log("new url", this.newUrl);
       this.$store.commit("updateUrl", this.newUrl);
       this.newUrl = null;
     },

@@ -1,15 +1,15 @@
 <template>
   <ul>
-    <li v-for="value in getNote" :key="value.toString()">
+    <li v-for="time in getNote" :key="time.toString()">
       <div>
-        <button :value="value" @click="setStartTime(value)">Play</button>
-        <button @click="expandNote(value)">
+        <button :time="time" @click="setStartTime(time)">Play</button>
+        <button @click="expandNote(time)">
           Edit
         </button>
         <div
           :class="{
-            active: activeItem === value,
-            hidden: activeItem !== value,
+            active: activeItem === time,
+            hidden: activeItem !== time,
           }"
         >
           <textarea></textarea>
@@ -45,22 +45,17 @@ export default {
       return this.$store.getters.getNote(this.url);
     },
   }),
-  watch: {
-    rawNotes(newVal, oldVal) {
-      console.log("n", newVal, "o", oldVal);
-    },
-  },
   methods: {
-    expandNote: function(value) {
-      this.activeItem = value;
+    expandNote: function(time) {
+      this.activeItem = time;
     },
     collapseNote: function() {
       console.log("collapsed");
       this.activeItem = null;
     },
-    setStartTime: function(value) {
-      this.startTime = value;
-      bus.$emit("setStartTime", value);
+    setStartTime: function(time) {
+      this.startTime = time;
+      bus.$emit("setStartTime", time);
     },
   },
 };
