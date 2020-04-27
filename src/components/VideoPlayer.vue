@@ -19,7 +19,10 @@ export default {
       },
     };
   },
-  computed: mapState(["url", "notes"]),
+  props: {
+    url: { type: String, required: true },
+  },
+  computed: mapState(["notes"]),
   methods: {
     currentTime: function() {
       console.log(this.player.currentTime());
@@ -27,16 +30,6 @@ export default {
         this.url,
         this.player.currentTime(),
       ]);
-    },
-  },
-  watch: {
-    url(newVal, oldVal) {
-      console.log("n", newVal, "o", oldVal, "player", this.player.src());
-      this.url = newVal;
-      this.player.src({
-        type: "video/youtube",
-        src: newVal,
-      });
     },
   },
   mounted() {

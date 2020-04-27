@@ -5,20 +5,17 @@
       <input type="text" placeholder="Insert URL" :value="newUrl" />
       <input type="submit" value="Change URL" />
     </form>
-    <video-player />
-    <side-bar />
+    <video-player-and-notes />
   </div>
 </template>
 
 <script>
-import VideoPlayer from "@/components/VideoPlayer.vue";
-import SideBar from "@/components/SideBar.vue";
+import VideoPlayerAndNotes from "@/components/VideoPlayerAndNotes.vue";
 
 export default {
   name: "VideoExample",
   components: {
-    VideoPlayer,
-    SideBar,
+    VideoPlayerAndNotes,
   },
   data() {
     return { newUrl: "" };
