@@ -5,18 +5,15 @@
       <input type="text" placeholder="Insert URL" :value="newUrl" />
       <input type="submit" value="Change URL" />
     </form>
-    <video-player-and-notes />
+    <transition name="fade" mode="out-in">
+      <router-view :key="$route.path" />
+    </transition>
   </div>
 </template>
 
 <script>
-import VideoPlayerAndNotes from "@/components/VideoPlayerAndNotes.vue";
-
 export default {
-  name: "VideoExample",
-  components: {
-    VideoPlayerAndNotes,
-  },
+  name: "VideoNotesEditor",
   data() {
     return { newUrl: "" };
   },

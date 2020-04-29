@@ -24,7 +24,6 @@
 </template>
 <script>
 import { bus } from "../main";
-import { mapState } from "vuex";
 
 export default {
   name: "Notes",
@@ -39,12 +38,11 @@ export default {
   props: {
     url: { type: String, required: true },
   },
-  computed: mapState({
-    notes: (state) => state.notes,
+  computed: {
     getNote() {
       return this.$store.getters.getNote(this.url);
     },
-  }),
+  },
   methods: {
     expandNote: function(time) {
       this.activeItem = time;

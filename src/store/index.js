@@ -30,7 +30,7 @@ export const store = new Vuex.Store({
     updateUrl: (state, newUrl) => {
       let myObj = state.rawNotes[newUrl] ? state.rawNotes[newUrl] : "{}";
       localStorage[newUrl] = myObj;
-      state.rawNotes = localStorage; // Mutate the entire rawNotes obj so that watcher in VideoPlayerAndNotes works
+      state.rawNotes = localStorage; // Mutate the entire rawNotes obj so that watcher in VideoDetails works
       console.log("updated url", newUrl);
     },
     updateNotes: (state, payload) => {

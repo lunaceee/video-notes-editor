@@ -22,7 +22,7 @@ export default {
   props: {
     url: { type: String, required: true },
   },
-  computed: mapState(["notes"]),
+  computed: mapState(["rawNotes"]),
   methods: {
     currentTime: function() {
       console.log(this.player.currentTime());

@@ -1,28 +1,25 @@
 <template>
   <div>
-    <ul v-for="url in Object.keys(notes)" :key="url">
-      <li>
-        <video-player :url="url" />
-        <notes :url="url" />
-      </li>
-    </ul>
+    <video-player :url="myUrl" />
+    <notes :url="myUrl" />
   </div>
 </template>
 <script>
 import VideoPlayer from "@/components/VideoPlayer.vue";
 import Notes from "@/components/Notes.vue";
-import { mapState } from "vuex";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "VideoPlayerAndNotes",
+  name: "VideoDetails",
   components: {
     VideoPlayer,
     Notes,
   },
   computed: {
-    ...mapState(["rawNotes"]),
     ...mapGetters(["notes"]),
+    myUrl: function() {
+      return this.$route.params["slug"];
+    },
   },
 };
 </script>
