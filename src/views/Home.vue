@@ -4,7 +4,7 @@
       All videos
     </h1>
     <div class="videos">
-      <div v-for="url in Object.keys(notes)" :key="url">
+      <div v-for="url in Object.keys(getNotes)" :key="url">
         <figure>
           <router-link
             :to="{
@@ -12,10 +12,7 @@
               params: { slug: url },
             }"
           >
-            <img
-              src="https://i.pinimg.com/564x/06/11/6e/06116ec748dd82079f0c3c9c87c6ec4f.jpg"
-              alt="cat face"
-            />
+            <VideoPlayer :url="url" :controls="false" />
           </router-link>
         </figure>
       </div>
@@ -24,12 +21,16 @@
 </template>
 
 <script>
+import VideoPlayer from "@/components/VideoPlayer.vue";
 import { mapGetters } from "vuex";
 
 export default {
   name: "home",
+  components: {
+    VideoPlayer,
+  },
   computed: {
-    ...mapGetters(["notes"]),
+    ...mapGetters(["getNotes"]),
   },
 };
 </script>

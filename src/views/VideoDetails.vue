@@ -19,7 +19,7 @@ export default {
     GoBack,
   },
   computed: {
-    ...mapGetters(["notes"]),
+    ...mapGetters(["getNotes"]),
     myUrl: function() {
       return this.$route.params["slug"];
     },

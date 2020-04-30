@@ -10,19 +10,19 @@ export const store = new Vuex.Store({
     rawNotes: Object.assign({}, localStorage), // instantiate notes as a copy of localStorage
   },
   getters: {
-    notes: (state) => {
+    getNotes: (state) => {
       let result = {};
       delete state.rawNotes["loglevel:webpack-dev-server"]; // remove unuseful key value pairs from local storage
 
       Object.keys(state.rawNotes).map((url) => {
-        console.log("notes getter");
+        console.log("get Notes");
         result[url] = JSON.parse(state.rawNotes[url]);
       });
 
       return result;
     },
     getNote: (state) => (url) => {
-      console.log("getNote getter");
+      console.log("get Note");
       return JSON.parse(state.rawNotes[url]);
     },
   },

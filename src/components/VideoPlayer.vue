@@ -1,7 +1,9 @@
 <template>
   <div class="player">
     <video ref="videoPlayer" class="video-js"></video>
-    <button v-on:click="currentTime">Save notes</button>
+    <button v-if="controls === true" v-on:click="currentTime">
+      Save notes
+    </button>
   </div>
 </template>
 
@@ -21,6 +23,10 @@ export default {
   },
   props: {
     url: { type: String, required: true },
+    controls: {
+      default: true,
+      type: Boolean,
+    },
   },
   computed: mapState(["rawNotes"]),
   methods: {
@@ -37,8 +43,8 @@ export default {
     this.player = videojs(
       this.$refs.videoPlayer,
       {
-        autoplay: true,
-        controls: true,
+        autoplay: false,
+        controls: this.controls,
         responsive: true,
         muted: false,
         techOrder: ["youtube"],
