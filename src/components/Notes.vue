@@ -1,51 +1,56 @@
 <template>
   <ul>
-    <li v-for="time in getNote" :key="time.toString()">
-      <div>
-        <button :time="time" @click="setStartTime(time)">Play</button>
-        <button @click="expandNote(time)">
-          Edit
-        </button>
-        <div
-          :class="{
-            active: activeItem === time,
-            hidden: activeItem !== time,
-          }"
-        >
-          <textarea></textarea>
-          <button disabled>Save</button>
-          <button @click="collapseNote">
-            Cancel
-          </button>
-        </div>
-      </div>
+    <li v-for="(note, time, index) in getNote" :key="index">
+      <Note />
     </li>
   </ul>
 </template>
 <script>
 import { bus } from "../main";
+import Note from "./Note.vue";
 
 export default {
   name: "Notes",
+  components: {
+    Note,
+  },
+  props: {
+    url: { type: String, required: true },
+    placeholder: {
+      default: "Type in note",
+      type: String,
+    },
+    newNote: {
+      type: String,
+    },
+    savedNote: {
+      default: "",
+      type: String,
+    },
+  },
   data() {
     return {
       startTime: {
         type: Number,
       },
       activeItem: null,
+      editingObj: {},
     };
-  },
-  props: {
-    url: { type: String, required: true },
   },
   computed: {
     getNote() {
+      console.log("getNote computed", this.$store.getters.getNote(this.url));
       return this.$store.getters.getNote(this.url);
     },
   },
   methods: {
+    isEditing: function(time) {
+      console.log("dfdfdfh", this.editingObj[time]);
+      return this.editingObj[time];
+    },
     expandNote: function(time) {
-      this.activeItem = time;
+      this.editingObj[time] = true;
+      console.log("xxxx", this.editingObj[time]);
     },
     collapseNote: function() {
       console.log("collapsed");
@@ -54,6 +59,14 @@ export default {
     setStartTime: function(time) {
       this.startTime = time;
       bus.$emit("setStartTime", time);
+    },
+    saveNote: function(time, e) {
+      console.log(arguments, e);
+      console.log(document.getElementById(`textarea-${e.target.id}`));
+      let tarea = document.getElementById(`textarea-${e.target.id}`);
+
+      let note = tarea.value;
+      this.$store.commit("editNote", [note, time, this.url]);
     },
   },
 };

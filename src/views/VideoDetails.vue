@@ -1,8 +1,8 @@
 <template>
   <div>
     <GoBack />
-    <video-player :url="myUrl" />
-    <notes :url="myUrl" />
+    <video-player :url="myUrl" class="player" />
+    <notes :url="myUrl" class="notes" />
   </div>
 </template>
 <script>
@@ -26,3 +26,11 @@ export default {
   },
 };
 </script>
+<style>
+.player {
+  float: left;
+}
+.notes {
+  float: right;
+}
+</style>

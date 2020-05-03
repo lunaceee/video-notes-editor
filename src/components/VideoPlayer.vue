@@ -35,6 +35,7 @@ export default {
       return this.$store.commit("updateNotes", [
         this.url,
         this.player.currentTime(),
+        "initial",
       ]);
     },
   },

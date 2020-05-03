@@ -2,8 +2,8 @@
   <div id="app">
     <h1>Vue Videojs player</h1>
     <form @submit.prevent="onSubmit">
-      <input type="text" placeholder="Insert URL" :value="newUrl" />
-      <input type="submit" value="Change URL" />
+      <input type="text" placeholder="Add URL" />
+      <input type="submit" value="Add URL" />
     </form>
     <transition name="fade" mode="out-in">
       <router-view :key="$route.path" />
@@ -14,14 +14,14 @@
 <script>
 export default {
   name: "VideoNotesEditor",
-  data() {
-    return { newUrl: "" };
-  },
   methods: {
     onSubmit(e) {
-      this.newUrl = e.target[0].value;
-      this.$store.commit("updateUrl", this.newUrl);
-      this.newUrl = null;
+      const newUrl = e.target[0].value || "";
+      if (newUrl) {
+        this.$store.commit("addVideo", newUrl);
+      } else {
+        alert("Invalid Youtube URL");
+      }
     },
   },
 };

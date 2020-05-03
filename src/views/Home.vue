@@ -4,15 +4,15 @@
       All videos
     </h1>
     <div class="videos">
-      <div v-for="url in Object.keys(getNotes)" :key="url">
+      <div v-for="video in videos" :key="video.url">
         <figure>
           <router-link
             :to="{
               name: 'VideoDetails',
-              params: { slug: url },
+              params: { slug: video.url },
             }"
           >
-            <VideoPlayer :url="url" :controls="false" />
+            <VideoPlayer :url="video.url" :controls="false" />
           </router-link>
         </figure>
       </div>
@@ -22,7 +22,7 @@
 
 <script>
 import VideoPlayer from "@/components/VideoPlayer.vue";
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "home",
@@ -30,7 +30,7 @@ export default {
     VideoPlayer,
   },
   computed: {
-    ...mapGetters(["getNotes"]),
+    ...mapState(["videos"]),
   },
 };
 </script>

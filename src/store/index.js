@@ -6,53 +6,46 @@ import youtube from "videojs-youtube";
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-  state: {
-    rawNotes: Object.assign({}, localStorage), // instantiate notes as a copy of localStorage
-  },
-  getters: {
-    getNotes: (state) => {
-      let result = {};
-      delete state.rawNotes["loglevel:webpack-dev-server"]; // remove unuseful key value pairs from local storage
-
-      Object.keys(state.rawNotes).map((url) => {
-        console.log("get Notes");
-        result[url] = JSON.parse(state.rawNotes[url]);
-      });
-
-      return result;
-    },
-    getNote: (state) => (url) => {
-      console.log("get Note");
-      return JSON.parse(state.rawNotes[url]);
-    },
-  },
+  state: { videos: [] },
   mutations: {
-    updateUrl: (state, newUrl) => {
-      let myObj = state.rawNotes[newUrl] ? state.rawNotes[newUrl] : "{}";
-      localStorage[newUrl] = myObj;
-      state.rawNotes = localStorage; // Mutate the entire rawNotes obj so that watcher in VideoDetails works
-      console.log("updated url", newUrl);
+    initializeStore: function() {
+      let persisted = localStorage.getItem("store");
+      if (persisted) {
+        persisted = JSON.parse(persisted) || {};
+      } else {
+        persisted = {};
+      }
+
+      if (!Array.isArray(persisted.videos)) {
+        persisted.videos = [];
+      }
+
+      this.replaceState(persisted);
     },
+
+    addVideo: (state, newUrl) => {
+      const video = { url: newUrl, notes: [] };
+      state.videos = state.videos || [];
+      state.videos.push(video);
+    },
+
     updateNotes: (state, payload) => {
-      let url = payload[0];
-      let newNote = payload[1];
-      console.log("newnote", newNote);
-      const toObj = (key) => {
-        if (!state.rawNotes[key]) {
-          return {};
-        }
-        const newObj = JSON.parse(state.rawNotes[key]);
-        console.log("new obj", newObj);
-        return newObj;
-      };
-      let myObj = toObj(url);
+      // let url = payload[0];
+      // let newTimeStamp = payload[1];
+      // let newNote = payload[2];
+      console.log(payload);
+    },
 
-      myObj[newNote] = newNote;
-
-      localStorage[url] = JSON.stringify(myObj);
-
-      // create a brand new object and copy localStorage into the object, rebind rawNotes to the new object
-      state.rawNotes = Object.assign({}, localStorage);
+    editNote: (state, payload) => {
+      // let note = payload[0];
+      // let time = payload[1];
+      // let url = payload[2];
+      console.log(payload);
     },
   },
+});
+
+// Subscribe to store updates, each update serialize to localStorage.
+store.subscribe((mutation, state) => {
+  localStorage.setItem("store", JSON.stringify(state));
 });
