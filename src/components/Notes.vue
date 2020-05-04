@@ -6,7 +6,7 @@
 
     <ul>
       <li v-for="(note, index) in notes" :key="index">
-        <Note :note="note" />
+        <Note :note="note" :noteIndex="index" :video="video" :playerHolder="playerHolder" />
       </li>
     </ul>
   </div>
@@ -22,8 +22,12 @@ export default {
   },
   props: {
     url: { type: String, required: true },
+    playerHolder: { type: Object },
   },
   computed: {
+    video() {
+      return this.$store.getters.video(this.url);
+    },
     notes() {
       const video = this.$store.getters.video(this.url);
       return video.notes;
@@ -32,7 +36,7 @@ export default {
   methods: {
     addNote() {
       const video = this.$store.getters.video(this.url);
-      this.$store.commit('addNote', video);
+      this.$store.commit('addNote', {video, time: this.playerHolder.get().currentTime()});
     }
   }
 };

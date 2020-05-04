@@ -6,8 +6,6 @@
 
 <script>
 import videojs from "video.js";
-import { bus } from "../main";
-import { mapState } from "vuex";
 
 export default {
   name: "VideoPlayer",
@@ -24,20 +22,9 @@ export default {
       default: true,
       type: Boolean,
     },
-  },
-  computed: mapState(["rawNotes"]),
-  methods: {
-    currentTime: function() {
-      console.log(this.player.currentTime());
-      return this.$store.commit("updateNotes", [
-        this.url,
-        this.player.currentTime(),
-        "initial",
-      ]);
-    },
+    playerHolder: { type: Object },
   },
   mounted() {
-    console.log("mounted");
     this.player = videojs(
       this.$refs.videoPlayer,
       {
@@ -52,14 +39,12 @@ export default {
             src: this.url,
           },
         ],
-      },
-      function onPlayerReady() {
-        console.log("onPlayerReady", this);
       }
     );
-    bus.$on("setStartTime", (value) => {
-      this.player.currentTime(value);
-    });
+
+    if (this.playerHolder) {
+      this.playerHolder.set(this.player);
+    }
   },
   beforeDestroy() {
     if (this.player) {

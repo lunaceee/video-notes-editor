@@ -1,8 +1,8 @@
 <template>
   <div>
     <GoBack />
-    <notes :url="videoUrl" class="notes" />
-    <video-player :url="videoUrl" class="player" />
+    <notes :url="videoUrl" class="notes" :playerHolder="playerHolder" />
+    <video-player :url="videoUrl" class="player" :playerHolder="playerHolder" />
   </div>
 </template>
 <script>
@@ -13,6 +13,15 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "VideoDetails",
+  data() {
+    let video;
+    return {
+      playerHolder: {
+        set: (vid) => video = vid,
+        get: () => video,
+      }
+    };
+  },
   components: {
     VideoPlayer,
     Notes,
@@ -28,5 +37,8 @@ export default {
 <style>
 .player {
   float: left;
+}
+.notes {
+  float: right;
 }
 </style>

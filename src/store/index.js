@@ -36,26 +36,20 @@ export const store = new Vuex.Store({
       state.videos.push(video);
     },
 
-    addNote: (state, video) => {
+    addNote: (state, { video, time }) => {
       video.notes.push({
-        text: 'HELLO',
-        time: 52,
+        text: "",
+        time
       });
     },
 
-    updateNotes: (state, payload) => {
-      // let url = payload[0];
-      // let newTimeStamp = payload[1];
-      // let newNote = payload[2];
-      console.log(payload);
+    updateNote: (state, { note, text }) => {
+      note.text = text;
     },
 
-    editNote: (state, payload) => {
-      // let note = payload[0];
-      // let time = payload[1];
-      // let url = payload[2];
-      console.log(payload);
-    },
+    deleteNote: (state, { video, noteIndex }) => {
+      video.notes.splice(noteIndex, 1)
+    }
   },
 });
 
