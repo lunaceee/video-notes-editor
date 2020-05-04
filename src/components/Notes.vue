@@ -1,9 +1,15 @@
 <template>
-  <ul>
-    <li v-for="(note, time, index) in getNote" :key="index">
-      <Note />
-    </li>
-  </ul>
+  <div>
+    <button v-on:click="addNote">
+      Add note
+    </button>
+
+    <ul>
+      <li v-for="(note, index) in notes" :key="index">
+        <Note :note="note" />
+      </li>
+    </ul>
+  </div>
 </template>
 <script>
 import { bus } from "../main";
@@ -16,59 +22,19 @@ export default {
   },
   props: {
     url: { type: String, required: true },
-    placeholder: {
-      default: "Type in note",
-      type: String,
-    },
-    newNote: {
-      type: String,
-    },
-    savedNote: {
-      default: "",
-      type: String,
-    },
-  },
-  data() {
-    return {
-      startTime: {
-        type: Number,
-      },
-      activeItem: null,
-      editingObj: {},
-    };
   },
   computed: {
-    getNote() {
-      console.log("getNote computed", this.$store.getters.getNote(this.url));
-      return this.$store.getters.getNote(this.url);
+    notes() {
+      const video = this.$store.getters.video(this.url);
+      return video.notes;
     },
   },
   methods: {
-    isEditing: function(time) {
-      console.log("dfdfdfh", this.editingObj[time]);
-      return this.editingObj[time];
-    },
-    expandNote: function(time) {
-      this.editingObj[time] = true;
-      console.log("xxxx", this.editingObj[time]);
-    },
-    collapseNote: function() {
-      console.log("collapsed");
-      this.activeItem = null;
-    },
-    setStartTime: function(time) {
-      this.startTime = time;
-      bus.$emit("setStartTime", time);
-    },
-    saveNote: function(time, e) {
-      console.log(arguments, e);
-      console.log(document.getElementById(`textarea-${e.target.id}`));
-      let tarea = document.getElementById(`textarea-${e.target.id}`);
-
-      let note = tarea.value;
-      this.$store.commit("editNote", [note, time, this.url]);
-    },
-  },
+    addNote() {
+      const video = this.$store.getters.video(this.url);
+      this.$store.commit('addNote', video);
+    }
+  }
 };
 </script>
 <style>

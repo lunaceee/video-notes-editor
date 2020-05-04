@@ -1,8 +1,8 @@
 <template>
   <div>
     <GoBack />
-    <video-player :url="myUrl" class="player" />
-    <notes :url="myUrl" class="notes" />
+    <notes :url="videoUrl" class="notes" />
+    <video-player :url="videoUrl" class="player" />
   </div>
 </template>
 <script>
@@ -19,8 +19,7 @@ export default {
     GoBack,
   },
   computed: {
-    ...mapGetters(["getNotes"]),
-    myUrl: function() {
+    videoUrl: function() {
       return this.$route.params["slug"];
     },
   },
@@ -29,8 +28,5 @@ export default {
 <style>
 .player {
   float: left;
-}
-.notes {
-  float: right;
 }
 </style>

@@ -7,8 +7,15 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: { videos: [] },
+  getters: {
+    video: (state) => (url) => {
+      for (const video of state.videos) {
+        if (video.url === url) return video;
+      }
+    },
+  },
   mutations: {
-    initializeStore: function() {
+    initializeStore: function () {
       let persisted = localStorage.getItem("store");
       if (persisted) {
         persisted = JSON.parse(persisted) || {};
@@ -27,6 +34,13 @@ export const store = new Vuex.Store({
       const video = { url: newUrl, notes: [] };
       state.videos = state.videos || [];
       state.videos.push(video);
+    },
+
+    addNote: (state, video) => {
+      video.notes.push({
+        text: 'HELLO',
+        time: 52,
+      });
     },
 
     updateNotes: (state, payload) => {
