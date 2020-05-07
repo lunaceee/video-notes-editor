@@ -9,7 +9,7 @@
     </div>
     <div class="content">
       <p v-if="mode === 'showing'">
-        {{note.time}} {{note.text}}
+       {{note.text}}
       </p>   
       <textarea v-if="mode === 'editing'" :placeholder="placeholder" v-model="editingContent"></textarea>
     </div>
