@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@devmobiliza/videojs-vimeo": "^0.6.0",
     "core-js": "^3.6.4",
     "video.js": "^7.7.5",
     "videojs-youtube": "^2.6.1",
