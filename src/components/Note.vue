@@ -1,17 +1,27 @@
 <template>
   <div class="note">
-    <div class="controls">
-    <button @click="play">play</button>
-    <button v-if="mode === 'showing'" @click="edit">edit</button>
-    <button v-if="mode === 'editing'" @click="save">save</button>
-    <button v-if="mode === 'editing'" @click="cancel">cancel</button>
-    <button @click="deleteNote">delete</button>
+    <div class="top-controls">
+      <button @click="play" class="play-btn">play</button>
+      <button v-if="mode === 'showing'" @click="edit" class="edit-btn">edit</button>
+      <button @click="deleteNote" class="delete-btn">delete</button>
+    </div>
+    <div class="timestamp">
+      <p>{{ Math.floor(note.time) }}s</p>
     </div>
     <div class="content">
-      <p v-if="mode === 'showing'">
-       {{note.text}}
-      </p>   
-      <textarea v-if="mode === 'editing'" :placeholder="placeholder" v-model="editingContent"></textarea>
+      <p v-if="mode === 'showing'">{{note.text}}</p>
+    </div>
+    <div class="text">
+      <textarea
+        wrap="hard"
+        v-if="mode === 'editing'"
+        :placeholder="placeholder"
+        v-model="editingContent"
+      ></textarea>
+    </div>
+    <div class="bottom-controls">
+      <button v-if="mode === 'editing'" @click="save" class="save-btn">save</button>
+      <button v-if="mode === 'editing'" @click="cancel" class="cancel-btn">cancel</button>
     </div>
   </div>
 </template>
@@ -22,14 +32,14 @@ export default {
   name: "note",
   data() {
     return {
-      mode: 'showing',
+      mode: "showing",
       editingContent: this.note.text
-    }
+    };
   },
   props: {
     placeholder: {
       default: "Type in note",
-      type: String,
+      type: String
     },
     playerHolder: {
       type: Object
@@ -44,49 +54,109 @@ export default {
     },
     noteIndex: {
       default: 0,
-      type: Number,
+      type: Number
     }
   },
   methods: {
-    edit: function(){
+    edit: function() {
       this.editingContent = this.note.text;
-      this.mode = "editing"
+      this.mode = "editing";
     },
-    cancel: function(){
-      this.mode = "showing"
+    cancel: function() {
+      this.mode = "showing";
     },
     save: function() {
-      this.$store.commit("updateNote", {note: this.note, text: this.editingContent});
+      this.$store.commit("updateNote", {
+        note: this.note,
+        text: this.editingContent
+      });
       this.mode = "showing";
     },
     deleteNote: function() {
-      this.$store.commit("deleteNote", {video: this.video, noteIndex: this.noteIndex})
+      this.$store.commit("deleteNote", {
+        video: this.video,
+        noteIndex: this.noteIndex
+      });
     },
-    play: function(){
+    play: function() {
       const player = this.playerHolder.get();
       player.pause();
       player.currentTime(this.note.time);
       player.play();
     }
-  },
+  }
 };
 </script>
-<style>
-  .note {
-    margin: 1rem;
-    outline: 1px solid gray;
-    padding: 1rem;
-    max-width: 30rem;
-  }
-  .controls button {
-    display: inline-block;
-    margin: .5rem;
-  }
-  .content p {
-    outline: 1px solid rgba(0, 0, 0, 0.1);
-  }
-  .content textarea {
-    width: 100%;
-    min-height: 4rem;
-  }
+<style scoped>
+.note {
+  display: grid;
+  grid-template-areas:
+    "top-controls time"
+    "content content"
+    "bottom-controls bottom-controls";
+  /* justify-items: start; */
+  align-items: center;
+  width: 20rem;
+  grid-gap: 0.5rem;
+}
+
+.top-controls {
+  grid-area: top-controls;
+}
+
+.bottom-controls {
+  grid-area: bottom-controls;
+  justify-items: flex-end;
+}
+
+.timestamp {
+  grid-area: time;
+  font-weight: 600;
+}
+
+.content,
+.text {
+  overflow: scroll;
+  width: 20rem;
+  grid-area: content;
+}
+
+.content {
+  word-break: break-all;
+  padding: 0 1rem;
+  text-align: left;
+  border-bottom: 0.01rem solid #2e2525;
+}
+
+.text > textarea {
+  width: 18rem;
+  height: 8rem;
+}
+
+.play-btn {
+  grid-area: play;
+}
+.edit-btn {
+  grid-area: edit;
+}
+.delete-btn {
+  grid-area: delete;
+}
+
+button:active {
+  top: 0.1em;
+}
+
+.cancel-btn {
+  background-color: #faeff1;
+  color: #2e2525;
+}
+
+.delete-btn {
+  background-color: #70003a;
+}
+
+.save-btn {
+  background-color: #3cb87d;
+}
 </style>

@@ -1,11 +1,12 @@
 <template>
-  <span class="go-back">
+  <div class="go-back">
     <button @click="goBack">go back</button>
-  </span>
+  </div>
 </template>
 
 <script>
 export default {
+  name: "GoBack",
   methods: {
     goBack() {
       return this.$router.go(-1);
@@ -16,10 +17,12 @@ export default {
 
 <style scoped>
 .go-back {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
   cursor: pointer;
 }
+
 button {
-  border: 0;
+  background-color: #3cb87d;
 }
 </style>

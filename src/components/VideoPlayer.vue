@@ -1,7 +1,5 @@
 <template>
-  <div class="player">
-    <video ref="videoPlayer" class="video-js"></video>
-  </div>
+  <video ref="videoPlayer" class="video-js"></video>
 </template>
 
 <script>
@@ -12,35 +10,32 @@ export default {
   data() {
     return {
       startTime: {
-        type: Number,
-      },
+        type: Number
+      }
     };
   },
   props: {
     url: { type: String, required: true },
     controls: {
       default: true,
-      type: Boolean,
+      type: Boolean
     },
-    playerHolder: { type: Object },
+    playerHolder: { type: Object }
   },
   mounted() {
-    this.player = videojs(
-      this.$refs.videoPlayer,
-      {
-        autoplay: false,
-        controls: this.controls,
-        responsive: true,
-        muted: false,
-        techOrder: ["youtube"],
-        sources: [
-          {
-            type: "video/youtube",
-            src: this.url,
-          },
-        ],
-      }
-    );
+    this.player = videojs(this.$refs.videoPlayer, {
+      autoplay: false,
+      controls: this.controls,
+      responsive: true,
+      muted: false,
+      techOrder: ["youtube"],
+      sources: [
+        {
+          type: "video/youtube",
+          src: this.url
+        }
+      ]
+    });
 
     if (this.playerHolder) {
       this.playerHolder.set(this.player);
@@ -50,13 +45,10 @@ export default {
     if (this.player) {
       this.player.dispose();
     }
-  },
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.player {
-  display: inline-block;
-}
 </style>
