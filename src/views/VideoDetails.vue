@@ -89,6 +89,7 @@ export default {
       "add-btn add-btn notes"
       ". . notes";
     grid-template-columns: repeat(3, 1fr);
+    grid-gap: 4rem;
   }
   .video {
     width: 42rem;

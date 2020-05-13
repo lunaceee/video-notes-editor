@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <form @submit.prevent="onSubmit" class="url-form">
+  <div class="url-form">
+    <form @submit.prevent="onSubmit">
       <input class="input" type="text" placeholder="Paste in a URL..." />
       <input class="submit-button" type="submit" value="Add video" />
     </form>
@@ -24,15 +24,13 @@ export default {
 </script>
 <style scoped>
 .url-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
 }
 
 .input,
 .submit-button {
-  display: inline;
-  margin: 0.5rem;
+  margin: 1rem;
+  width: 18rem;
 }
 
 .input {
@@ -41,5 +39,17 @@ export default {
   border-radius: 0.2em;
   width: 18rem;
   height: 2.2rem;
+}
+
+@media (min-width: 30rem) {
+  .submit-button {
+    width: 8rem;
+  }
+}
+
+@media (min-width: 60rem) {
+  .url-form {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 </style>

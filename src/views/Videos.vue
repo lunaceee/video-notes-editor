@@ -1,18 +1,16 @@
 <template>
-  <div class="home">
-    <div class="videos">
-      <div v-for="video in videos" :key="video.url" class="video-thumbnail">
-        <figure>
-          <router-link
-            :to="{
+  <div class="videos">
+    <div v-for="video in videos" :key="video.url" class="video-thumbnail">
+      <figure>
+        <router-link
+          :to="{
               name: 'VideoDetails',
               params: { slug: video.url },
             }"
-          >
-            <VideoPlayer :url="video.url" :controls="false" />
-          </router-link>
-        </figure>
-      </div>
+        >
+          <VideoPlayer :url="video.url" :controls="false" />
+        </router-link>
+      </figure>
     </div>
   </div>
 </template>

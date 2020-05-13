@@ -25,13 +25,6 @@ export default {
     GoBack
   },
   computed: {
-    // isHomePage() {
-    //   if (this.$router.path == `/`) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // },
     isVideoDetailPage() {
       const decUri = decodeURIComponent(this.$route.path);
       console.log(decUri);
@@ -83,7 +76,6 @@ input[type="submit"] {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: grid;
-  grid-gap: 1rem;
   grid-template-columns: 1fr;
   grid-template-areas:
     "header"
@@ -98,17 +90,23 @@ footer {
 }
 
 header {
+  grid-area: header;
 }
 
 main {
+  grid-area: main;
+  display: grid;
+  justify-items: center;
 }
 
 footer {
+  grid-area: footer;
 }
 
-@media (min-width: 28rem) {
+@media (min-width: 60rem) {
   .container {
     grid-template-columns: 1fr;
+    grid-gap: 1rem;
   }
 }
 </style>

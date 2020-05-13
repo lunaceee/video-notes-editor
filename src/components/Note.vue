@@ -94,10 +94,11 @@ export default {
     "top-controls time"
     "content content"
     "bottom-controls bottom-controls";
-  /* justify-items: start; */
+  justify-items: start;
   align-items: center;
   width: 20rem;
-  grid-gap: 0.5rem;
+  grid-gap: 1rem;
+  border-bottom: 1px solid #0d0904;
 }
 
 .top-controls {
@@ -106,7 +107,6 @@ export default {
 
 .bottom-controls {
   grid-area: bottom-controls;
-  justify-items: flex-end;
 }
 
 .timestamp {
@@ -116,16 +116,14 @@ export default {
 
 .content,
 .text {
-  overflow: scroll;
   width: 20rem;
   grid-area: content;
 }
 
 .content {
-  word-break: break-all;
-  padding: 0 1rem;
   text-align: left;
-  border-bottom: 0.01rem solid #2e2525;
+  overflow: scroll;
+  max-height: 15rem;
 }
 
 .text > textarea {
