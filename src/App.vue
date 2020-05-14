@@ -24,7 +24,6 @@ export default {
   computed: {
     isVideoDetailPage() {
       const decUri = decodeURIComponent(this.$route.path);
-      console.log(decUri);
       if (decUri == `/${this.$route.params["slug"]}`) {
         return true;
       } else {
