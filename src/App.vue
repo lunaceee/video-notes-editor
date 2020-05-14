@@ -3,7 +3,6 @@
     <header>
       <h1>Video notes editor</h1>
       <AddURLForm v-if="!isVideoDetailPage" />
-      <GoBack v-if="isVideoDetailPage" />
     </header>
     <main>
       <transition name="fade" mode="out-in">
@@ -16,13 +15,11 @@
 
 <script>
 import AddURLForm from "@/components/addUrlForm.vue";
-import GoBack from "@/components/GoBack.vue";
 
 export default {
   name: "VideoNotesEditor",
   components: {
-    AddURLForm,
-    GoBack
+    AddURLForm
   },
   computed: {
     isVideoDetailPage() {

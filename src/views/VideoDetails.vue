@@ -1,16 +1,21 @@
 <template>
   <div class="video-details">
+    <div class="top-controls">
+      <GoBack />
+      <button v-on:click="addNote" class="add-note">Add note</button>
+    </div>
     <video-player
       :url="videoUrl"
       :playerHolder="playerHolder"
       :class="videoUrl !== '/' ? 'video' : ''"
     />
     <notes :url="videoUrl" class="notes" :playerHolder="playerHolder" />
-    <button v-on:click="addNote" class="add-note">Add note</button>
   </div>
 </template>
 <script>
 import VideoPlayer from "@/components/VideoPlayer.vue";
+import GoBack from "@/components/GoBack.vue";
+
 import Notes from "@/components/Notes.vue";
 import { mapGetters } from "vuex";
 
@@ -27,7 +32,8 @@ export default {
   },
   components: {
     VideoPlayer,
-    Notes
+    Notes,
+    GoBack
   },
   computed: {
     videoUrl: function() {
@@ -61,17 +67,15 @@ export default {
   padding-left: 0;
 }
 
-.add-note {
-  grid-area: add-btn;
-  max-height: 3rem;
-  align-self: start;
+.top-controls {
+  grid-area: top-controls;
 }
 
 @media (min-width: 20rem) {
   .video-details {
     grid-template-areas:
+      "top-controls"
       "video"
-      "add-btn"
       "notes";
   }
 }
@@ -85,11 +89,11 @@ export default {
 @media (min-width: 62rem) {
   .video-details {
     grid-template-areas:
+      "top-controls top-controls ."
       "video video notes"
-      "add-btn add-btn notes"
       ". . notes";
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 4rem;
+    grid-gap: 3rem;
   }
   .video {
     width: 42rem;
