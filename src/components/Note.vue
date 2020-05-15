@@ -99,7 +99,6 @@ export default {
     "bottom-controls bottom-controls";
   justify-items: start;
   align-items: center;
-  width: 20rem;
   grid-gap: 1rem;
   border-bottom: 1px solid #0d0904;
 }
