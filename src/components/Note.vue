@@ -5,9 +5,7 @@
       <button v-if="mode === 'showing'" @click="edit" class="edit-btn">edit</button>
       <button @click="deleteNote" class="delete-btn">delete</button>
     </div>
-    <div class="timestamp">
-      <p>{{ Math.floor(note.time) }}s/{{ Math.floor(note.duration) }}s</p>
-    </div>
+    <div class="timestamp">{{ formatTimestamp(note.time) }}/{{formatTimestamp(note.duration)}}</div>
     <div class="content">
       <p v-if="mode === 'showing'">{{note.text}}</p>
     </div>
@@ -86,6 +84,16 @@ export default {
       player.pause();
       player.currentTime(this.note.time);
       player.play();
+    },
+    formatTimestamp: function(time) {
+      const dateObj = new Date(time * 1000);
+      const minutes = dateObj.getUTCMinutes();
+      const seconds = dateObj.getSeconds();
+      return (
+        minutes.toString().padStart(2, "0") +
+        ":" +
+        seconds.toString().padStart(2, "0")
+      );
     }
   }
 };
@@ -113,7 +121,7 @@ export default {
 
 .timestamp {
   grid-area: time;
-  font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .content,
