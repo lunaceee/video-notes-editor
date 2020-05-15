@@ -9,6 +9,7 @@ export default {
   name: "VideoPlayer",
   data() {
     return {
+      player: null,
       startTime: {
         type: Number
       }

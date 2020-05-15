@@ -6,7 +6,7 @@
       <button @click="deleteNote" class="delete-btn">delete</button>
     </div>
     <div class="timestamp">
-      <p>{{ Math.floor(note.time) }}s</p>
+      <p>{{ Math.floor(note.time) }}s/{{ Math.floor(note.duration) }}s</p>
     </div>
     <div class="content">
       <p v-if="mode === 'showing'">{{note.text}}</p>
@@ -54,6 +54,9 @@ export default {
     },
     noteIndex: {
       default: 0,
+      type: Number
+    },
+    duration: {
       type: Number
     }
   },

@@ -36,10 +36,11 @@ export const store = new Vuex.Store({
 			state.videos.push(video);
 		},
 
-		addNote: (state, { video, time }) => {
+		addNote: (state, { video, time, duration }) => {
 			video.notes.unshift({
 				text: '',
-				time
+				time,
+				duration
 			});
 		},
 

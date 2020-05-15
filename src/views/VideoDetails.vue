@@ -43,9 +43,11 @@ export default {
   methods: {
     addNote() {
       const video = this.$store.getters.video(this.videoUrl);
+
       this.$store.commit("addNote", {
         video,
-        time: this.playerHolder.get().currentTime()
+        time: this.playerHolder.get().currentTime(),
+        duration: this.playerHolder.get().duration()
       });
     }
   }
