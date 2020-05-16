@@ -79,12 +79,6 @@ input[type="submit"] {
     "footer";
 }
 
-header,
-main,
-footer {
-  margin: 1rem;
-}
-
 header {
   grid-area: header;
 }
@@ -96,7 +90,16 @@ main {
 }
 
 footer {
+  display: flex;
   grid-area: footer;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: yellow;
+  height: 10rem;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (min-width: 60rem) {

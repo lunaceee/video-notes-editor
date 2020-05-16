@@ -109,6 +109,7 @@ export default {
   align-items: center;
   grid-gap: 1rem;
   border-bottom: 1px solid #0d0904;
+  margin-bottom: 1rem;
 }
 
 .top-controls {

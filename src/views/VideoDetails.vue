@@ -1,5 +1,5 @@
 <template>
-  <div class="video-details">
+  <div class="video-details" :class="notesSize > 0 ? 'withSidebar' : 'withNoSidebar'">
     <div class="top-controls">
       <GoBack />
       <button v-on:click="addNote" class="add-note">Add note</button>
@@ -38,6 +38,10 @@ export default {
   computed: {
     videoUrl: function() {
       return this.$route.params["slug"];
+    },
+    notesSize: function() {
+      const video = this.$store.getters.video(this.videoUrl);
+      return video.notes.length;
     }
   },
   methods: {
@@ -89,7 +93,7 @@ export default {
   }
 }
 @media (min-width: 62rem) {
-  .video-details {
+  .withSidebar {
     grid-template-areas:
       "top-controls top-controls ."
       "video video notes"
@@ -97,15 +101,23 @@ export default {
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 3rem;
   }
+
+  .withNoSidebar {
+    grid-template-areas:
+      "top-controls top-controls"
+      "video video";
+    grid-template-columns: repeat(2, 2fr);
+  }
+
   .video {
-    width: 42rem;
+    width: 43rem;
     height: 28rem;
   }
 }
 @media (min-width: 100rem) {
   .video {
-    width: 60rem;
-    height: 40rem;
+    width: 56rem;
+    height: 33rem;
   }
 }
 </style>
