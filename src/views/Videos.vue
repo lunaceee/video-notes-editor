@@ -1,6 +1,6 @@
 <template>
   <div class="videos">
-    <div v-for="video in videos" :key="video.url" class="video-thumbnail">
+    <div v-for="(video, index) in videos" :key="index" class="video-thumbnail">
       <figure>
         <router-link
           :to="{
