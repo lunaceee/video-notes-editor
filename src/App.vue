@@ -1,15 +1,17 @@
 <template>
   <div id="app" class="container">
-    <header>
-      <h1>Video notes editor</h1>
-      <AddURLForm v-if="!isVideoDetailPage" />
-    </header>
-    <main>
-      <transition name="fade" mode="out-in">
-        <router-view :key="$route.path" />
-      </transition>
-    </main>
-    <footer>Made by @lunaceee with Video.js and Vue.js</footer>
+    <div class="content">
+      <header>
+        <h1>Video notes editor</h1>
+        <AddURLForm v-if="!isVideoDetailPage" />
+      </header>
+      <main>
+        <transition name="fade" mode="out-in">
+          <router-view :key="$route.path" />
+        </transition>
+      </main>
+    </div>
+    <footer class="footer">Made by @lunaceee with Video.js and Vue.js</footer>
   </div>
 </template>
 
@@ -38,6 +40,15 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300;1,400&display=swap");
 :root {
   font-size: 16px; /* 1rem */
+}
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  display: grid;
+  margin: 0;
+  grid-template-rows: 1fr auto;
 }
 
 button,
@@ -72,34 +83,25 @@ input[type="submit"] {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: grid;
-  grid-template-columns: 1fr;
   grid-template-areas:
-    "header"
-    "main"
+    "content"
     "footer";
 }
 
-header {
-  grid-area: header;
-}
-
-main {
-  grid-area: main;
+.content {
+  grid-area: content;
   display: grid;
   justify-items: center;
+  padding: 20px;
 }
 
-footer {
-  display: flex;
-  grid-area: footer;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: yellow;
-  height: 10rem;
+.footer {
+  min-height: 6rem;
+  background-color: #b2ebf2;
+  display: grid;
   align-items: center;
-  justify-content: center;
+  grid-row-start: 4;
+  grid-row-end: 5;
 }
 
 @media (min-width: 60rem) {
