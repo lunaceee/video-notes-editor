@@ -58,6 +58,8 @@ input {
   font-family: inherit;
   font-size: 100%;
   box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 button,
@@ -65,15 +67,25 @@ input[type="submit"] {
   padding: 0.7em 1.4em;
   margin: 0 0.3em 0.3em 0;
   border-radius: 0.3rem;
-  box-sizing: border-box;
+  border-style: none;
   text-decoration: none;
   text-transform: uppercase;
   font-size: 0.8rem;
   color: #ffffff;
   background-color: #e8569f;
-  box-shadow: inset 0 -0.6em 0 -0.35em rgba(0, 0, 0, 0.17);
+  box-shadow: inset 0 -0.6em 0 -0.35em rgba(230, 221, 221, 0.17);
   text-align: center;
   position: relative;
+}
+
+button:focus,
+input:focus {
+  outline: none;
+}
+
+button:active,
+input:active {
+  top: 0.1em;
 }
 
 .container {
@@ -86,6 +98,10 @@ input[type="submit"] {
   grid-template-areas:
     "content"
     "footer";
+}
+
+h1 {
+  margin: 3rem 0;
 }
 
 .content {

@@ -35,6 +35,10 @@ export default {
   grid-gap: 0.1rem;
 }
 
+.video-thumbnail:hover {
+  background-color: #ffcdd2;
+}
+
 @media (min-width: 40rem) {
   .videos {
     grid-template-columns: repeat(2, 2fr);

@@ -108,7 +108,7 @@ export default {
   justify-items: start;
   align-items: center;
   grid-gap: 1rem;
-  border-bottom: 1px solid #0d0904;
+  border-bottom: 1px solid #70003a;
   margin-bottom: 1rem;
 }
 
@@ -127,18 +127,18 @@ export default {
 
 .content,
 .text {
-  width: 20rem;
   grid-area: content;
 }
 
-.content {
+.content p {
   text-align: left;
-  overflow: scroll;
+  overflow-x: auto;
   max-height: 15rem;
+  white-space: pre-wrap;
 }
 
 .text > textarea {
-  width: 18rem;
+  width: 20rem;
   height: 8rem;
 }
 
@@ -151,11 +151,6 @@ export default {
 .delete-btn {
   grid-area: delete;
 }
-
-button:active {
-  top: 0.1em;
-}
-
 .cancel-btn {
   background-color: #faeff1;
   color: #2e2525;
@@ -167,5 +162,28 @@ button:active {
 
 .save-btn {
   background-color: #3cb87d;
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #e8569f;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: #e8569f;
 }
 </style>

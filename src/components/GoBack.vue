@@ -22,6 +22,6 @@ export default {
 }
 
 button {
-  background-color: #3cb87d;
+  background-color: #00acc1;
 }
 </style>

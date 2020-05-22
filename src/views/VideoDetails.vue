@@ -60,7 +60,6 @@ export default {
 <style scoped>
 .video-details {
   display: grid;
-  grid-gap: 1rem;
   justify-items: center;
 }
 
@@ -99,7 +98,7 @@ export default {
       "video video notes"
       ". . notes";
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 3rem;
+    grid-gap: 1rem 4rem;
   }
 
   .withNoSidebar {
@@ -107,6 +106,7 @@ export default {
       "top-controls top-controls"
       "video video";
     grid-template-columns: repeat(2, 2fr);
+    grid-gap: 1rem;
   }
 
   .video {

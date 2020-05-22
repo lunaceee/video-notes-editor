@@ -16,7 +16,7 @@ export default {
         this.$store.commit("addVideo", newUrl);
         document.getElementById("addUrlForm").reset();
       } else {
-        alert("Invalid video URL");
+        alert("Please insert an URL");
       }
     }
   }
@@ -34,22 +34,20 @@ export default {
 }
 
 .input {
-  -webkit-appearance: none;
-  appearance: none; /* remove default appearance */
   border-radius: 0.2em;
   width: 18rem;
   height: 2.2rem;
+  border: 2px solid #e8569f;
+}
+
+.input:focus {
+  border-radius: 0.2rem;
+  outline: none;
 }
 
 @media (min-width: 30rem) {
   .submit-button {
     width: 8rem;
-  }
-}
-
-@media (min-width: 60rem) {
-  .url-form {
-    grid-template-columns: repeat(1, 1fr);
   }
 }
 </style>
