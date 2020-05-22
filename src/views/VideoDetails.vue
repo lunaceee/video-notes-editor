@@ -82,6 +82,7 @@ export default {
       "top-controls"
       "video"
       "notes";
+    grid-gap: 1rem;
   }
 }
 

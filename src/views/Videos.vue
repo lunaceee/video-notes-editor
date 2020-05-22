@@ -16,15 +16,11 @@
 </template>
 
 <script>
-import VideoPlayer from "@/components/VideoPlayer.vue";
 import { mapState } from "vuex";
 import { getVideoId } from "../utils";
 
 export default {
   name: "Videos",
-  components: {
-    VideoPlayer
-  },
   computed: {
     ...mapState(["videos"])
   },
@@ -34,7 +30,7 @@ export default {
       if (url.match(/youtu\.be/) || url.match(/v=/)) {
         return `https://img.youtube.com/vi/${videoId}/0.jpg`;
       }
-      return `https://img.youtube.com/vi/pR7wqdjeV9s/0.jpg`;
+      return `https://img.youtube.com/vi/eYLbteOm42k/0.jpg`; // Placeholder for non YouTube videos
     }
   }
 };
@@ -43,7 +39,6 @@ export default {
 .videos {
   display: grid;
   grid-gap: 1rem;
-  /* justify-items: center; */
 }
 
 .video-thumbnail img {
