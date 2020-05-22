@@ -1,6 +1,6 @@
 <template>
   <div class="url-form">
-    <form @submit.prevent="onSubmit">
+    <form @submit.prevent="onSubmit" id="addUrlForm">
       <input class="input" type="text" placeholder="Paste in a video URL..." />
       <input class="submit-button" type="submit" value="Add video" />
     </form>
@@ -14,7 +14,7 @@ export default {
       const newUrl = e.target[0].value || "";
       if (newUrl) {
         this.$store.commit("addVideo", newUrl);
-        e.target[0].value = "";
+        document.getElementById("addUrlForm").reset();
       } else {
         alert("Invalid video URL");
       }
