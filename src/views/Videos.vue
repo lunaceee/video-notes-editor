@@ -8,7 +8,7 @@
               params: { slug: video.url },
             }"
         >
-          <VideoPlayer :url="video.url" :controls="false" />
+          <img :src="getVideoThumbnail(video.url)" :url="video.url" alt="video thumbnail" />
         </router-link>
       </figure>
     </div>
@@ -18,6 +18,7 @@
 <script>
 import VideoPlayer from "@/components/VideoPlayer.vue";
 import { mapState } from "vuex";
+import { getVideoId } from "../utils";
 
 export default {
   name: "Videos",
@@ -26,13 +27,28 @@ export default {
   },
   computed: {
     ...mapState(["videos"])
+  },
+  methods: {
+    getVideoThumbnail(url) {
+      const videoId = getVideoId(url);
+      if (url.match(/youtu\.be/) || url.match(/v=/)) {
+        return `https://img.youtube.com/vi/${videoId}/0.jpg`;
+      }
+      return `https://img.youtube.com/vi/pR7wqdjeV9s/0.jpg`;
+    }
   }
 };
 </script>
 <style scoped>
 .videos {
   display: grid;
-  grid-gap: 0.1rem;
+  grid-gap: 1rem;
+  /* justify-items: center; */
+}
+
+.video-thumbnail img {
+  width: 16rem;
+  height: 11rem;
 }
 
 .video-thumbnail:hover {
