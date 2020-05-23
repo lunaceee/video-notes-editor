@@ -29,7 +29,7 @@ export default {
 
 .input,
 .submit-button {
-  margin: 1rem;
+  margin: 0.5rem;
   width: 18rem;
 }
 

@@ -9,5 +9,7 @@ export function getVideoId(url) {
     return new URL(url).searchParams.get("v");
   }
 
-  // TODO: Add check for other video formats, e.g., Vimeo
+  if (url.match(/vimeo\.com/)) {
+    return url.split("video.com/")[1];
+  }
 }

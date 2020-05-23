@@ -4,6 +4,7 @@
 
 <script>
 import videojs from "video.js";
+import "@devmobiliza/videojs-vimeo/dist/videojs-vimeo.esm";
 
 export default {
   name: "VideoPlayer",
@@ -39,8 +40,17 @@ export default {
       ]
     });
 
-    if (this.playerHolder) {
-      this.playerHolder.set(this.player);
+    const playerHolder = this.playerHolder;
+
+    this.player.on("firstplay", function() {
+      console.log("playerholder notify");
+      if (playerHolder) {
+        playerHolder.notify("firstplay");
+      }
+    });
+
+    if (playerHolder) {
+      playerHolder.set(this.player);
     }
   },
   beforeDestroy() {

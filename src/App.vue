@@ -2,7 +2,7 @@
   <div id="app" class="container">
     <div class="content">
       <header>
-        <h1>Video notes editor</h1>
+        <h1 :class="isVideoDetailPage ? '.heading' : ''">Video notes editor</h1>
         <AddURLForm v-if="!isVideoDetailPage" />
       </header>
       <main>
@@ -100,7 +100,7 @@ input:active {
     "footer";
 }
 
-h1 {
+.heading {
   margin: 3rem 0;
 }
 

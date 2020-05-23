@@ -2,7 +2,7 @@
   <div class="video-details" :class="notesSize > 0 ? 'withSidebar' : 'withNoSidebar'">
     <div class="top-controls">
       <GoBack />
-      <button v-on:click="addNote" class="add-note">Add note</button>
+      <button :disabled="notStarted" v-on:click="addNote" class="add-note">Add note</button>
     </div>
     <video-player
       :url="videoUrl"
@@ -26,8 +26,15 @@ export default {
     return {
       playerHolder: {
         set: vid => (video = vid),
-        get: () => video
-      }
+        get: () => video,
+        notify: e => {
+          if (e === "firstplay") {
+            console.log("notify");
+            this.notStarted = false;
+          }
+        }
+      },
+      notStarted: true
     };
   },
   components: {
@@ -61,6 +68,10 @@ export default {
 .video-details {
   display: grid;
   justify-items: center;
+}
+
+.add-note[disabled="disabled"] {
+  background-color: grey;
 }
 
 .video {

@@ -11,6 +11,7 @@
           <img :src="getVideoThumbnail(video.url)" :url="video.url" alt="video thumbnail" />
         </router-link>
       </figure>
+      <button @click="deleteVideo(video.videoId)">delete</button>
     </div>
   </div>
 </template>
@@ -31,6 +32,9 @@ export default {
         return `https://img.youtube.com/vi/${videoId}/0.jpg`;
       }
       return `https://img.youtube.com/vi/eYLbteOm42k/0.jpg`; // Placeholder for non YouTube videos
+    },
+    deleteVideo(videoId) {
+      this.$store.commit("deleteVideo", videoId);
     }
   }
 };

@@ -33,12 +33,13 @@ export const store = new Vuex.Store({
     },
 
     addVideo: (state, newUrl) => {
-      const video = { url: newUrl, notes: [] };
+      const videoId = getVideoId(newUrl);
+      const video = { url: newUrl, notes: [], videoId };
       let videos = state.videos;
       videos = state.videos || [];
 
       for (const vid of videos) {
-        if (getVideoId(vid.url) === getVideoId(newUrl)) {
+        if (getVideoId(vid.url) === videoId) {
           alert("Video already exists");
           return;
         }
@@ -61,6 +62,13 @@ export const store = new Vuex.Store({
 
     deleteNote: (state, { video, noteIndex }) => {
       video.notes.splice(noteIndex, 1);
+    },
+
+    deleteVideo: (state, videoId) => {
+      let videos = state.videos;
+      const videoIndex = videos.findIndex((video) => video.videoId === videoId);
+      if (videoIndex === -1) return;
+      videos.splice(videoIndex, 1);
     },
   },
 });
