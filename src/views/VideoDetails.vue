@@ -71,7 +71,8 @@ export default {
 }
 
 .add-note[disabled="disabled"] {
-  background-color: grey;
+  background-color: #bdbdbd;
+  cursor: not-allowed;
 }
 
 .video {
@@ -103,14 +104,14 @@ export default {
     height: 18rem;
   }
 }
-@media (min-width: 62rem) {
+@media (min-width: 65rem) {
   .withSidebar {
     grid-template-areas:
       "top-controls top-controls ."
       "video video notes"
       ". . notes";
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 1rem 4rem;
+    grid-gap: 1rem;
   }
 
   .withNoSidebar {

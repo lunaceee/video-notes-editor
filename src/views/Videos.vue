@@ -1,6 +1,6 @@
 <template>
-  <div class="videos">
-    <div v-for="(video, index) in videos" :key="index" class="video-thumbnail">
+  <ul class="videos">
+    <li v-for="(video, index) in videos" :key="index" class="video-thumbnail">
       <figure>
         <router-link
           :to="{
@@ -12,8 +12,8 @@
         </router-link>
       </figure>
       <button @click="deleteVideo(video.videoId)">delete</button>
-    </div>
-  </div>
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -42,7 +42,14 @@ export default {
 <style scoped>
 .videos {
   display: grid;
-  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  margin: 2rem 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  display: inline;
 }
 
 .video-thumbnail img {
@@ -52,22 +59,6 @@ export default {
 
 .video-thumbnail:hover {
   background-color: #ffcdd2;
-}
-
-@media (min-width: 40rem) {
-  .videos {
-    grid-template-columns: repeat(2, 2fr);
-  }
-}
-@media (min-width: 62rem) {
-  .videos {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 100rem) {
-  .videos {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
 }
 </style>

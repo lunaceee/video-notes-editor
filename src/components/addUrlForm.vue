@@ -25,17 +25,18 @@ export default {
 <style scoped>
 .url-form {
   display: grid;
+  margin: 2rem;
 }
 
 .input,
 .submit-button {
   margin: 0.5rem;
-  width: 18rem;
+  display: block;
+  width: 100%;
 }
 
 .input {
   border-radius: 0.2em;
-  width: 18rem;
   height: 2.2rem;
   border: 2px solid #e8569f;
 }
@@ -45,9 +46,17 @@ export default {
   outline: none;
 }
 
-@media (min-width: 30rem) {
+@media (min-width: 40rem) {
+  .input,
   .submit-button {
-    width: 8rem;
+    display: inline-block;
+  }
+  .input {
+    width: 30%;
+  }
+
+  .submit-button {
+    width: 10%;
   }
 }
 </style>

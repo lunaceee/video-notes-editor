@@ -107,7 +107,6 @@ export default {
     "bottom-controls bottom-controls";
   justify-items: start;
   align-items: center;
-  grid-gap: 1rem;
   border-bottom: 1px solid #70003a;
   margin-bottom: 1rem;
 }
@@ -128,13 +127,17 @@ export default {
 .content,
 .text {
   grid-area: content;
+  padding: 0;
 }
-
+.content {
+  width: 19rem;
+}
 .content p {
   text-align: left;
   overflow-x: auto;
   max-height: 15rem;
   white-space: pre-wrap;
+  width: inherit;
 }
 
 .text > textarea {
@@ -185,5 +188,17 @@ export default {
 }
 ::-webkit-scrollbar-thumb:window-inactive {
   background: #e8569f;
+}
+
+@media (min-width: 40rem) {
+  .content {
+    width: 30rem;
+  }
+}
+
+@media (min-width: 65rem) {
+  .content {
+    width: 20rem;
+  }
 }
 </style>

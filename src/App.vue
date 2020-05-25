@@ -2,7 +2,7 @@
   <div id="app" class="container">
     <div class="content">
       <header>
-        <h1 :class="isVideoDetailPage ? '.heading' : ''">Video notes editor</h1>
+        <h1>Video notes editor</h1>
         <AddURLForm v-if="!isVideoDetailPage" />
       </header>
       <main>
@@ -88,6 +88,10 @@ input:active {
   top: 0.1em;
 }
 
+h1 {
+  margin: 3rem 0;
+}
+
 .container {
   font-family: "Open Sans", sans-serif;
   text-align: center;
@@ -100,15 +104,8 @@ input:active {
     "footer";
 }
 
-.heading {
-  margin: 3rem 0;
-}
-
 .content {
   grid-area: content;
-  display: grid;
-  justify-items: center;
-  padding: 20px;
 }
 
 .footer {
@@ -118,12 +115,5 @@ input:active {
   align-items: center;
   grid-row-start: 4;
   grid-row-end: 5;
-}
-
-@media (min-width: 60rem) {
-  .container {
-    grid-template-columns: 1fr;
-    grid-gap: 1rem;
-  }
 }
 </style>
