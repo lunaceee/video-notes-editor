@@ -38,10 +38,11 @@ export default {
 .input {
   border-radius: 0.2em;
   height: 2.2rem;
-  border: 2px solid #e8569f;
+  border: 1px solid #e8569f;
 }
 
 .input:focus {
+  border: 2px solid #e8569f;
   border-radius: 0.2rem;
   outline: none;
 }

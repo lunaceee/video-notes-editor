@@ -53,8 +53,8 @@ li {
 }
 
 .video-thumbnail img {
-  width: 16rem;
-  height: 11rem;
+  width: auto;
+  height: 12rem;
 }
 
 .video-thumbnail:hover {

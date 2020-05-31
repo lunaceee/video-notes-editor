@@ -4,11 +4,9 @@
       <GoBack />
       <button :disabled="notStarted" v-on:click="addNote" class="add-note">Add note</button>
     </div>
-    <video-player
-      :url="videoUrl"
-      :playerHolder="playerHolder"
-      :class="videoUrl !== '/' ? 'video' : ''"
-    />
+    <transition name="slide-fade">
+      <video-player v-if="show" :url="videoUrl" :playerHolder="playerHolder" class="video" />
+    </transition>
     <notes :url="videoUrl" class="notes" :playerHolder="playerHolder" />
   </div>
 </template>
@@ -34,7 +32,8 @@ export default {
           }
         }
       },
-      notStarted: true
+      notStarted: true,
+      show: true
     };
   },
   components: {
@@ -100,8 +99,8 @@ export default {
 
 @media (min-width: 40rem) {
   .video {
-    width: 30rem;
-    height: 18rem;
+    width: 38rem;
+    height: 22rem;
   }
 }
 @media (min-width: 65rem) {
@@ -112,6 +111,7 @@ export default {
       ". . notes";
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1rem;
+    margin-bottom: 5rem;
   }
 
   .withNoSidebar {
