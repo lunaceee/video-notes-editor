@@ -1,7 +1,6 @@
 <template>
-  <div class="video-details" :class="notesSize > 0 ? 'withSidebar' : 'withNoSidebar'">
+  <div class="video-details" :class="notesSize > 0 ? 'with-notes' : 'with-no-notes'">
     <div class="top-controls">
-      <GoBack />
       <button :disabled="notStarted" v-on:click="addNote" class="add-note">Add note</button>
     </div>
     <transition name="slide-fade">
@@ -12,7 +11,6 @@
 </template>
 <script>
 import VideoPlayer from "@/components/VideoPlayer.vue";
-import GoBack from "@/components/GoBack.vue";
 
 import Notes from "@/components/Notes.vue";
 import { mapGetters } from "vuex";
@@ -38,8 +36,7 @@ export default {
   },
   components: {
     VideoPlayer,
-    Notes,
-    GoBack
+    Notes
   },
   computed: {
     videoUrl: function() {
@@ -67,6 +64,7 @@ export default {
 .video-details {
   display: grid;
   justify-items: center;
+  margin-bottom: 5rem;
 }
 
 .add-note[disabled="disabled"] {
@@ -95,38 +93,61 @@ export default {
       "notes";
     grid-gap: 1rem;
   }
+
+  .notes {
+    width: 80vw;
+  }
 }
 
-@media (min-width: 40rem) {
+@media (min-width: 48rem) {
   .video {
-    width: 38rem;
-    height: 22rem;
+    width: 80vw;
+    height: 28rem;
+  }
+
+  .notes {
+    width: 80vw;
   }
 }
 @media (min-width: 65rem) {
-  .withSidebar {
+  .video-details,
+  .with-notes {
     grid-template-areas:
       "top-controls top-controls ."
-      "video video notes"
-      ". . notes";
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 1rem;
-    margin-bottom: 5rem;
+      "video video notes";
   }
 
-  .withNoSidebar {
+  .with-no-notes {
     grid-template-areas:
-      "top-controls top-controls"
-      "video video";
-    grid-template-columns: repeat(2, 2fr);
-    grid-gap: 1rem;
+      "top-controls"
+      "video";
+  }
+
+  .with-no-notes > .notes {
+    display: none;
   }
 
   .video {
-    width: 43rem;
+    width: 80vw;
     height: 28rem;
   }
+
+  .notes {
+    width: 80vw;
+  }
 }
+
+@media (min-width: 80rem) {
+  .video {
+    width: 42rem;
+    height: 28rem;
+  }
+
+  .notes {
+    width: 20rem;
+  }
+}
+
 @media (min-width: 100rem) {
   .video {
     width: 56rem;

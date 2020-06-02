@@ -43,7 +43,6 @@ export default {
 .videos {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-  margin: 2rem 0;
   padding: 0;
 }
 

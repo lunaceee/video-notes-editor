@@ -1,42 +1,45 @@
 <template>
   <div id="app" class="container">
-    <div class="content">
-      <header>
-        <h1>Video notes editor</h1>
-        <AddURLForm v-if="!isVideoDetailPage" />
-      </header>
-      <main>
-        <transition
-          name="fade"
-          mode="out-in"
-          @beforeLeave="beforeLeave"
-          @enter="enter"
-          @afterEnter="afterEnter"
-        >
-          <router-view :key="$route.path" />
-        </transition>
-      </main>
-    </div>
+    <header>
+      <GoBack class="back" v-show="!isHomePage" />
+      <transition name="heading">
+        <h1 class="logo" :class="isHomePage ? '' : 'active'">Video notes editor</h1>
+      </transition>
+    </header>
+    <main>
+      <AddURLForm :class="isHomePage ? '' : 'hide'" />
+      <transition
+        name="fade"
+        mode="out-in"
+        @beforeLeave="beforeLeave"
+        @enter="enter"
+        @afterEnter="afterEnter"
+      >
+        <router-view :key="$route.path" />
+      </transition>
+    </main>
     <footer class="footer">Made by @lunaceee with Video.js and Vue.js</footer>
   </div>
 </template>
 
 <script>
+import GoBack from "@/components/GoBack.vue";
 import AddURLForm from "@/components/addUrlForm.vue";
 
 export default {
   name: "VideoNotesEditor",
+  data() {
+    return {
+      prevHeight: 0
+    };
+  },
   components: {
-    AddURLForm
+    AddURLForm,
+    GoBack
   },
   computed: {
-    isVideoDetailPage() {
-      const decUri = decodeURIComponent(this.$route.path);
-      if (decUri == `/${this.$route.params["slug"]}`) {
-        return true;
-      } else {
-        return false;
-      }
+    isHomePage() {
+      return this.$route.path === "/";
     }
   },
   methods: {
@@ -66,9 +69,11 @@ export default {
 }
 html {
   height: 100%;
+  overflow-y: scroll;
 }
 body {
   min-height: 100%;
+  width: 100%;
   display: grid;
   margin: 0;
   grid-template-rows: 1fr auto;
@@ -101,6 +106,10 @@ input[type="submit"] {
   position: relative;
 }
 
+.hide {
+  visibility: hidden;
+}
+
 button:focus,
 input:focus {
   outline: none;
@@ -111,28 +120,55 @@ input:active {
   top: 0.1em;
 }
 
-h1 {
-  margin: 3rem 0;
-}
-
 .container {
+  display: grid;
+  width: 100%;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
   font-family: "Open Sans", sans-serif;
   text-align: center;
   color: #2c3e50;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: grid;
-  grid-template-areas:
-    "content"
-    "footer";
 }
 
-.content {
-  grid-area: content;
+.heading-move,
+.logo {
+  transition: all 0.4s ease;
+}
+
+header {
+  grid-area: header;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  display: grid;
+  height: 5rem;
+  grid-template-areas: "back logo account";
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  margin: 0 2rem;
+}
+
+.back {
+  grid-area: back;
+  display: grid;
+  justify-items: start;
+}
+
+.logo {
+  grid-area: logo;
+}
+
+main {
+  grid-area: main;
+  grid-row-start: 2;
+  grid-row-end: 4;
 }
 
 .footer {
-  min-height: 6rem;
+  min-height: 8rem;
   background-color: #b2ebf2;
   display: grid;
   align-items: center;
@@ -151,5 +187,11 @@ h1 {
 .fade-enter,
 .fade-leave-active {
   opacity: 0;
+}
+
+@media (min-width: 80rem) {
+  .active {
+    transform: scale(0.8);
+  }
 }
 </style>

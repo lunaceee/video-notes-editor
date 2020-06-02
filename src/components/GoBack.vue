@@ -1,5 +1,5 @@
 <template>
-  <div class="go-back">
+  <div>
     <button @click="goBack">go back</button>
   </div>
 </template>
@@ -16,11 +16,6 @@ export default {
 </script>
 
 <style scoped>
-.go-back {
-  display: inline-block;
-  cursor: pointer;
-}
-
 button {
   background-color: #00acc1;
 }

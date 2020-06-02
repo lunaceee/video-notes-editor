@@ -105,14 +105,16 @@ export default {
     "top-controls time"
     "content content"
     "bottom-controls bottom-controls";
-  justify-items: start;
   align-items: center;
   border-bottom: 1px solid #70003a;
   margin-bottom: 1rem;
 }
 
+/* grid layout */
 .top-controls {
   grid-area: top-controls;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .bottom-controls {
@@ -122,29 +124,32 @@ export default {
 .timestamp {
   grid-area: time;
   font-size: 0.9rem;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .content,
 .text {
   grid-area: content;
   padding: 0;
+  width: inherit;
 }
-.content {
-  width: 19rem;
-}
+
 .content p {
   text-align: left;
   overflow-x: auto;
   max-height: 15rem;
   white-space: pre-wrap;
+  word-wrap: break-word;
   width: inherit;
 }
 
 .text > textarea {
   width: 20rem;
-  height: 8rem;
+  height: 15rem;
 }
 
+/* control buttons */
 .play-btn {
   grid-area: play;
 }
@@ -169,7 +174,7 @@ export default {
 
 /* custom scrollbar */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
 }
 
 /* Track */
@@ -190,9 +195,15 @@ export default {
   background: #e8569f;
 }
 
+@media (min-width: 20rem) {
+  .content {
+    width: 20rem;
+  }
+}
+
 @media (min-width: 40rem) {
   .content {
-    width: 30rem;
+    width: inherit;
   }
 }
 
