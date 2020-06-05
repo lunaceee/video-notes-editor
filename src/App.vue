@@ -3,7 +3,7 @@
     <header>
       <GoBack class="back" v-show="!isHomePage" />
       <transition name="heading">
-        <h1 class="logo" :class="isHomePage ? '' : 'active'">Video notes editor</h1>
+        <img class="logo" :class="isHomePage ? '' : 'active'" alt="logo" src="./assets/cuttle-logo.svg" />
       </transition>
     </header>
     <main>
@@ -159,6 +159,8 @@ header {
 
 .logo {
   grid-area: logo;
+  margin: 2rem auto;
+  transform: scale(1.3);
 }
 
 main {
@@ -191,7 +193,7 @@ main {
 
 @media (min-width: 80rem) {
   .active {
-    transform: scale(0.8);
+    transform: scale(1);
   }
 }
 </style>

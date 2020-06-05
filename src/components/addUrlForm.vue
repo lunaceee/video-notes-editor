@@ -57,7 +57,16 @@ export default {
   }
 
   .submit-button {
-    width: 10%;
+    width: 15%;
+  }
+}
+
+@media (min-width: 65rem) {
+  .input {
+    width: 20%;
+  }
+  .submit-button {
+    width: 8%;
   }
 }
 </style>
