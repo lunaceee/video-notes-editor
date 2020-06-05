@@ -68,7 +68,7 @@ export default {
 }
 
 .add-note[disabled="disabled"] {
-  background-color: #bdbdbd;
+  background-color: var(--btn-mute-bg);
   cursor: not-allowed;
 }
 

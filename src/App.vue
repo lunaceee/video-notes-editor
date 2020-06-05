@@ -3,7 +3,12 @@
     <header>
       <GoBack class="back" v-show="!isHomePage" />
       <transition name="heading">
-        <img class="logo" :class="isHomePage ? '' : 'active'" alt="logo" src="./assets/cuttle-logo.svg" />
+        <img
+          class="logo"
+          :class="isHomePage ? '' : 'active'"
+          alt="logo"
+          src="./assets/cuttle-logo.svg"
+        />
       </transition>
     </header>
     <main>
@@ -18,7 +23,12 @@
         <router-view :key="$route.path" />
       </transition>
     </main>
-    <footer class="footer">Made by @lunaceee with Video.js and Vue.js</footer>
+    <footer class="footer">
+      <span>
+        Made for you by
+        <a href="https://github.com/lunaceee">lunaceee</a>
+      </span>
+    </footer>
   </div>
 </template>
 
@@ -66,17 +76,28 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300;1,400&display=swap");
 :root {
   font-size: 16px; /* 1rem */
+  --bg: #fffbe6;
+  --btn-bg: #fd5523;
+  --btn-delete-bg: #611802;
+  --color: #356859;
+  --btn-goback-bg: #37966f;
+  --btn-mute-bg: #6b706f;
+  --footer-bg: #b9e4c9;
+  --video-overlay: #d6f0df;
 }
+
 html {
   height: 100%;
   overflow-y: scroll;
 }
 body {
+  color: var(--color);
   min-height: 100%;
   width: 100%;
   display: grid;
   margin: 0;
   grid-template-rows: 1fr auto;
+  background-color: var(--bg);
 }
 
 button,
@@ -99,11 +120,16 @@ input[type="submit"] {
   text-decoration: none;
   text-transform: uppercase;
   font-size: 0.8rem;
-  color: #ffffff;
-  background-color: #e8569f;
+  color: #fdf6e3;
+  background-color: var(--btn-bg);
   box-shadow: inset 0 -0.6em 0 -0.35em rgba(230, 221, 221, 0.17);
   text-align: center;
   position: relative;
+}
+
+a,
+a:active {
+  color: var(--btn-bg);
 }
 
 .hide {
@@ -129,7 +155,6 @@ input:active {
     "footer";
   font-family: "Open Sans", sans-serif;
   text-align: center;
-  color: #2c3e50;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -141,14 +166,13 @@ input:active {
 
 header {
   grid-area: header;
-  grid-row-start: 1;
-  grid-row-end: 2;
+  grid-row: 1/3;
   display: grid;
-  height: 5rem;
+  height: 8rem;
   grid-template-areas: "back logo account";
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  margin: 0 2rem;
+  padding: 2rem;
 }
 
 .back {
@@ -165,17 +189,16 @@ header {
 
 main {
   grid-area: main;
-  grid-row-start: 2;
-  grid-row-end: 4;
+  grid-row: 3/5;
 }
 
 .footer {
   min-height: 8rem;
-  background-color: #b2ebf2;
+  background-color: var(--footer-bg);
   display: grid;
   align-items: center;
-  grid-row-start: 4;
-  grid-row-end: 5;
+  grid-row: 5/6;
+  font-weight: 600;
 }
 
 .fade-enter-active,

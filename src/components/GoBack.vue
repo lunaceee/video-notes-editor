@@ -17,6 +17,6 @@ export default {
 
 <style scoped>
 button {
-  background-color: #00acc1;
+  background-color: var(--btn-goback-bg);
 }
 </style>

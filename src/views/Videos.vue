@@ -57,7 +57,7 @@ li {
 }
 
 .video-thumbnail:hover {
-  background-color: #ffcdd2;
+  background-color: var(--video-overlay);
   transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
 }
 </style>

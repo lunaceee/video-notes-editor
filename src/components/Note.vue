@@ -165,7 +165,7 @@ export default {
 }
 
 .delete-btn {
-  background-color: #70003a;
+  background-color: var(--btn-delete-bg);
 }
 
 .save-btn {
@@ -188,11 +188,11 @@ export default {
 ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 10px;
   border-radius: 10px;
-  background: #e8569f;
+  background: var(--btn-bg);
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 ::-webkit-scrollbar-thumb:window-inactive {
-  background: #e8569f;
+  background: var(--btn-bg);
 }
 
 @media (min-width: 20rem) {
