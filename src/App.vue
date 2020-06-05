@@ -12,7 +12,7 @@
       </transition>
     </header>
     <main>
-      <AddURLForm :class="isHomePage ? '' : 'hide'" />
+      <AddURLForm v-show="isHomePage" />
       <transition
         name="fade"
         mode="out-in"
@@ -78,11 +78,13 @@ export default {
   font-size: 16px; /* 1rem */
   --bg: #fffbe6;
   --btn-bg: #fd5523;
-  --btn-delete-bg: #611802;
+  --btn-delete-bg: #C21900;
   --color: #356859;
-  --btn-goback-bg: #37966f;
-  --btn-mute-bg: #6b706f;
-  --footer-bg: #b9e4c9;
+  --color-light: #fffbe6;
+  --color-light-green: #629686;
+  --btn-primary-bg: #37966f;
+  --btn-mute-bg: #e1e2e1;
+  --footer-bg: #043d30;
   --video-overlay: #d6f0df;
 }
 
@@ -132,10 +134,6 @@ a:active {
   color: var(--btn-bg);
 }
 
-.hide {
-  visibility: hidden;
-}
-
 button:focus,
 input:focus {
   outline: none;
@@ -166,9 +164,8 @@ input:active {
 
 header {
   grid-area: header;
-  grid-row: 1/3;
+  grid-row: 1/2;
   display: grid;
-  height: 8rem;
   grid-template-areas: "back logo account";
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
@@ -189,7 +186,7 @@ header {
 
 main {
   grid-area: main;
-  grid-row: 3/5;
+  grid-row: 2/5;
 }
 
 .footer {
@@ -197,8 +194,9 @@ main {
   background-color: var(--footer-bg);
   display: grid;
   align-items: center;
-  grid-row: 5/6;
   font-weight: 600;
+  margin-top: 5rem;
+  color: var(--color-light-green)
 }
 
 .fade-enter-active,

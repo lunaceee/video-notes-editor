@@ -11,7 +11,7 @@
           <img :src="getVideoThumbnail(video.url)" :url="video.url" alt="video thumbnail" />
         </router-link>
       </figure>
-      <button @click="deleteVideo(video.videoId)">delete</button>
+      <button class="delete-btn" @click="deleteVideo(video.videoId)">delete</button>
     </li>
   </ul>
 </template>
@@ -42,7 +42,7 @@ export default {
 <style scoped>
 .videos {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
   padding: 0;
 }
 
@@ -52,12 +52,21 @@ li {
 }
 
 .video-thumbnail img {
-  width: auto;
-  height: 12rem;
+  width: 20rem;
+  height: auto;
 }
 
-.video-thumbnail:hover {
+.video-thumbnail figure {
+  padding: 1rem;
+}
+
+.video-thumbnail figure:hover {
   background-color: var(--video-overlay);
   transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+}
+
+.delete-btn {
+  background-color: var(--btn-delete-bg);
+  cursor: pointer;
 }
 </style>

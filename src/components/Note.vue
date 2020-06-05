@@ -106,7 +106,7 @@ export default {
     "content content"
     "bottom-controls bottom-controls";
   align-items: center;
-  border-bottom: 1px solid #70003a;
+  border-bottom: 1px solid var(--color);
   margin-bottom: 1rem;
 }
 
@@ -147,6 +147,7 @@ export default {
 .text > textarea {
   width: 20rem;
   height: 15rem;
+  border-color: var(--color);
 }
 
 /* control buttons */
@@ -158,10 +159,12 @@ export default {
 }
 .delete-btn {
   grid-area: delete;
+  background-color: var(--btn-delete-bg)
 }
+
 .cancel-btn {
-  background-color: #faeff1;
-  color: #2e2525;
+  background-color: var(--btn-mute-bg);
+  color: var(--color);
 }
 
 .delete-btn {
@@ -169,7 +172,7 @@ export default {
 }
 
 .save-btn {
-  background-color: #3cb87d;
+  background-color: var(--btn-primary-bg);
 }
 
 /* custom scrollbar */
