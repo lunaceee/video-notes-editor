@@ -1,11 +1,11 @@
 <template>
   <div class="note">
+    <div class="timestamp">{{ formatTimestamp(note.time) }}/{{formatTimestamp(note.duration)}}</div>
     <div class="top-controls">
       <button @click="play" class="play-btn">play</button>
       <button v-if="mode === 'showing'" @click="edit" class="edit-btn">edit</button>
       <button @click="deleteNote" class="delete-btn">delete</button>
     </div>
-    <div class="timestamp">{{ formatTimestamp(note.time) }}/{{formatTimestamp(note.duration)}}</div>
     <div class="content">
       <p v-if="mode === 'showing'">{{note.text}}</p>
     </div>
@@ -102,7 +102,7 @@ export default {
 .note {
   display: grid;
   grid-template-areas:
-    "top-controls time"
+    "time top-controls"
     "content content"
     "bottom-controls bottom-controls";
   align-items: center;
@@ -114,7 +114,7 @@ export default {
 .top-controls {
   grid-area: top-controls;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
 }
 
 .bottom-controls {
@@ -123,9 +123,10 @@ export default {
 
 .timestamp {
   grid-area: time;
-  font-size: 0.9rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  font-weight: 600;
+  font-size: small;
 }
 
 .content,
@@ -159,7 +160,7 @@ export default {
 }
 .delete-btn {
   grid-area: delete;
-  background-color: var(--btn-delete-bg)
+  background-color: var(--btn-delete-bg);
 }
 
 .cancel-btn {
