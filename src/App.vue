@@ -78,12 +78,12 @@ export default {
   font-size: 16px; /* 1rem */
   --bg: #fffbe6;
   --btn-bg: #fd5523;
-  --btn-delete-bg: #C21900;
+  --btn-delete-bg: #c21900;
   --color: #356859;
   --color-light: #fffbe6;
   --color-light-green: #629686;
   --btn-primary-bg: #37966f;
-  --btn-mute-bg: #e1e2e1;
+  --btn-mute-bg: #043d30;
   --footer-bg: #043d30;
   --video-overlay: #d6f0df;
 }
@@ -196,7 +196,7 @@ main {
   align-items: center;
   font-weight: 600;
   margin-top: 5rem;
-  color: var(--color-light-green)
+  color: var(--color-light-green);
 }
 
 .fade-enter-active,

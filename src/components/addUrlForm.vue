@@ -36,16 +36,14 @@ export default {
 }
 
 .input::placeholder {
-  color:var(--color);
-  background-color: var(--bg);
-  padding: 1rem;
-  padding-left: 0;
+  color: var(--color);
 }
 
 .input {
   border-radius: 0.2em;
-  height: 2.2rem;
+  height: 2rem;
   border: 1px solid var(--btn-bg);
+  background-color: var(--bg);
 }
 
 .input:focus {
