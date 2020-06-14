@@ -214,7 +214,7 @@ main {
 .fade-leave-active {
   transition-duration: 0.3s;
   transition-property: height, opacity;
-  transition-timing-function: ease;
+  transition-timing-function: ease-in;
   overflow: hidden;
 }
 
