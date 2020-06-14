@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="container">
     <header>
-      <GoBack class="back" v-show="!isHomePage" />
+      <GoBack class="back" :class="[isHomePage ? 'hide' : '']" />
       <transition name="heading">
         <img
           class="logo"
@@ -10,6 +10,7 @@
           src="./assets/cuttle-logo.svg"
         />
       </transition>
+      <Auth />
     </header>
     <main>
       <AddURLForm v-show="isHomePage" />
@@ -35,6 +36,7 @@
 <script>
 import GoBack from "@/components/GoBack.vue";
 import AddURLForm from "@/components/addUrlForm.vue";
+import Auth from "@/components/Auth.vue";
 
 export default {
   name: "VideoNotesEditor",
@@ -45,7 +47,8 @@ export default {
   },
   components: {
     AddURLForm,
-    GoBack
+    GoBack,
+    Auth
   },
   computed: {
     isHomePage() {
@@ -184,9 +187,17 @@ header {
   transform: scale(1.3);
 }
 
+.account {
+  grid-area: account;
+}
+
 main {
   grid-area: main;
   grid-row: 2/5;
+}
+
+.hide {
+  visibility: hidden;
 }
 
 .footer {

@@ -9,11 +9,15 @@
   },
   "dependencies": {
     "@devmobiliza/videojs-vimeo": "^0.6.0",
+    "@firebase/app": "^0.6.5",
+    "@firebase/firestore": "^1.15.0",
     "core-js": "^3.6.4",
     "normalize.css": "^8.0.1",
     "video.js": "^7.7.5",
     "videojs-youtube": "^2.6.1",
     "vue": "^2.6.11",
+    "vue-firestore": "^0.3.30",
+    "vue-js-modal": "^2.0.0-rc.3",
     "vue-router": "^3.1.6",
     "vuex": "^3.2.0"
   },
