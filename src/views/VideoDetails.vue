@@ -1,7 +1,7 @@
 <template>
   <div class="video-details" :class="notesSize > 0 ? 'with-notes' : 'with-no-notes'">
     <div class="top-controls">
-      <button :disabled="notStarted" v-on:click="addNote" class="add-note">Add note</button>
+      <button :disabled="notStarted" @click="addNote" class="add-note">Add note</button>
     </div>
     <transition name="slide-fade">
       <video-player v-if="show" :url="videoUrl" :playerHolder="playerHolder" class="video" />

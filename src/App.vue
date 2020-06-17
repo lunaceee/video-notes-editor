@@ -2,25 +2,14 @@
   <div id="app" class="container">
     <header>
       <GoBack class="back" :class="[isHomePage ? 'hide' : '']" />
-      <transition name="heading">
-        <img
-          class="logo"
-          :class="isHomePage ? '' : 'active'"
-          alt="logo"
-          src="./assets/cuttle-logo.svg"
-        />
-      </transition>
-      <Auth />
+      <router-link :to="{name: 'home'}">
+        <Logo class="logo" :class="[!isHomePage ? 'active' : '']" />
+      </router-link>
+      <Auth class="account" />
     </header>
     <main>
       <AddURLForm v-show="isHomePage" />
-      <transition
-        name="fade"
-        mode="out-in"
-        @beforeLeave="beforeLeave"
-        @enter="enter"
-        @afterEnter="afterEnter"
-      >
+      <transition name="fade" mode="out-in" @beforeLeave="beforeLeave" @enter="enter">
         <router-view :key="$route.path" />
       </transition>
     </main>
@@ -37,6 +26,7 @@
 import GoBack from "@/components/GoBack.vue";
 import AddURLForm from "@/components/addUrlForm.vue";
 import Auth from "@/components/Auth.vue";
+import Logo from "@/assets/icons/cuttle-logo.svg";
 
 export default {
   name: "VideoNotesEditor",
@@ -48,7 +38,8 @@ export default {
   components: {
     AddURLForm,
     GoBack,
-    Auth
+    Auth,
+    Logo
   },
   computed: {
     isHomePage() {
@@ -67,9 +58,6 @@ export default {
       setTimeout(() => {
         element.style.height = height;
       });
-    },
-    afterEnter(element) {
-      element.style.height = "auto";
     }
   }
 };
@@ -89,6 +77,7 @@ export default {
   --btn-mute-bg: #043d30;
   --footer-bg: #043d30;
   --video-overlay: #d6f0df;
+  --border: #dddedf;
 }
 
 html {
@@ -102,7 +91,10 @@ body {
   display: grid;
   margin: 0;
   grid-template-rows: 1fr auto;
-  background-color: var(--bg);
+}
+
+ul {
+  list-style: none;
 }
 
 button,
@@ -135,6 +127,10 @@ input[type="submit"] {
 a,
 a:active {
   color: var(--btn-bg);
+}
+
+a {
+  text-decoration: none;
 }
 
 button:focus,
@@ -189,6 +185,8 @@ header {
 
 .account {
   grid-area: account;
+  display: flex;
+  justify-content: flex-end;
 }
 
 main {
@@ -212,7 +210,7 @@ main {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition-duration: 0.3s;
+  transition-duration: 0.4s;
   transition-property: height, opacity;
   transition-timing-function: ease-in;
   overflow: hidden;
@@ -223,9 +221,105 @@ main {
   opacity: 0;
 }
 
-@media (min-width: 80rem) {
-  .active {
+/*
+Login and signup form
+ */
+
+.auth-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.form-container {
+  min-width: 16rem;
+  padding: 2rem;
+  margin: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 0.2rem;
+}
+
+.form-container input {
+  display: block;
+  width: 100%;
+  margin-bottom: 4px;
+  font-size: 12px;
+  line-height: 2;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 4px 8px;
+  font-family: inherit;
+  transition: 0.5s all;
+  font-size: 0.8rem;
+}
+
+.autocomplete-fix {
+  position: absolute;
+  visibility: hidden;
+  overflow: hidden;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  left: 0;
+  top: 0;
+}
+.divider {
+  display: flex;
+}
+.divider:before,
+.divider:after {
+  content: "";
+  flex: 1;
+}
+
+.line {
+  align-items: center;
+  margin: 1em -1em;
+}
+.line:before,
+.line:after {
+  height: 1px;
+  margin: 0 0.8em;
+}
+
+.one-line:before,
+.one-line:after {
+  background: var(--border);
+}
+
+.input-group {
+  margin: 2rem 0;
+}
+.signup-btn,
+.login-btn {
+  width: 100%;
+}
+.login-btn {
+  background-color: white;
+  border: 1px solid var(--btn-primary-bg);
+  color: var(--btn-primary-bg);
+  box-shadow: inset 0 -0.6em 0 -0.35em var(--video-overlay);
+}
+
+@media (min-width: 20rem) {
+  .logo {
+    transition-duration: 1s;
+    transform: scale(0.7);
+    transition-timing-function: ease-in-out;
+  }
+}
+
+@media (min-width: 40rem) {
+  .logo {
+    transition-duration: 1s;
     transform: scale(1);
+    transition-timing-function: ease-in-out;
+  }
+
+  .active {
+    transition-duration: 1s;
+    transform: scale(0.8);
+    transition-timing-function: ease-in-out;
   }
 }
 </style>

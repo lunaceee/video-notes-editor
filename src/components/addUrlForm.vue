@@ -43,7 +43,6 @@ export default {
   border-radius: 0.2em;
   height: 2rem;
   border: 1px solid var(--btn-bg);
-  background-color: var(--bg);
 }
 
 .input:focus {
