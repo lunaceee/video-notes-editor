@@ -1,20 +1,31 @@
 <template>
   <div class="auth-container">
     <div class="form-container">
-      <form autocomplete="false">
+      <form @submit.prevent="signUp" autocomplete="false">
         <h2 class="form-title">Create an account</h2>
         <div class="autocomplete-fix">
           <input type="password" disabled />
         </div>
         <div class="input-group">
-          <input type="text" placeholder="Username" v-model="username" />
-          <input type="password" placeholder="Password" v-model="
-          password" />
+          <input
+            type="text"
+            placeholder="Username"
+            v-model="username"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            v-model="password"
+            required
+          />
         </div>
-        <button class="signup-btn" id="sign-up-btn" @click.stop.prevent="signUp">Sign up</button>
+        <button class="signup-btn" id="sign-up-btn" type="submit">
+          Sign up
+        </button>
         <span class="divider line one-line" contenteditable>or</span>
         <p>Already have an account?</p>
-        <router-link :to="{name: 'login'}">
+        <router-link :to="{ name: 'login' }">
           <button class="login-btn">Log in</button>
         </router-link>
       </form>
@@ -31,7 +42,7 @@ export default {
     return { username: null, password: null };
   },
   computed: {
-    ...mapState(["videos"])
+    ...mapState(["videos"]),
   },
   methods: {
     async signUp() {
@@ -41,21 +52,23 @@ export default {
         .get();
 
       let videos = this.videos;
+
       if (user.exists) {
         alert("User already exist!");
+        this.username = null;
+        this.password = null;
       } else {
         db.collection("users")
           .doc(this.username)
           .set({
             password: this.password,
-            videos: videos
+            videos: videos,
           });
         this.$store.commit("setUsername", this.username);
         this.$router.push("/feedback");
       }
-    }
-  }
+    },
+  },
 };
 </script>
-<style>
-</style>
+<style></style>

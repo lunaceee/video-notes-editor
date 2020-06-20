@@ -1,12 +1,14 @@
 <template>
   <ul class="account-controllers">
-    <router-link :to="{name: 'signup'}" v-if="showSignup">
+    <router-link :to="{ name: 'signup' }" v-if="showSignup">
       <button>Sign up</button>
     </router-link>
-    <router-link :to="{name: 'login'}" v-if="showLogin">
+    <router-link :to="{ name: 'login' }" v-if="showLogin">
       <button class="login-btn">Log in</button>
     </router-link>
-    <button class="logout-btn" @click="logOut" v-if="showLogout">Log out</button>
+    <button class="logout-btn" @click="logOut" v-if="showLogout">
+      Log out
+    </button>
   </ul>
 </template>
 <script>
@@ -25,14 +27,15 @@ export default {
     },
     showLogout() {
       return this.username !== null;
-    }
+    },
   },
   methods: {
     logOut() {
       this.$store.commit("deleteAllVideos");
       this.$store.commit("unsetUsername");
-    }
-  }
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 <style scoped>

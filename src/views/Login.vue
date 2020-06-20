@@ -7,15 +7,26 @@
           <input type="password" disabled />
         </div>
         <div class="input-group">
-          <input type="text" placeholder="Username" v-model="username" />
-          <input type="password" placeholder="Password" v-model="
-          password" />
+          <input
+            required
+            type="text"
+            placeholder="Username"
+            v-model="username"
+          />
+          <input
+            required
+            type="password"
+            placeholder="Password"
+            v-model="password"
+          />
         </div>
-        <button class="login-btn" id="goto-login-btn" @click="logIn">Log in</button>
+        <button class="login-btn" id="goto-login-btn" @click="logIn">
+          Log in
+        </button>
       </form>
       <span class="divider line one-line" contenteditable>or</span>
       <p>Need an account?</p>
-      <router-link :to="{name: 'signup'}">
+      <router-link :to="{ name: 'signup' }">
         <button class="signup-btn">Sign up</button>
       </router-link>
     </div>
@@ -32,7 +43,7 @@ export default {
     return { username: null, password: null };
   },
   computed: {
-    ...mapState(["videos"])
+    ...mapState(["videos"]),
   },
   methods: {
     async logIn() {
@@ -49,9 +60,8 @@ export default {
         this.$store.commit("updateVideos", serverVideos);
         this.$router.push("/");
       }
-    }
-  }
+    },
+  },
 };
 </script>
-<style>
-</style>
+<style></style>
