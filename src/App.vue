@@ -9,9 +9,7 @@
     </header>
     <main>
       <AddURLForm v-show="isHomePage" />
-      <transition name="fade" mode="out-in" @beforeLeave="beforeLeave" @enter="enter">
-        <router-view :key="$route.path" />
-      </transition>
+      <router-view :key="$route.path" />
     </main>
     <footer class="footer">
       <span>
@@ -29,7 +27,7 @@ import Auth from "@/components/Auth.vue";
 import Logo from "@/assets/icons/cuttle-logo.svg";
 
 export default {
-  name: "VideoNotesEditor",
+  name: "Cuttle",
   data() {
     return {
       prevHeight: 0
@@ -44,20 +42,6 @@ export default {
   computed: {
     isHomePage() {
       return this.$route.path === "/";
-    }
-  },
-  methods: {
-    beforeLeave(element) {
-      this.prevHeight = getComputedStyle(element).height;
-    },
-    enter(element) {
-      const { height } = getComputedStyle(element);
-
-      element.style.height = this.prevHeight;
-
-      setTimeout(() => {
-        element.style.height = height;
-      });
     }
   }
 };
@@ -163,7 +147,6 @@ input:active {
 
 header {
   grid-area: header;
-  grid-row: 1/2;
   display: grid;
   grid-template-areas: "back logo account";
   grid-template-columns: repeat(3, 1fr);
@@ -191,7 +174,7 @@ header {
 
 main {
   grid-area: main;
-  grid-row: 2/5;
+  min-height: 40rem;
 }
 
 .hide {
@@ -199,26 +182,13 @@ main {
 }
 
 .footer {
+  grid-area: footer;
   min-height: 8rem;
   background-color: var(--footer-bg);
   display: grid;
   align-items: center;
   font-weight: 600;
-  margin-top: 5rem;
   color: var(--color-light-green);
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition-duration: 0.4s;
-  transition-property: height, opacity;
-  transition-timing-function: ease-in;
-  overflow: hidden;
-}
-
-.fade-enter,
-.fade-leave-active {
-  opacity: 0;
 }
 
 /*
@@ -317,7 +287,7 @@ Login and signup form
   }
 
   .active {
-    transition-duration: 1s;
+    transition-duration: 0.3s;
     transform: scale(0.8);
     transition-timing-function: ease-in-out;
   }

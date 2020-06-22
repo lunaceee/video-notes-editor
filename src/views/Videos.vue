@@ -44,6 +44,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
   padding: 0;
+  min-height: 343px;
 }
 
 li {
@@ -53,7 +54,7 @@ li {
 
 .video-thumbnail img {
   width: 20rem;
-  height: auto;
+  height: 15rem;
 }
 
 .video-thumbnail figure {
