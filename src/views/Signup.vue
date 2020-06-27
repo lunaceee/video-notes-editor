@@ -7,26 +7,14 @@
           <input type="password" disabled />
         </div>
         <div class="input-group">
-          <input
-            type="text"
-            placeholder="Username"
-            v-model="username"
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            v-model="password"
-            required
-          />
+          <input type="text" placeholder="Username" v-model="username" required />
+          <input type="password" placeholder="Password" v-model="password" required />
         </div>
-        <button class="signup-btn" id="sign-up-btn" type="submit">
-          Sign up
-        </button>
+        <ButtonPrimary class="signup-btn" id="sign-up-btn" type="submit">Sign up</ButtonPrimary>
         <span class="divider line one-line" contenteditable>or</span>
         <p>Already have an account?</p>
         <router-link :to="{ name: 'login' }">
-          <button class="login-btn">Log in</button>
+          <ButtonPrimary class="login-btn">Log in</ButtonPrimary>
         </router-link>
       </form>
     </div>
@@ -35,14 +23,16 @@
 <script>
 import { db } from "../firebase";
 import { mapState } from "vuex";
+import ButtonPrimary from "@/components/ButtonPrimary.vue";
 
 export default {
   name: "signup",
   data() {
     return { username: null, password: null };
   },
+  components: { ButtonPrimary },
   computed: {
-    ...mapState(["videos"]),
+    ...mapState(["videos"])
   },
   methods: {
     async signUp() {
@@ -62,13 +52,12 @@ export default {
           .doc(this.username)
           .set({
             password: this.password,
-            videos: videos,
+            videos: videos
           });
         this.$store.commit("setUsername", this.username);
         this.$router.push("/feedback");
       }
-    },
-  },
+    }
+  }
 };
 </script>
-<style></style>

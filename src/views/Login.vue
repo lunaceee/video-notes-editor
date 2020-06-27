@@ -7,27 +7,15 @@
           <input type="password" disabled />
         </div>
         <div class="input-group">
-          <input
-            required
-            type="text"
-            placeholder="Username"
-            v-model="username"
-          />
-          <input
-            required
-            type="password"
-            placeholder="Password"
-            v-model="password"
-          />
+          <input required type="text" placeholder="Username" v-model="username" />
+          <input required type="password" placeholder="Password" v-model="password" />
         </div>
-        <button class="login-btn" id="goto-login-btn" @click="logIn">
-          Log in
-        </button>
+        <ButtonPrimary class="login-btn" id="goto-login-btn" @click.native="logIn">Log in</ButtonPrimary>
       </form>
       <span class="divider line one-line" contenteditable>or</span>
       <p>Need an account?</p>
       <router-link :to="{ name: 'signup' }">
-        <button class="signup-btn">Sign up</button>
+        <ButtonPrimary class="signup-btn">Sign up</ButtonPrimary>
       </router-link>
     </div>
   </div>
@@ -36,18 +24,19 @@
 <script>
 import { db } from "../firebase";
 import { mapState } from "vuex";
+import ButtonPrimary from "@/components/ButtonPrimary.vue";
 
 export default {
   name: "login",
   data() {
     return { username: null, password: null };
   },
+  components: { ButtonPrimary },
   computed: {
-    ...mapState(["videos"]),
+    ...mapState(["videos"])
   },
   methods: {
     async logIn() {
-      console.log("login", this.username);
       let videos = this.videos;
       const user = await db
         .collection("users")
@@ -60,8 +49,8 @@ export default {
         this.$store.commit("updateVideos", serverVideos);
         this.$router.push("/");
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style></style>

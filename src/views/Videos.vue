@@ -1,7 +1,7 @@
 <template>
   <ul class="videos">
-    <li v-for="(video, index) in videos" :key="index" class="video-thumbnail">
-      <figure>
+    <li v-for="(video, index) in videos" :key="index">
+      <figure class="video-thumbnail">
         <router-link
           :to="{
               name: 'VideoDetails',
@@ -11,7 +11,7 @@
           <img :src="getVideoThumbnail(video.url)" :url="video.url" alt="video thumbnail" />
         </router-link>
       </figure>
-      <button class="delete-btn" @click="deleteVideo(video.videoId)">delete</button>
+      <ButtonPrimary class="btn__delete" @click.native="deleteVideo(video.videoId)">delete</ButtonPrimary>
     </li>
   </ul>
 </template>
@@ -19,12 +19,14 @@
 <script>
 import { mapState } from "vuex";
 import { getVideoId } from "../utils";
+import ButtonPrimary from "@/components/ButtonPrimary.vue";
 
 export default {
   name: "Videos",
   computed: {
     ...mapState(["videos"])
   },
+  components: { ButtonPrimary },
   methods: {
     getVideoThumbnail(url) {
       const videoId = getVideoId(url);
@@ -44,30 +46,47 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
   padding: 0;
-  min-height: 343px;
 }
 
 li {
-  list-style: none;
-  display: inline;
+  display: grid;
+  justify-items: center;
+}
+
+.video-thumbnail {
+  overflow: hidden;
 }
 
 .video-thumbnail img {
-  width: 20rem;
-  height: 15rem;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
-.video-thumbnail figure {
-  padding: 1rem;
+.video-thumbnail img:hover {
+  transform: rotate(2deg) scale(1.1);
 }
 
-.video-thumbnail figure:hover {
-  background-color: var(--video-overlay);
-  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
-}
-
-.delete-btn {
+.btn__delete {
   background-color: var(--btn-delete-bg);
   cursor: pointer;
+}
+
+@media (max-width: 30rem) {
+  .videos {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .video-thumbnail {
+    transform: scale(0.8);
+  }
+}
+
+@media (min-width: 30rem) {
+  .video-thumbnail {
+    transform: scale(0.8);
+  }
 }
 </style>

@@ -1,10 +1,8 @@
 <template>
-  <div class="url-form">
-    <form @submit.prevent="onSubmit" id="addUrlForm">
-      <input class="input" type="text" placeholder="Paste in a video URL..." />
-      <input class="submit-button" type="submit" value="Add video" />
-    </form>
-  </div>
+  <form class="form__add-url" @submit.prevent="onSubmit" id="addUrlForm">
+    <input class="form__input" type="text" placeholder="Paste in a video URL..." />
+    <input class="form__btn-submit" type="submit" value="Add video" />
+  </form>
 </template>
 <script>
 export default {
@@ -23,54 +21,70 @@ export default {
 };
 </script>
 <style scoped>
-.url-form {
-  display: grid;
-  margin: 2rem;
+.form__add-url {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
 }
 
-.input,
-.submit-button {
+.form__input,
+.form__btn-submit {
   margin: 0.5rem;
-  display: block;
-  width: 100%;
 }
 
-.input::placeholder {
-  color: var(--color);
+.form__input {
+  min-width: 15rem;
+  max-width: 30rem;
+  padding: 0.5rem;
+  font-size: small;
 }
 
-.input {
+.form__btn-submit {
+  min-width: auto;
+  max-width: 30rem;
+}
+
+.form__input::placeholder {
+  color: var(--color-placeholder);
+}
+
+.form__input {
   border-radius: 0.2em;
   height: 2rem;
-  border: 1px solid var(--btn-bg);
+  border: 1px solid var(--btn-primary-bg);
 }
 
-.input:focus {
-  border: 2px solid var(--btn-bg);
+.form__input:focus {
+  border: 2px solid var(--btn-primary-bg);
   border-radius: 0.2rem;
   outline: none;
 }
 
-@media (min-width: 40rem) {
-  .input,
-  .submit-button {
-    display: inline-block;
-  }
-  .input {
-    width: 30%;
-  }
-
-  .submit-button {
-    width: 15%;
+@media (max-width: 20rem) {
+  .form__add-url {
+    width: 100vw;
   }
 }
 
-@media (min-width: 65rem) {
-  .input {
-    width: 20%;
+@media (min-width: 20rem) {
+  .form__add-url {
+    width: 100%;
   }
-  .submit-button {
-    width: 8%;
+}
+
+@media (min-width: 40rem) {
+  .form__add-url {
+    flex-flow: row wrap;
+  }
+
+  .form__input {
+    width: 30vw;
+  }
+
+  .form__btn-submit {
+    width: auto;
   }
 }
 </style>
