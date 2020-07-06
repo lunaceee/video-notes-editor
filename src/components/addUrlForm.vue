@@ -26,7 +26,6 @@ export default {
   flex-flow: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 3rem;
 }
 
 .form__input,
@@ -44,6 +43,7 @@ export default {
 .form__btn-submit {
   min-width: auto;
   max-width: 30rem;
+  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-primary-border);
 }
 
 .form__input::placeholder {

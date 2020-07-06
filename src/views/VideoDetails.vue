@@ -78,6 +78,7 @@ export default {
 
 .details__add-note[disabled="disabled"] {
   background-color: var(--btn-mute-bg);
+  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-mute-color);
   color: var(--btn-mute-color);
   cursor: not-allowed;
 }

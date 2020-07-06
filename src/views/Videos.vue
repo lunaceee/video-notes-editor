@@ -70,6 +70,7 @@ li {
 
 .btn__delete {
   background-color: var(--btn-delete-bg);
+  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-delete-border);
   cursor: pointer;
 }
 

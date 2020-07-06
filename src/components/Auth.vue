@@ -2,11 +2,11 @@
   <div class="auth__container">
     <div class="dropdown__default">
       <ButtonPrimary
-        v-if="showSave"
+        v-if="!showLogout"
         aria-expanded="false"
         aria-labelledby="dropdownMenuButton"
         @click.native="toggleDropdown"
-      >Save</ButtonPrimary>
+      >Account</ButtonPrimary>
       <ButtonPrimary class="auth__btn-logout" @click.native="logOut" v-if="showLogout">Log out</ButtonPrimary>
       <ul :class="[isActive ? 'active' : '', 'dropdown__menu-default']">
         <li>
@@ -58,17 +58,13 @@ export default {
     },
     showLogout() {
       return this.username !== null;
-    },
-    showSave() {
-      console.log(this.videos == []);
-      return this.videos !== [];
     }
   },
   methods: {
     logOut() {
       this.$store.commit("deleteAllVideos");
       this.$store.commit("unsetUsername");
-      window.location.reload();
+      this.$router.push("/");
     },
     toggleDropdown() {
       this.isActive = !this.isActive;

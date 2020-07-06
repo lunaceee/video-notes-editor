@@ -12,8 +12,7 @@ const firebaseApp = firebase.initializeApp({
 	measurementId: 'G-23MMSMGR0X'
 });
 
-console.log('kjhgf', firebaseApp.auth());
-
+console.log('auth', firebaseApp.auth());
 firebaseApp.auth().signInAnonymously().catch(function(error) {
 	// Handle Errors here.
 	var errorCode = error.code;
@@ -24,7 +23,6 @@ firebaseApp.auth().signInAnonymously().catch(function(error) {
 firebaseApp.auth().onAuthStateChanged(function(user) {
 	if (user) {
 		// User is signed in.
-		console.log('user', user);
 		var isAnonymous = user.isAnonymous;
 		var uid = user.uid;
 		// ...

@@ -5,11 +5,14 @@
         <GoBack :class="[isHomePage ? 'hide' : '']" />
       </div>
       <router-link :to="{name: 'home'}">
-        <Logo :class="[!isHomePage ? 'active' : '', 'app__logo']" />
+        <Logo class="app__logo-mobile app__logo" />
       </router-link>
       <Auth />
     </header>
     <main class="app__main">
+      <router-link :to="{name: 'home'}">
+        <Logo :class="[!isHomePage ? 'active' : '', 'app__logo', 'app__logo-default']" />
+      </router-link>
       <AddURLForm v-show="isHomePage" />
       <router-view :key="$route.path" />
     </main>
@@ -32,7 +35,7 @@ export default {
   name: "Cuttle",
   data() {
     return {
-      prevHeight: 0
+      isMobile: false
     };
   },
   components: {
@@ -55,14 +58,11 @@ export default {
 :root {
   font-size: 16px; /* 1rem */
   font-family: "Lato", sans-serif;
-  --white: #ffffff;
-  --video-overlay: hsl(31, 65%, 80%);
-
   --teal: #60b3b0;
   --color-dark: #a63f42;
   --color-light: #fffbe6;
   --btn-primary-bg: #a63f42;
-  --btn-primary-border: #dda6a8;
+  --btn-primary-border: #69140e;
   --btn-secondary-bg: #e3f2f1;
   --btn-secondary-border: #60b3b0;
   --btn-mute-bg: #ebebeb;
@@ -70,6 +70,7 @@ export default {
   --btn-mute-color: #c0c0c0;
   --btn-cancel-color: hsl(0, 0, 75%);
   --btn-delete-bg: #4a1c1e;
+  --btn-delete-border: #a63f42;
 
   --color-placeholder: #8f3900;
 
@@ -162,6 +163,7 @@ a:hover {
   grid-template-areas: "back logo account";
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
+  grid-row: 1/2;
 }
 
 .header__back {
@@ -170,9 +172,9 @@ a:hover {
   align-items: center;
 }
 
-.app__logo {
+.app__logo-mobile {
   grid-area: logo;
-  margin: 2rem auto;
+  visibility: hidden;
 }
 
 .active {
@@ -292,27 +294,46 @@ Login and signup form
   box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-secondary-border);
 }
 
+@media (max-width: 20rem) {
+  .app__logo-mobile {
+    visibility: visible;
+  }
+
+  .app__logo-default {
+    visibility: hidden;
+  }
+}
+
 @media (min-width: 20rem) {
   .app__header {
     padding: 0 2rem;
+  }
+
+  .app__logo {
+    width: 6rem;
+  }
+
+  .app__logo-mobile {
+    visibility: visible;
+  }
+
+  .app__logo-default {
+    visibility: hidden;
   }
 }
 
 @media (min-width: 40rem) {
   .app__logo {
-    transform: scale(0.6);
-    transition: all 0.5s ease;
+    width: 20rem;
+    margin: 0 0 4rem;
   }
 
-  .app__header {
-    padding: 2rem;
+  .app__logo-mobile {
+    visibility: hidden;
   }
-}
 
-@media (min-width: 60rem) {
-  .app__logo {
-    transform: scale(0.8);
-    transition: all 0.5s ease;
+  .app__logo-default {
+    visibility: visible;
   }
 }
 </style>
