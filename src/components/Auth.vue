@@ -1,14 +1,13 @@
 <template>
-  <div class="auth">
+  <div class="auth__container">
     <div class="dropdown__default">
-      <button
-        class="btn"
-        aria-haspopup="true"
+      <ButtonPrimary
+        v-if="showSave"
         aria-expanded="false"
         aria-labelledby="dropdownMenuButton"
-        @click="toggleDropdown"
-        v-if="!showLogout"
-      >Save video</button>
+        @click.native="toggleDropdown"
+      >Save</ButtonPrimary>
+      <ButtonPrimary class="auth__btn-logout" @click.native="logOut" v-if="showLogout">Log out</ButtonPrimary>
       <ul :class="[isActive ? 'active' : '', 'dropdown__menu-default']">
         <li>
           <router-link class="auth__btn-signup" :to="{ name: 'signup' }" v-if="showSignup">Sign up</router-link>
@@ -17,14 +16,13 @@
           <router-link :to="{ name: 'login' }" v-if="showLogin">Log in</router-link>
         </li>
       </ul>
-      <ButtonPrimary class="auth__btn-logout" @click.native="logOut" v-if="showLogout">Log out</ButtonPrimary>
     </div>
     <!-- menu on mobile viewport -->
     <div class="dropdown__mobile">
-      <button class="btn__icon" @click="toggleDropdown">
+      <button class="btn__icon" @click="toggleDropdownMobile">
         <IconUser />
       </button>
-      <ul :class="[isActive ? 'active' : '', 'dropdown__menu-mobile']">
+      <ul :class="[isActiveOnMobile ? 'active' : '', 'dropdown__menu-mobile']">
         <li>
           <router-link class="auth__btn-signup" :to="{ name: 'signup' }" v-if="showSignup">Sign up</router-link>
         </li>
@@ -45,12 +43,13 @@ export default {
   name: "authentication",
   data() {
     return {
-      isActive: false
+      isActive: false,
+      isActiveOnMobile: false
     };
   },
   components: { ButtonPrimary, IconUser },
   computed: {
-    ...mapState(["username"]),
+    ...mapState(["username", "videos"]),
     showSignup() {
       return this.$route.name !== "signup" && this.username === null;
     },
@@ -59,32 +58,45 @@ export default {
     },
     showLogout() {
       return this.username !== null;
+    },
+    showSave() {
+      console.log(this.videos == []);
+      return this.videos !== [];
     }
   },
   methods: {
     logOut() {
       this.$store.commit("deleteAllVideos");
       this.$store.commit("unsetUsername");
-      this.$router.push("/");
+      window.location.reload();
     },
     toggleDropdown() {
       this.isActive = !this.isActive;
+    },
+    toggleDropdownMobile() {
+      this.isActiveOnMobile = !this.isActiveOnMobile;
     }
   }
 };
 </script>
 <style scoped>
-.auth {
+.auth__container {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  align-items: baseline;
-  justify-items: right;
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
+
 .dropdown__default,
 .dropdown__mobile {
   grid-area: 1 / 1 / 2 / 2;
+  display: grid;
+  justify-items: right;
+}
+
+.dropdown__default button,
+.dropdown__mobile button {
+  grid-area: 1/1/2/2;
 }
 
 .dropdown__menu-default,
@@ -96,6 +108,7 @@ export default {
 .active {
   visibility: visible;
 }
+
 @media (max-width: 20rem) {
   .dropdown__mobile {
     visibility: visible;

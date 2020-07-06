@@ -1,17 +1,19 @@
 <template>
-  <div id="app" class="container">
-    <header>
-      <GoBack class="back" :class="[isHomePage ? 'hide' : '']" />
+  <div id="app" class="app__container">
+    <header class="app__header">
+      <div class="header__back">
+        <GoBack :class="[isHomePage ? 'hide' : '']" />
+      </div>
       <router-link :to="{name: 'home'}">
-        <Logo :class="[!isHomePage ? 'active' : '', 'logo']" />
+        <Logo :class="[!isHomePage ? 'active' : '', 'app__logo']" />
       </router-link>
       <Auth />
     </header>
-    <main>
+    <main class="app__main">
       <AddURLForm v-show="isHomePage" />
       <router-view :key="$route.path" />
     </main>
-    <footer class="footer">
+    <footer class="app__footer">
       <span>
         Made for you by
         <a href="https://github.com/lunaceee">lunaceee</a>
@@ -142,7 +144,7 @@ a:hover {
   cursor: pointer;
 }
 
-.container {
+.app__container {
   display: grid;
   width: 100%;
   grid-template-areas:
@@ -154,7 +156,7 @@ a:hover {
   -moz-osx-font-smoothing: grayscale;
 }
 
-header {
+.app__header {
   grid-area: header;
   display: grid;
   grid-template-areas: "back logo account";
@@ -162,13 +164,13 @@ header {
   align-items: center;
 }
 
-.back {
+.header__back {
   grid-area: back;
-  display: grid;
-  justify-items: start;
+  display: flex;
+  align-items: center;
 }
 
-.logo {
+.app__logo {
   grid-area: logo;
   margin: 2rem auto;
 }
@@ -178,7 +180,7 @@ header {
   transition: all 0.4s ease;
 }
 
-main {
+.app__main {
   grid-area: main;
   margin-bottom: 5rem;
 }
@@ -187,7 +189,7 @@ main {
   visibility: hidden;
 }
 
-.footer {
+.app__footer {
   grid-area: footer;
   min-height: 8rem;
   background-color: var(--footer-bg);
@@ -291,29 +293,24 @@ Login and signup form
 }
 
 @media (min-width: 20rem) {
-  .logo {
-    transform: scale(0.7);
-    transition: all 0.5s ease;
-  }
-
-  header {
+  .app__header {
     padding: 0 2rem;
   }
 }
 
 @media (min-width: 40rem) {
-  .logo {
+  .app__logo {
     transform: scale(0.6);
     transition: all 0.5s ease;
   }
 
-  header {
+  .app__header {
     padding: 2rem;
   }
 }
 
 @media (min-width: 60rem) {
-  .logo {
+  .app__logo {
     transform: scale(0.8);
     transition: all 0.5s ease;
   }
