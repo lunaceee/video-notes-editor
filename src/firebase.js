@@ -1,5 +1,5 @@
 import { firebase } from '@firebase/app';
-import 'firebase/auth'; 
+import '@firebase/auth'; 
 import '@firebase/firestore';
 
 const firebaseApp = firebase.initializeApp({
@@ -13,7 +13,6 @@ const firebaseApp = firebase.initializeApp({
 	measurementId: 'G-23MMSMGR0X'
 });
 
-console.log('auth', firebaseApp.auth());
 firebaseApp.auth().signInAnonymously().catch(function(error) {
 	// Handle Errors here.
 	var errorCode = error.code;
