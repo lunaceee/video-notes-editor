@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import 'normalize.css';
 import VueFirestore from 'vue-firestore';
-import firebase from 'firebase'; // important for firebase auth to work
 import App from './App.vue';
 import router from './router';
 import 'video.js/dist/video-js.css';
