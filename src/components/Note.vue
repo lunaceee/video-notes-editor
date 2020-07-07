@@ -134,9 +134,9 @@ export default {
   width: inherit;
 }
 
-.icon:hover,
+.btn__icon:hover,
 .icon-group__play:hover {
-  color: var(--btn-shadow);
+  color: var(--btn-primary-bg);
 }
 
 .note__timestamp {

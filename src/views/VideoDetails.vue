@@ -81,6 +81,7 @@ export default {
   box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-mute-color);
   color: var(--btn-mute-color);
   cursor: not-allowed;
+  top: 0;
 }
 
 .details__video {
