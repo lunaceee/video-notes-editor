@@ -4,15 +4,21 @@
       <div class="header__back">
         <GoBack :class="[isHomePage ? 'hide' : '']" />
       </div>
-      <router-link :to="{name: 'home'}">
-        <Logo class="app__logo-mobile app__logo" />
-      </router-link>
-      <Auth />
+      <div class="app__logo app__logo-mobile">
+        <router-link :to="{name: 'home'}">
+          <Logo />
+        </router-link>
+      </div>
+      <div class="header__auth">
+        <Auth />
+      </div>
     </header>
     <main class="app__main">
-      <router-link :to="{name: 'home'}">
-        <Logo :class="[!isHomePage ? 'active' : '', 'app__logo', 'app__logo-default']" />
-      </router-link>
+      <div class="app__logo app__logo-default">
+        <router-link :to="{name: 'home'}">
+          <Logo />
+        </router-link>
+      </div>
       <AddURLForm v-show="isHomePage" />
       <router-view :key="$route.path" />
     </main>
@@ -152,24 +158,31 @@ a:hover {
     "header"
     "main"
     "footer";
-  text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .app__header {
+  padding: 2rem 2rem 0;
   grid-area: header;
   display: grid;
   grid-template-areas: "back logo account";
-  grid-template-columns: repeat(3, 1fr);
-  align-items: center;
-  grid-row: 1/2;
+  grid-template-columns: repeat(3, minmax(3rem, 1fr));
+  grid-template-rows: 1fr;
 }
 
 .header__back {
   grid-area: back;
-  display: flex;
-  align-items: center;
+}
+
+.header__auth {
+  overflow: visible;
+}
+
+.app__logo {
+  margin: auto;
+  min-width: 8rem;
+  max-width: 20rem;
 }
 
 .app__logo-mobile {
@@ -177,9 +190,9 @@ a:hover {
   visibility: hidden;
 }
 
-.active {
-  transform: scale(1);
-  transition: all 0.4s ease;
+.app__logo-default {
+  display: none;
+  margin-bottom: 5rem;
 }
 
 .app__main {
@@ -197,6 +210,7 @@ a:hover {
   background-color: var(--footer-bg);
   display: grid;
   align-items: center;
+  text-align: center;
   font-weight: 600;
   color: var(--footer-color);
 }
@@ -210,13 +224,6 @@ a:hover {
 /*
 Login and signup form
  */
-
-.auth-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
 .form-container {
   min-width: 16rem;
   padding: 2rem;
@@ -288,52 +295,41 @@ Login and signup form
   box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-primary-border);
 }
 
-.auth__btn-logout {
-  background-color: var(--btn-secondary-bg);
-  color: #214544;
-  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-secondary-border);
-}
-
 @media (max-width: 20rem) {
   .app__logo-mobile {
     visibility: visible;
   }
 
-  .app__logo-default {
-    visibility: hidden;
+  .app__logo {
+    min-width: 4rem;
+  }
+
+  .header__back {
+    margin-top: 1rem;
   }
 }
 
 @media (min-width: 20rem) {
-  .app__header {
-    padding: 0 2rem;
-  }
-
-  .app__logo {
-    width: 6rem;
-  }
-
   .app__logo-mobile {
     visibility: visible;
   }
 
-  .app__logo-default {
-    visibility: hidden;
+  .header__back {
+    padding-top: 0.8rem;
+  }
+
+  .app__logo {
+    min-width: 6rem;
   }
 }
 
 @media (min-width: 40rem) {
-  .app__logo {
-    width: 20rem;
-    margin: 0 0 4rem;
-  }
-
   .app__logo-mobile {
     visibility: hidden;
   }
 
   .app__logo-default {
-    visibility: visible;
+    display: block;
   }
 }
 </style>

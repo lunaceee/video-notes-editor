@@ -2,18 +2,19 @@
   <div class="auth__container">
     <div class="dropdown__default">
       <ButtonPrimary
-        v-if="!showLogout"
         aria-expanded="false"
         aria-labelledby="dropdownMenuButton"
         @click.native="toggleDropdown"
       >Account</ButtonPrimary>
-      <ButtonPrimary class="auth__btn-logout" @click.native="logOut" v-if="showLogout">Log out</ButtonPrimary>
       <ul :class="[isActive ? 'active' : '', 'dropdown__menu-default']">
         <li>
           <router-link class="auth__btn-signup" :to="{ name: 'signup' }" v-if="showSignup">Sign up</router-link>
         </li>
         <li>
           <router-link :to="{ name: 'login' }" v-if="showLogin">Log in</router-link>
+        </li>
+        <li>
+          <a @click.native="logOut" v-if="showLogout">Log out</a>
         </li>
       </ul>
     </div>
@@ -80,9 +81,7 @@ export default {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  margin-top: 3rem;
 }
-
 .dropdown__default,
 .dropdown__mobile {
   grid-area: 1 / 1 / 2 / 2;

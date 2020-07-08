@@ -130,7 +130,7 @@ export default {
 .note__top-controls {
   grid-area: top-controls;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
   width: inherit;
 }
 
@@ -153,7 +153,7 @@ export default {
 
 .icon-group__edit {
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
 }
 
 .note__bottom-controls {
