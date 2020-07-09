@@ -1,12 +1,21 @@
 <template>
-  <div class="video-details" :class="notesSize > 0 ? 'with-notes' : 'with-no-notes'">
-    <div class="top-controls">
-      <button :disabled="notStarted" @click="addNote" class="add-note">Add note</button>
+  <div class="details" :class="notesSize > 0 ? 'details__with-notes' : 'details__with-no-notes'">
+    <div class="details__top-controls">
+      <ButtonPrimary
+        :disabled="notStarted"
+        @click.native="addNote"
+        class="details__add-note"
+      >Add note</ButtonPrimary>
     </div>
     <transition name="slide-fade">
-      <video-player v-if="show" :url="videoUrl" :playerHolder="playerHolder" class="video" />
+      <video-player
+        v-if="show"
+        :url="videoUrl"
+        :playerHolder="playerHolder"
+        class="details__video"
+      />
     </transition>
-    <notes :url="videoUrl" class="notes" :playerHolder="playerHolder" />
+    <notes :url="videoUrl" class="details__notes" :playerHolder="playerHolder" />
   </div>
 </template>
 <script>
@@ -14,6 +23,7 @@ import VideoPlayer from "@/components/VideoPlayer.vue";
 
 import Notes from "@/components/Notes.vue";
 import { mapGetters } from "vuex";
+import ButtonPrimary from "@/components/ButtonPrimary.vue";
 
 export default {
   name: "VideoDetails",
@@ -25,7 +35,6 @@ export default {
         get: () => video,
         notify: e => {
           if (e === "firstplay") {
-            console.log("notify");
             this.notStarted = false;
           }
         }
@@ -36,7 +45,8 @@ export default {
   },
   components: {
     VideoPlayer,
-    Notes
+    Notes,
+    ButtonPrimary
   },
   computed: {
     videoUrl: function() {
@@ -61,33 +71,46 @@ export default {
 };
 </script>
 <style scoped>
-.video-details {
+.details {
   display: grid;
   justify-items: center;
-  margin-bottom: 5rem;
 }
 
-.add-note[disabled="disabled"] {
+.details__add-note[disabled="disabled"] {
   background-color: var(--btn-mute-bg);
-  color: var(--color-light-green);
+  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-mute-color);
+  color: var(--btn-mute-color);
   cursor: not-allowed;
+  top: 0;
 }
 
-.video {
+.details__video {
   grid-area: video;
 }
 
-.notes {
+.details__notes {
   grid-area: notes;
-  padding-left: 0;
+  padding: 0;
 }
 
-.top-controls {
+.details__top-controls {
   grid-area: top-controls;
+  width: inherit;
+}
+
+@media (max-width: 20rem) {
+  .details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .details__video {
+    width: 100vw;
+  }
 }
 
 @media (min-width: 20rem) {
-  .video-details {
+  .details {
     grid-template-areas:
       "top-controls"
       "video"
@@ -95,62 +118,69 @@ export default {
     grid-gap: 1rem;
   }
 
-  .notes {
+  .details__video {
+    width: 100vw;
+    height: 16rem;
+  }
+
+  .details__notes {
     width: 80vw;
+  }
+}
+
+@media (min-width: 30rem) {
+  .details__video {
+    height: 24rem;
   }
 }
 
 @media (min-width: 48rem) {
-  .video {
+  .details__video {
     width: 80vw;
     height: 28rem;
   }
-
-  .notes {
-    width: 80vw;
-  }
 }
+
 @media (min-width: 65rem) {
-  .video-details,
-  .with-notes {
+  .details {
     grid-template-areas:
       "top-controls top-controls ."
       "video video notes";
   }
 
-  .with-no-notes {
+  .details__with-no-notes {
     grid-template-areas:
       "top-controls"
       "video";
   }
 
-  .with-no-notes > .notes {
+  .details__with-no-notes > .details__notes {
     display: none;
   }
 
-  .video {
-    width: 80vw;
-    height: 28rem;
+  .details__video {
+    width: 40rem;
+    height: 25rem;
   }
 
-  .notes {
-    width: 80vw;
-  }
-}
-
-@media (min-width: 80rem) {
-  .video {
-    width: 42rem;
-    height: 28rem;
-  }
-
-  .notes {
+  .details__notes {
     width: 20rem;
   }
 }
 
+@media (min-width: 80rem) {
+  .details__video {
+    width: 43rem;
+    height: 30rem;
+  }
+
+  .details__notes {
+    width: 28rem;
+  }
+}
+
 @media (min-width: 100rem) {
-  .video {
+  .details__video {
     width: 56rem;
     height: 33rem;
   }

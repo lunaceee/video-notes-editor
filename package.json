@@ -12,6 +12,7 @@
 	"dependencies": {
 		"@devmobiliza/videojs-vimeo": "^0.6.0",
 		"@firebase/app": "^0.6.5",
+		"@firebase/auth": "^0.14.7",
 		"@firebase/firestore": "^1.15.0",
 		"core-js": "^3.6.4",
 		"normalize.css": "^8.0.1",

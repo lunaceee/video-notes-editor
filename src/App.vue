@@ -1,17 +1,28 @@
 <template>
-  <div id="app" class="container">
-    <header>
-      <GoBack class="back" :class="[isHomePage ? 'hide' : '']" />
-      <router-link :to="{name: 'home'}">
-        <Logo class="logo" :class="[!isHomePage ? 'active' : '']" />
-      </router-link>
-      <Auth class="account" />
+  <div id="app" class="app__container">
+    <header class="app__header">
+      <div class="header__back">
+        <GoBack :class="[isHomePage ? 'hide' : '']" />
+      </div>
+      <div class="app__logo app__logo-mobile">
+        <router-link :to="{name: 'home'}">
+          <Logo />
+        </router-link>
+      </div>
+      <div class="header__auth">
+        <Auth />
+      </div>
     </header>
-    <main>
+    <main class="app__main">
+      <div class="app__logo app__logo-default">
+        <router-link :to="{name: 'home'}">
+          <Logo />
+        </router-link>
+      </div>
       <AddURLForm v-show="isHomePage" />
       <router-view :key="$route.path" />
     </main>
-    <footer class="footer">
+    <footer class="app__footer">
       <span>
         Made for you by
         <a href="https://github.com/lunaceee">lunaceee</a>
@@ -24,13 +35,13 @@
 import GoBack from "@/components/GoBack.vue";
 import AddURLForm from "@/components/addUrlForm.vue";
 import Auth from "@/components/Auth.vue";
-import Logo from "@/assets/icons/cuttle-logo.svg";
+import Logo from "@/assets/icons/cuttle-logo-v1.svg";
 
 export default {
   name: "Cuttle",
   data() {
     return {
-      prevHeight: 0
+      isMobile: false
     };
   },
   components: {
@@ -41,6 +52,7 @@ export default {
   },
   computed: {
     isHomePage() {
+      console.log(this.$route.path);
       return this.$route.path === "/";
     }
   }
@@ -48,40 +60,50 @@ export default {
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Lato&display=swap");
 :root {
   font-size: 16px; /* 1rem */
-  --bg: #fffbe6;
-  --btn-bg: #fd5523;
-  --btn-delete-bg: #c21900;
-  --color: #356859;
+  font-family: "Lato", sans-serif;
+  --teal: #60b3b0;
+  --color-dark: #a63f42;
   --color-light: #fffbe6;
-  --color-light-green: #629686;
-  --btn-primary-bg: #37966f;
-  --btn-mute-bg: #043d30;
-  --footer-bg: #043d30;
-  --video-overlay: #d6f0df;
+  --btn-primary-bg: #a63f42;
+  --btn-primary-border: #69140e;
+  --btn-secondary-bg: #e3f2f1;
+  --btn-secondary-border: #60b3b0;
+  --btn-mute-bg: #ebebeb;
+  --btn-color: var(--color-light);
+  --btn-mute-color: #c0c0c0;
+  --btn-cancel-color: hsl(0, 0, 75%);
+  --btn-delete-bg: #4a1c1e;
+  --btn-delete-border: #a63f42;
+
+  --color-placeholder: #8f3900;
+
+  --footer-bg: #a63f42;
+  --footer-color: var(--color-light);
   --border: #dddedf;
 }
 
 html {
   height: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 body {
-  color: var(--color);
+  color: var(--color-dark);
   min-height: 100%;
   width: 100%;
   display: grid;
   margin: 0;
   grid-template-rows: 1fr auto;
+  position: relative;
 }
 
 ul {
   list-style: none;
 }
 
-button,
 label,
 input {
   display: inline-block;
@@ -92,115 +114,116 @@ input {
   -moz-appearance: none;
 }
 
-button,
 input[type="submit"] {
   padding: 0.7em 1.4em;
   margin: 0 0.3em 0.3em 0;
   border-radius: 0.3rem;
   border-style: none;
+  background-color: var(--btn-primary-bg);
   text-decoration: none;
   text-transform: uppercase;
   font-size: 0.8rem;
   color: #fdf6e3;
-  background-color: var(--btn-bg);
   box-shadow: inset 0 -0.6em 0 -0.35em rgba(230, 221, 221, 0.17);
   text-align: center;
   position: relative;
 }
 
-a,
-a:active {
-  color: var(--btn-bg);
-}
-
-a {
-  text-decoration: none;
-}
-
-button:focus,
 input:focus {
   outline: none;
 }
 
-button:active,
 input:active {
   top: 0.1em;
 }
 
-.container {
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a,
+a:active {
+  color: var(--btn-secondary-border);
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+.app__container {
   display: grid;
   width: 100%;
   grid-template-areas:
     "header"
     "main"
     "footer";
-  font-family: "Open Sans", sans-serif;
-  text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.heading-move,
-.logo {
-  transition: all 0.4s ease;
-}
-
-header {
+.app__header {
+  padding: 2rem 2rem 0;
   grid-area: header;
   display: grid;
   grid-template-areas: "back logo account";
-  grid-template-columns: repeat(3, 1fr);
-  align-items: center;
-  padding: 2rem;
+  grid-template-columns: repeat(3, minmax(3rem, 1fr));
+  grid-template-rows: 1fr;
 }
 
-.back {
+.header__back {
   grid-area: back;
-  display: grid;
-  justify-items: start;
 }
 
-.logo {
+.header__auth {
+  overflow: visible;
+}
+
+.app__logo {
+  margin: auto;
+  min-width: 8rem;
+  max-width: 20rem;
+}
+
+.app__logo-mobile {
   grid-area: logo;
-  margin: 2rem auto;
-  transform: scale(1.3);
+  visibility: hidden;
 }
 
-.account {
-  grid-area: account;
-  display: flex;
-  justify-content: flex-end;
+.app__logo-default {
+  display: none;
+  margin-bottom: 5rem;
 }
 
-main {
+.app__main {
   grid-area: main;
-  min-height: 40rem;
+  margin-bottom: 5rem;
 }
 
 .hide {
   visibility: hidden;
 }
 
-.footer {
+.app__footer {
   grid-area: footer;
   min-height: 8rem;
   background-color: var(--footer-bg);
   display: grid;
   align-items: center;
+  text-align: center;
   font-weight: 600;
-  color: var(--color-light-green);
+  color: var(--footer-color);
+}
+
+.btn__icon {
+  border: none;
+  background-color: unset;
+  cursor: pointer;
 }
 
 /*
 Login and signup form
  */
-
-.auth-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
 .form-container {
   min-width: 16rem;
   padding: 2rem;
@@ -260,36 +283,53 @@ Login and signup form
 .input-group {
   margin: 2rem 0;
 }
+
 .signup-btn,
 .login-btn {
   width: 100%;
 }
-.login-btn {
-  background-color: white;
-  border: 1px solid var(--btn-primary-bg);
-  color: var(--btn-primary-bg);
-  box-shadow: inset 0 -0.6em 0 -0.35em var(--video-overlay);
+
+.auth__btn-login {
+  background-color: var(--btn-secondary-bg);
+  color: var(--color-dark);
+  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-primary-border);
+}
+
+@media (max-width: 20rem) {
+  .app__logo-mobile {
+    visibility: visible;
+  }
+
+  .app__logo {
+    min-width: 4rem;
+  }
+
+  .header__back {
+    margin-top: 1rem;
+  }
 }
 
 @media (min-width: 20rem) {
-  .logo {
-    transition-duration: 1s;
-    transform: scale(0.7);
-    transition-timing-function: ease-in-out;
+  .app__logo-mobile {
+    visibility: visible;
+  }
+
+  .header__back {
+    padding-top: 0.8rem;
+  }
+
+  .app__logo {
+    min-width: 6rem;
   }
 }
 
 @media (min-width: 40rem) {
-  .logo {
-    transition-duration: 1s;
-    transform: scale(1);
-    transition-timing-function: ease-in-out;
+  .app__logo-mobile {
+    visibility: hidden;
   }
 
-  .active {
-    transition-duration: 0.3s;
-    transform: scale(0.8);
-    transition-timing-function: ease-in-out;
+  .app__logo-default {
+    display: block;
   }
 }
 </style>

@@ -1,15 +1,23 @@
 <template>
   <div class="note">
-    <div class="timestamp">{{ formatTimestamp(note.time) }}/{{formatTimestamp(note.duration)}}</div>
-    <div class="top-controls">
-      <button @click="play" class="play-btn">play</button>
-      <button v-if="mode === 'showing'" @click="edit" class="edit-btn">edit</button>
-      <button @click="deleteNote" class="delete-btn">delete</button>
+    <div class="note__top-controls">
+      <button @click="play" class="btn__icon icon-group__play">
+        <IconPlay />
+        <span class="note__timestamp">{{ formatTimestamp(note.time) }}</span>
+      </button>
+      <div class="icon-group__edit">
+        <button class="btn__icon" v-if="mode === 'showing'" @click="edit">
+          <IconEdit />
+        </button>
+        <button class="btn__icon" @click="deleteNote">
+          <IconTrash />
+        </button>
+      </div>
     </div>
-    <div class="content">
+    <div class="note__content">
       <p v-if="mode === 'showing'">{{note.text}}</p>
     </div>
-    <div class="text">
+    <div class="note__input">
       <textarea
         wrap="hard"
         v-if="mode === 'editing'"
@@ -17,14 +25,18 @@
         v-model="editingContent"
       ></textarea>
     </div>
-    <div class="bottom-controls">
-      <button v-if="mode === 'editing'" @click="save" class="save-btn">save</button>
-      <button v-if="mode === 'editing'" @click="cancel" class="cancel-btn">cancel</button>
+    <div class="note__bottom-controls">
+      <ButtonPrimary @click.native="save" v-if="mode === 'editing'" class="btn__save">Save</ButtonPrimary>
+      <ButtonPrimary @click.native="cancel" v-if="mode === 'editing'" class="btn__cancel">Cancel</ButtonPrimary>
     </div>
   </div>
 </template>
 <script>
 import { bus } from "../main";
+import IconPlay from "@/assets/icons/IconPlay.svg";
+import IconEdit from "@/assets/icons/IconEdit.svg";
+import IconTrash from "@/assets/icons/IconTrash.svg";
+import ButtonPrimary from "@/components/ButtonPrimary.vue";
 
 export default {
   name: "note",
@@ -34,9 +46,15 @@ export default {
       editingContent: this.note.text
     };
   },
+  components: {
+    IconPlay,
+    IconEdit,
+    IconTrash,
+    ButtonPrimary
+  },
   props: {
     placeholder: {
-      default: "Type in note",
+      default: "Curiosity nourishes the cat...",
       type: String
     },
     playerHolder: {
@@ -102,78 +120,86 @@ export default {
 .note {
   display: grid;
   grid-template-areas:
-    "time top-controls"
-    "content content"
-    "bottom-controls bottom-controls";
-  align-items: center;
-  border-bottom: 1px solid var(--color);
+    "top-controls"
+    "content"
+    "bottom-controls";
+  border-bottom: 1px solid var(--border);
   margin-bottom: 1rem;
 }
 
-/* grid layout */
-.top-controls {
+.note__top-controls {
   grid-area: top-controls;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: inherit;
+}
+
+.btn__icon:hover,
+.icon-group__play:hover {
+  color: var(--btn-primary-bg);
+}
+
+.note__timestamp {
+  font-weight: 600;
+  font-size: small;
+  align-self: center;
+}
+
+.icon-group__play {
+  display: flex;
+  justify-content: flex-start;
+  align-self: center;
+}
+
+.icon-group__edit {
   display: flex;
   justify-content: flex-end;
 }
 
-.bottom-controls {
+.note__bottom-controls {
   grid-area: bottom-controls;
+  margin-bottom: 1rem;
 }
 
-.timestamp {
-  grid-area: time;
-  display: flex;
-  justify-content: flex-start;
-  font-weight: 600;
-  font-size: small;
+.btn__cancel {
+  background-color: var(--btn-mute-bg);
+  color: var(--btn-cancel-color);
 }
 
-.content,
-.text {
+.btn__save {
+  background-color: var(--btn-primary-bg);
+}
+
+.note__content,
+.note__input {
   grid-area: content;
-  padding: 0;
-  width: inherit;
 }
 
-.content p {
+.note__content > p {
   text-align: left;
   overflow-x: auto;
   max-height: 15rem;
   white-space: pre-wrap;
   word-wrap: break-word;
-  width: inherit;
+  box-sizing: border-box;
+  padding: 0 1rem;
 }
 
-.text > textarea {
-  width: 20rem;
+textarea {
+  width: 80%;
   height: 15rem;
-  border-color: var(--color);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin: 2rem 0;
+  padding: 1rem;
 }
 
-/* control buttons */
-.play-btn {
-  grid-area: play;
-}
-.edit-btn {
-  grid-area: edit;
-}
-.delete-btn {
-  grid-area: delete;
-  background-color: var(--btn-delete-bg);
+textarea:invalid {
+  border: 2px solid var(--btn-delete-bg);
 }
 
-.cancel-btn {
-  background-color: var(--btn-mute-bg);
-  color: var(--color);
-}
-
-.delete-btn {
-  background-color: var(--btn-delete-bg);
-}
-
-.save-btn {
-  background-color: var(--btn-primary-bg);
+textarea::placeholder {
+  color: var(--color-dark);
 }
 
 /* custom scrollbar */
@@ -200,20 +226,24 @@ export default {
 }
 
 @media (min-width: 20rem) {
-  .content {
-    width: 20rem;
-  }
-}
-
-@media (min-width: 40rem) {
-  .content {
-    width: inherit;
+  .note__content {
+    width: 80vw;
   }
 }
 
 @media (min-width: 65rem) {
-  .content {
+  .note__content {
+    width: 28rem;
+  }
+
+  .note__top-controls {
     width: 20rem;
+  }
+}
+
+@media (min-width: 80rem) {
+  .note__top-controls {
+    width: 28rem;
   }
 }
 </style>

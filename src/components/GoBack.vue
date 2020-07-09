@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{name: 'home'}">Go home</router-link>
+  <router-link :to="{name: 'home'}">Back</router-link>
 </template>
 
 <script>
