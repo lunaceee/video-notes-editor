@@ -1,25 +1,7 @@
-# video-player
+# Cuttle
 
-## Project setup
-```
-npm install
-```
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2cebd649-9db0-41b2-88ac-bf743c32c074/deploy-status)](https://app.netlify.com/sites/cool-cuttle/deploys)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### A light weight video annotator built on top of Vue.js, Vuex, Video.js and Firebase.
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-# video-notes-editor
+### [Demo](https://cuttle.page/#/)
