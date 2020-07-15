@@ -1,6 +1,6 @@
 <template>
-  <div class="auth-container">
-    <div class="form-container">
+  <div class="auth">
+    <div class="auth__form">
       <form @submit.prevent="signUp" autocomplete="false">
         <h2 class="form-title">Create an account</h2>
         <div class="autocomplete-fix">
@@ -10,11 +10,11 @@
           <input type="text" placeholder="Username" v-model="username" required />
           <input type="password" placeholder="Password" v-model="password" required />
         </div>
-        <ButtonPrimary class="signup-btn" id="sign-up-btn" type="submit">Sign up</ButtonPrimary>
+        <ButtonPrimary class="btn__signup" id="sign-up-btn" type="submit">Sign up</ButtonPrimary>
         <span class="divider line one-line" contenteditable>or</span>
         <p>Already have an account?</p>
         <router-link :to="{ name: 'login' }">
-          <ButtonPrimary class="login-btn">Log in</ButtonPrimary>
+          <ButtonPrimary class="btn__login">Log in</ButtonPrimary>
         </router-link>
       </form>
     </div>
