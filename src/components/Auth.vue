@@ -7,30 +7,32 @@
         @click.native="toggleDropdown"
       >Account</ButtonPrimary>
       <ul :class="[isActive ? 'active' : '', 'dropdown__menu-default']">
-        <li>
+        <li @click="toggleDropdown">
           <router-link class="auth__btn-signup" :to="{ name: 'signup' }" v-if="showSignup">Sign up</router-link>
         </li>
-        <li>
+        <li @click="toggleDropdown">
           <router-link :to="{ name: 'login' }" v-if="showLogin">Log in</router-link>
         </li>
-        <li>
-          <a @click.native="logOut" v-if="showLogout">Log out</a>
+        <li @click="toggleDropdown">
+          <a @click="logOut" v-if="showLogout">Log out</a>
         </li>
       </ul>
     </div>
     <!-- menu on mobile viewport -->
     <div class="dropdown__mobile">
-      <button class="btn__icon" @click="toggleDropdownMobile">
+      <button class="btn__icon" @click="toggleDropdown">
         <IconUser />
       </button>
-      <ul :class="[isActiveOnMobile ? 'active' : '', 'dropdown__menu-mobile']">
-        <li>
+      <ul class="dropdown__menu-mobile">
+        <li @click="toggleDropdown">
           <router-link class="auth__btn-signup" :to="{ name: 'signup' }" v-if="showSignup">Sign up</router-link>
         </li>
-        <li>
+        <li @click="toggleDropdown">
           <router-link :to="{ name: 'login' }" v-if="showLogin">Log in</router-link>
         </li>
-        <li @click="logOut" v-if="showLogout">Log out</li>
+        <li @click="toggleDropdown">
+          <a @click="logOut" v-if="showLogout">Log out</a>
+        </li>
       </ul>
     </div>
   </div>
@@ -44,8 +46,7 @@ export default {
   name: "authentication",
   data() {
     return {
-      isActive: false,
-      isActiveOnMobile: false
+      isActive: false
     };
   },
   components: { ButtonPrimary, IconUser },
@@ -65,13 +66,17 @@ export default {
     logOut() {
       this.$store.commit("deleteAllVideos");
       this.$store.commit("unsetUsername");
-      this.$router.push("/");
+      this.$route.name === "home"
+        ? window.location.reload()
+        : this.$router.push("/");
     },
     toggleDropdown() {
       this.isActive = !this.isActive;
-    },
-    toggleDropdownMobile() {
-      this.isActiveOnMobile = !this.isActiveOnMobile;
+    }
+  },
+  watch: {
+    $route(to, from) {
+      this.isActive = false;
     }
   }
 };

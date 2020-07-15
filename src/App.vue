@@ -52,7 +52,6 @@ export default {
   },
   computed: {
     isHomePage() {
-      console.log(this.$route.path);
       return this.$route.path === "/";
     }
   }
@@ -222,17 +221,21 @@ a:hover {
 }
 
 /*
-Login and signup form
+authentication
  */
-.form-container {
-  min-width: 16rem;
-  padding: 2rem;
-  margin: 2rem;
+.auth__form {
+  width: 90%;
+  text-align: center;
+  margin: auto;
   border: 1px solid var(--border);
   border-radius: 0.2rem;
 }
 
-.form-container input {
+.auth__form form {
+  padding: 2rem;
+}
+
+.auth__form input {
   display: block;
   width: 100%;
   margin-bottom: 4px;
@@ -284,15 +287,15 @@ Login and signup form
   margin: 2rem 0;
 }
 
-.signup-btn,
-.login-btn {
+.btn__signup,
+.btn__login {
   width: 100%;
 }
 
-.auth__btn-login {
+.btn__login {
   background-color: var(--btn-secondary-bg);
-  color: var(--color-dark);
-  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-primary-border);
+  color: var(--teal);
+  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-secondary-border);
 }
 
 @media (max-width: 20rem) {
@@ -310,6 +313,10 @@ Login and signup form
 }
 
 @media (min-width: 20rem) {
+  .auth__form {
+    width: 20rem;
+  }
+
   .app__logo-mobile {
     visibility: visible;
   }

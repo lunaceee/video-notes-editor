@@ -1,7 +1,7 @@
 <template>
-  <div class="auth-container">
-    <div class="form-container">
-      <form autocomplete="false">
+  <div class="auth">
+    <div class="auth__form">
+      <form autocomplete="false" @submit.prevent="logIn">
         <h2 class="form-title">Welcome back!</h2>
         <div class="autocomplete-fix">
           <input type="password" disabled />
@@ -10,13 +10,13 @@
           <input required type="text" placeholder="Username" v-model="username" />
           <input required type="password" placeholder="Password" v-model="password" />
         </div>
-        <ButtonPrimary class="login-btn" id="goto-login-btn" @click.native="logIn">Log in</ButtonPrimary>
+        <ButtonPrimary class="btn__login" id="goto-login-btn" @click.native="logIn">Log in</ButtonPrimary>
+        <span class="divider line one-line" contenteditable>or</span>
+        <p>Need an account?</p>
+        <router-link :to="{ name: 'signup' }">
+          <ButtonPrimary class="btn__signup">Sign up</ButtonPrimary>
+        </router-link>
       </form>
-      <span class="divider line one-line" contenteditable>or</span>
-      <p>Need an account?</p>
-      <router-link :to="{ name: 'signup' }">
-        <ButtonPrimary class="signup-btn">Sign up</ButtonPrimary>
-      </router-link>
     </div>
   </div>
 </template>
@@ -53,4 +53,3 @@ export default {
   }
 };
 </script>
-<style></style>
