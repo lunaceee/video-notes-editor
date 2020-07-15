@@ -31,6 +31,7 @@ export const store = new Vuex.Store({
 
 			if (!Array.isArray(persisted.videos)) {
 				persisted.videos = [];
+				persisted.username = null;
 			}
 
 			this.replaceState(persisted);

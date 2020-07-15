@@ -59,7 +59,7 @@ export default {
       return this.$route.name !== "login" && this.username === null;
     },
     showLogout() {
-      return this.username !== null || this.videos.length === 0;
+      return this.username && this.username !== null;
     }
   },
   methods: {
@@ -75,6 +75,7 @@ export default {
     }
   },
   watch: {
+    // watch the route change to show and hide dropdown menu
     $route(to, from) {
       this.isActive = false;
     }
