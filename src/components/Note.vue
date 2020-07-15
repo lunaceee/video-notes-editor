@@ -26,84 +26,76 @@
       ></textarea>
     </div>
     <div class="note__bottom-controls">
-      <ButtonPrimary @click.native="save" v-if="mode === 'editing'" class="btn__save">Save</ButtonPrimary>
-      <ButtonPrimary @click.native="cancel" v-if="mode === 'editing'" class="btn__cancel">Cancel</ButtonPrimary>
+      <base-button @click.native="save" v-if="mode === 'editing'" primary>Save</base-button>
+      <base-button @click.native="cancel" v-if="mode === 'editing'" cancel>Cancel</base-button>
     </div>
   </div>
 </template>
 <script>
 import { bus } from "../main";
-import IconPlay from "@/assets/icons/IconPlay.svg";
 import IconEdit from "@/assets/icons/IconEdit.svg";
+import IconPlay from "@/assets/icons/IconPlay.svg";
 import IconTrash from "@/assets/icons/IconTrash.svg";
-import ButtonPrimary from "@/components/ButtonPrimary.vue";
 
 export default {
-  name: "note",
+  name: "videoNote",
   data() {
     return {
       mode: "showing",
-      editingContent: this.note.text
+      editingContent: this.note.text,
     };
   },
   components: {
     IconPlay,
     IconEdit,
     IconTrash,
-    ButtonPrimary
   },
   props: {
     placeholder: {
       default: "Curiosity nourishes the cat...",
-      type: String
+      type: String,
     },
     playerHolder: {
-      type: Object
+      type: Object,
     },
     video: {
       default: () => {},
-      type: Object
+      type: Object,
     },
     note: {
       default: () => {},
-      type: Object
+      type: Object,
     },
     noteIndex: {
       default: 0,
-      type: Number
+      type: Number,
     },
     duration: {
-      type: Number
-    }
+      type: Number,
+    },
   },
   methods: {
-    edit: function() {
+    edit: function () {
       this.editingContent = this.note.text;
       this.mode = "editing";
     },
-    cancel: function() {
+    cancel: function () {
       this.mode = "showing";
     },
-    save: function() {
+    save: function () {
       this.$store.commit("updateNote", {
         note: this.note,
-        text: this.editingContent
+        text: this.editingContent,
       });
       this.mode = "showing";
     },
-    deleteNote: function() {
-      this.$store.commit("deleteNote", {
-        video: this.video,
-        noteIndex: this.noteIndex
-      });
-    },
-    play: function() {
+    play: function () {
       const player = this.playerHolder.get();
       player.pause();
       player.currentTime(this.note.time);
       player.play();
     },
-    formatTimestamp: function(time) {
+    formatTimestamp: function (time) {
       const dateObj = new Date(time * 1000);
       const minutes = dateObj.getUTCMinutes();
       const seconds = dateObj.getSeconds();
@@ -112,8 +104,14 @@ export default {
         ":" +
         seconds.toString().padStart(2, "0")
       );
-    }
-  }
+    },
+    deleteNote: function () {
+      this.$store.commit("deleteNote", {
+        video: this.video,
+        noteIndex: this.noteIndex,
+      });
+    },
+  },
 };
 </script>
 <style scoped>
@@ -129,20 +127,19 @@ export default {
 
 .note__top-controls {
   grid-area: top-controls;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: inherit;
-}
-
-.btn__icon:hover,
-.icon-group__play:hover {
-  color: var(--btn-primary-bg);
+  display: flex;
+  justify-content: space-between;
 }
 
 .note__timestamp {
   font-weight: 600;
-  font-size: small;
   align-self: center;
+  margin-left: 0.3rem;
+  color: var(--dark-blue);
+}
+
+.note__timestamp:hover {
+  color: var(--light-red);
 }
 
 .icon-group__play {
@@ -159,34 +156,34 @@ export default {
 .note__bottom-controls {
   grid-area: bottom-controls;
   margin-bottom: 1rem;
-}
-
-.btn__cancel {
-  background-color: var(--btn-mute-bg);
-  color: var(--btn-cancel-color);
-}
-
-.btn__save {
-  background-color: var(--btn-primary-bg);
+  display: flex;
+  justify-content: space-between;
 }
 
 .note__content,
 .note__input {
   grid-area: content;
+  width: inherit;
+  margin: 0 0.5rem;
+}
+
+.note__input {
+  display: flex;
+  justify-items: center;
 }
 
 .note__content > p {
-  text-align: left;
   overflow-x: auto;
-  max-height: 15rem;
+  max-height: 10rem;
   white-space: pre-wrap;
   word-wrap: break-word;
-  box-sizing: border-box;
-  padding: 0 1rem;
+  word-break: break-all;
+  padding: 0 2rem 0 0;
 }
 
 textarea {
-  width: 80%;
+  width: 100%;
+  max-width: 100%;
   height: 15rem;
   border: 1px solid var(--border);
   border-radius: 4px;
@@ -199,51 +196,30 @@ textarea:invalid {
 }
 
 textarea::placeholder {
-  color: var(--color-dark);
+  color: var(--dark-blue);
 }
 
 /* custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 0.5rem;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
+  -webkit-border-radius: 0.5rem;
+  border-radius: 0.5rem;
+  margin-right: 0.2rem;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  background: var(--btn-bg);
+  -webkit-border-radius: 0.5rem;
+  border-radius: 0.5rem;
+  background: var(--light-blue);
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 ::-webkit-scrollbar-thumb:window-inactive {
-  background: var(--btn-bg);
-}
-
-@media (min-width: 20rem) {
-  .note__content {
-    width: 80vw;
-  }
-}
-
-@media (min-width: 65rem) {
-  .note__content {
-    width: 28rem;
-  }
-
-  .note__top-controls {
-    width: 20rem;
-  }
-}
-
-@media (min-width: 80rem) {
-  .note__top-controls {
-    width: 28rem;
-  }
+  background: var(--light-blue);
 }
 </style>

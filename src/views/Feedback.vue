@@ -1,11 +1,17 @@
 <template>
-  <div class="form-feedback">
-    <h2>Thanks for joining Cuttle! Now you're able to create and share notes from your favorite videos!</h2>
+  <div class="form__feedback">
+    <h2>Welcome to Cuttle!</h2>
     <router-link :to="{ name: 'home' }">Go to homepage</router-link>
   </div>
 </template>
 <script>
 export default {
-  name: "feedback"
+  name: "feedbackForm",
 };
 </script>
+<style scoped>
+.form__feedback {
+  display: grid;
+  justify-items: center;
+}
+</style>

@@ -6,17 +6,17 @@
   </ul>
 </template>
 <script>
-import { bus } from "../main";
+import { bus } from "@/main";
 import Note from "./Note.vue";
 
 export default {
-  name: "Notes",
+  name: "videoNotes",
   components: {
-    Note
+    Note,
   },
   props: {
     url: { type: String, required: true },
-    playerHolder: { type: Object }
+    playerHolder: { type: Object },
   },
   computed: {
     video() {
@@ -25,8 +25,8 @@ export default {
     notes() {
       const video = this.$store.getters.video(this.url);
       return video.notes;
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

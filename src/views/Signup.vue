@@ -1,6 +1,6 @@
 <template>
-  <div class="auth-container">
-    <div class="form-container">
+  <div class="auth">
+    <div class="auth__form">
       <form @submit.prevent="signUp" autocomplete="false">
         <h2 class="form-title">Create an account</h2>
         <div class="autocomplete-fix">
@@ -10,11 +10,11 @@
           <input type="text" placeholder="Username" v-model="username" required />
           <input type="password" placeholder="Password" v-model="password" required />
         </div>
-        <ButtonPrimary class="signup-btn" id="sign-up-btn" type="submit">Sign up</ButtonPrimary>
+        <base-button primary mobile type="submit" text="Sign up"></base-button>
         <span class="divider line one-line" contenteditable>or</span>
         <p>Already have an account?</p>
         <router-link :to="{ name: 'login' }">
-          <ButtonPrimary class="login-btn">Log in</ButtonPrimary>
+          <base-button secondary mobile text="Log in"></base-button>
         </router-link>
       </form>
     </div>
@@ -23,23 +23,18 @@
 <script>
 import { db } from "../firebase";
 import { mapState } from "vuex";
-import ButtonPrimary from "@/components/ButtonPrimary.vue";
 
 export default {
-  name: "signup",
+  name: "signupForm",
   data() {
     return { username: null, password: null };
   },
-  components: { ButtonPrimary },
   computed: {
-    ...mapState(["videos"])
+    ...mapState(["videos"]),
   },
   methods: {
     async signUp() {
-      const user = await db
-        .collection("users")
-        .doc(this.username)
-        .get();
+      const user = await db.collection("users").doc(this.username).get();
 
       let videos = this.videos;
 
@@ -48,16 +43,14 @@ export default {
         this.username = null;
         this.password = null;
       } else {
-        db.collection("users")
-          .doc(this.username)
-          .set({
-            password: this.password,
-            videos: videos
-          });
+        db.collection("users").doc(this.username).set({
+          password: this.password,
+          videos: videos,
+        });
         this.$store.commit("setUsername", this.username);
         this.$router.push("/feedback");
       }
-    }
-  }
+    },
+  },
 };
 </script>

@@ -1,8 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 206.09 54.98">
   <defs>
     <style>
-      .cls-1{fill:#60B3B0}
+      .cls-1{fill:url('#myGradient')}
     </style>
+    <linearGradient id="myGradient" gradientTransform="rotate(120)">
+      <stop offset="0%"  stop-color="#fa709a" />
+      <stop offset="95%" stop-color="#fee140" />
+    </linearGradient>
   </defs>
   <g id="Layer_2" data-name="Layer 2">
     <g id="Layer_1-2" data-name="Layer 1">

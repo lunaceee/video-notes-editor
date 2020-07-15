@@ -15,7 +15,9 @@
 		"@firebase/auth": "^0.14.7",
 		"@firebase/firestore": "^1.15.0",
 		"core-js": "^3.6.4",
+		"node-fetch": "^2.6.0",
 		"normalize.css": "^8.0.1",
+		"postcss-preset-env": "^6.7.0",
 		"video.js": "^7.7.5",
 		"videojs-youtube": "^2.6.1",
 		"vue": "^2.6.11",
@@ -28,9 +30,9 @@
 		"@vue/cli-plugin-eslint": "~4.3.0",
 		"@vue/cli-service": "~4.3.0",
 		"babel-eslint": "^10.1.0",
-		"css-loader": "^3.6.0",
 		"eslint": "^6.7.2",
 		"eslint-plugin-vue": "^6.2.2",
+		"postcss-loader": "^3.0.0",
 		"vue-svg-loader": "^0.16.0",
 		"vue-template-compiler": "^2.6.11"
 	},
@@ -39,10 +41,7 @@
 		"env": {
 			"node": true
 		},
-		"extends": [
-			"plugin:vue/essential",
-			"eslint:recommended"
-		],
+		"extends": [ "plugin:vue/essential", "eslint:recommended" ],
 		"parserOptions": {
 			"parser": "babel-eslint"
 		},
@@ -52,9 +51,5 @@
 			"vue/no-unused-components": 0
 		}
 	},
-	"browserslist": [
-		"> 1%",
-		"last 2 versions",
-		"not dead"
-	]
+	"browserslist": [ "> 1%", "last 2 versions", "not dead" ]
 }

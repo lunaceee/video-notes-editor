@@ -1,54 +1,44 @@
 <template>
-  <div class="auth__container">
-    <div class="dropdown__default">
-      <ButtonPrimary
+  <div class="auth">
+    <div class="auth__dropdown--toggle">
+      <base-button
         aria-expanded="false"
         aria-labelledby="dropdownMenuButton"
         @click.native="toggleDropdown"
-      >Account</ButtonPrimary>
-      <ul :class="[isActive ? 'active' : '', 'dropdown__menu-default']">
-        <li>
-          <router-link class="auth__btn-signup" :to="{ name: 'signup' }" v-if="showSignup">Sign up</router-link>
+        v-click-outside="closeDropdown"
+        secondary
+        text="Account"
+      ></base-button>
+    </div>
+    <div v-if="!showLogout">
+      <ul :class="[isOpen ? 'active' : '', 'auth__dropdown--list']">
+        <li @click="toggleDropdown" class="auth__dropdown--item">
+          <router-link :to="{ name: 'signup' }" v-if="showSignup">Sign up</router-link>
         </li>
-        <li>
+        <li @click="toggleDropdown" class="auth__dropdown--item">
           <router-link :to="{ name: 'login' }" v-if="showLogin">Log in</router-link>
-        </li>
-        <li>
-          <a @click.native="logOut" v-if="showLogout">Log out</a>
         </li>
       </ul>
     </div>
-    <!-- menu on mobile viewport -->
-    <div class="dropdown__mobile">
-      <button class="btn__icon" @click="toggleDropdownMobile">
-        <IconUser />
-      </button>
-      <ul :class="[isActiveOnMobile ? 'active' : '', 'dropdown__menu-mobile']">
-        <li>
-          <router-link class="auth__btn-signup" :to="{ name: 'signup' }" v-if="showSignup">Sign up</router-link>
+    <div v-else>
+      <ul :class="[isOpen ? 'active' : '', 'auth__dropdown--list']">
+        <li @click="toggleDropdown" class="auth__dropdown--item">
+          <a @click="logOut" v-if="showLogout">Log out</a>
         </li>
-        <li>
-          <router-link :to="{ name: 'login' }" v-if="showLogin">Log in</router-link>
-        </li>
-        <li @click="logOut" v-if="showLogout">Log out</li>
       </ul>
     </div>
   </div>
 </template>
 <script>
 import { mapState } from "vuex";
-import ButtonPrimary from "@/components/ButtonPrimary.vue";
-import IconUser from "@/assets/icons/IconUser.svg";
 
 export default {
-  name: "authentication",
+  name: "authDropdown",
   data() {
     return {
-      isActive: false,
-      isActiveOnMobile: false
+      isOpen: false,
     };
   },
-  components: { ButtonPrimary, IconUser },
   computed: {
     ...mapState(["username", "videos"]),
     showSignup() {
@@ -58,78 +48,59 @@ export default {
       return this.$route.name !== "login" && this.username === null;
     },
     showLogout() {
-      return this.username !== null;
-    }
+      return this.username && this.username !== null;
+    },
   },
   methods: {
     logOut() {
       this.$store.commit("deleteAllVideos");
       this.$store.commit("unsetUsername");
-      this.$router.push("/");
+      this.$route.name === "home"
+        ? window.location.reload()
+        : this.$router.push("/");
     },
     toggleDropdown() {
-      this.isActive = !this.isActive;
+      this.isOpen = !this.isOpen;
     },
-    toggleDropdownMobile() {
-      this.isActiveOnMobile = !this.isActiveOnMobile;
-    }
-  }
+    closeDropdown() {
+      this.isOpen = false;
+      this.$emit("change", this.isOpen);
+    },
+  },
 };
 </script>
-<style scoped>
-.auth__container {
+<style>
+.auth__dropdown--toggle {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
 }
-.dropdown__default,
-.dropdown__mobile {
+
+.btn__default,
+.btn__icon--mobile {
   grid-area: 1 / 1 / 2 / 2;
-  display: grid;
-  justify-items: right;
 }
 
-.dropdown__default button,
-.dropdown__mobile button {
-  grid-area: 1/1/2/2;
-}
-
-.dropdown__menu-default,
-.dropdown__menu-mobile,
-.dropdown__mobile {
+.auth__dropdown--list {
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
   visibility: hidden;
+  background-color: var(--btn-mute-bg);
+  margin-top: 0;
+  border-radius: 0.2rem;
+  color: var(--light-blue);
 }
 
 .active {
   visibility: visible;
 }
 
-@media (max-width: 20rem) {
-  .dropdown__mobile {
-    visibility: visible;
-  }
-
-  .dropdown__default {
-    visibility: hidden;
-  }
-}
-@media (min-width: 20rem) {
-  .dropdown__mobile {
-    visibility: visible;
-  }
-
-  .dropdown__default {
-    visibility: hidden;
-  }
+.auth__dropdown--item {
+  padding: 0.6rem;
 }
 
-@media (min-width: 40rem) {
-  .dropdown__mobile {
-    visibility: hidden;
-  }
-
-  .dropdown__default {
-    visibility: visible;
-  }
+.auth__dropdown--item > a {
+  color: var(--black);
 }
 </style>

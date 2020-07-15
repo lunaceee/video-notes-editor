@@ -4,11 +4,11 @@
 
 <script>
 export default {
-  name: "GoBack",
+  name: "goHome",
   methods: {
     goBack() {
       return this.$router.home;
-    }
-  }
+    },
+  },
 };
 </script>
