@@ -58,7 +58,7 @@ export default {
       return this.$route.name !== "login" && this.username === null;
     },
     showLogout() {
-      return this.username !== null;
+      return this.username !== null || this.videos.length === 0;
     }
   },
   methods: {
