@@ -7,14 +7,7 @@
         class="details__add-note"
       >Add note</ButtonPrimary>
     </div>
-    <transition name="slide-fade">
-      <video-player
-        v-if="show"
-        :url="videoUrl"
-        :playerHolder="playerHolder"
-        class="details__video"
-      />
-    </transition>
+    <video-player v-if="show" :url="videoUrl" :playerHolder="playerHolder" class="details__video" />
     <notes :url="videoUrl" class="details__notes" :playerHolder="playerHolder" />
   </div>
 </template>

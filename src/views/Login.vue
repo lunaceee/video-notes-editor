@@ -1,7 +1,7 @@
 <template>
   <div class="auth">
     <div class="auth__form">
-      <form autocomplete="false" @submit.prevent="logIn">
+      <form @submit.prevent="logIn" autocomplete="false">
         <h2 class="form-title">Welcome back!</h2>
         <div class="autocomplete-fix">
           <input type="password" disabled />
@@ -10,7 +10,7 @@
           <input required type="text" placeholder="Username" v-model="username" />
           <input required type="password" placeholder="Password" v-model="password" />
         </div>
-        <ButtonPrimary class="btn__login" id="goto-login-btn" @click.native="logIn">Log in</ButtonPrimary>
+        <ButtonPrimary class="btn__login" id="goto-login-btn" type="submit">Log in</ButtonPrimary>
         <span class="divider line one-line" contenteditable>or</span>
         <p>Need an account?</p>
         <router-link :to="{ name: 'signup' }">
@@ -37,7 +37,6 @@ export default {
   },
   methods: {
     async logIn() {
-      let videos = this.videos;
       const user = await db
         .collection("users")
         .doc(this.username)
@@ -48,6 +47,8 @@ export default {
         this.$store.commit("setUsername", this.username);
         this.$store.commit("updateVideos", serverVideos);
         this.$router.push("/");
+      } else {
+        alert("Username or password is incorrect, please try again");
       }
     }
   }
