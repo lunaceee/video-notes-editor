@@ -64,6 +64,7 @@ export default {
   font-size: 16px; /* 1rem */
   font-family: "Lato", sans-serif;
   --teal: #60b3b0;
+  --black: #050505;
   --color-dark: #a63f42;
   --color-light: #fffbe6;
   --btn-primary-bg: #a63f42;
@@ -176,6 +177,8 @@ a:hover {
 
 .header__auth {
   overflow: visible;
+  display: grid;
+  justify-items: right;
 }
 
 .app__logo {
