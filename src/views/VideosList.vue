@@ -1,7 +1,7 @@
 <template>
   <ul class="videos">
     <li v-for="(video, index) in videos" :key="index">
-      <base-card>
+      <base-card hover="hover">
         <template v-slot:media>
           <figure class="video-thumbnail">
             <router-link
@@ -16,8 +16,8 @@
         </template>
         <template v-slot:card-title>This is a title asdfadfadsfadfasdfasdadfasdfasfd</template>
 
-        <template v-slot:buttons>
-          <base-button class="btn__delete" @click.native="deleteVideo(video.videoId)">delete</base-button>
+        <template v-slot:footer>
+          <base-button danger @click.native="deleteVideo(video.videoId)">delete</base-button>
         </template>
       </base-card>
     </li>
@@ -55,7 +55,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
   grid-gap: 4rem;
-  margin: 3rem 3rem 0 0;
+  margin-top: 3rem;
 }
 
 .video-thumbnail img {
@@ -71,15 +71,5 @@ export default {
   overflow: hidden;
   width: 100%;
   margin: 0;
-}
-
-.video-thumbnail img:hover {
-  transform: scale(1.1);
-}
-
-.btn__delete {
-  background-color: var(--btn-delete-bg);
-  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-delete-border);
-  cursor: pointer;
 }
 </style>

@@ -41,20 +41,20 @@ export default {
   name: "Cuttle",
   data() {
     return {
-      isMobile: false
+      isMobile: false,
     };
   },
   components: {
     AddURLForm,
     GoBack,
     Auth,
-    Logo
+    Logo,
   },
   computed: {
     isHomePage() {
       return this.$route.path === "/";
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -94,14 +94,15 @@ body {
   color: var(--color-dark);
   min-height: 100%;
   width: 100%;
-  display: grid;
   margin: 0;
+  display: grid;
   grid-template-rows: 1fr auto;
   position: relative;
 }
 
 ul {
   list-style: none;
+  padding: 0;
 }
 
 label,
@@ -199,7 +200,6 @@ a:hover {
 
 .app__main {
   grid-area: main;
-  margin-bottom: 5rem;
 }
 
 .hide {
@@ -334,6 +334,9 @@ authentication
 }
 
 @media (min-width: 40rem) {
+  .app__main {
+    margin: 5rem;
+  }
   .app__logo-mobile {
     visibility: hidden;
   }

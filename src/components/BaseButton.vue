@@ -1,5 +1,12 @@
 <template>
-  <button class="btn btn__primary">
+  <button
+    class="btn"
+    :class="[
+    {'btn__primary': primary},
+    {'btn__danger': danger}, 
+    {'btn__mute': mute}
+    ]"
+  >
     <slot></slot>
   </button>
 </template>
@@ -7,6 +14,20 @@
 <script>
 export default {
   name: "baseButton",
+  props: {
+    primary: {
+      type: Boolean,
+      description: "Whether it's a primary button",
+    },
+    danger: {
+      type: Boolean,
+      description: "Whether it's a danger button",
+    },
+    mute: {
+      type: Boolean,
+      description: "Whether it's a muted button",
+    },
+  },
 };
 </script>
 <style>
@@ -40,5 +61,12 @@ export default {
 
 .btn:active {
   top: 0.1em;
+}
+
+.btn__danger {
+  background-color: var(--btn-delete-bg);
+  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-delete-border);
+  cursor: pointer;
+  color: var(--color-light);
 }
 </style>

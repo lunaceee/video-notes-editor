@@ -1,5 +1,6 @@
 <template>
-  <div class="card">
+  <div class="card" :class="[
+         {'card-lift--hover': hover}]">
     <div class="card__media">
       <slot name="media"></slot>
     </div>
@@ -14,8 +15,8 @@
           <slot name="supporting-text"></slot>
         </p>
       </div>
-      <div class="card__buttons">
-        <slot name="buttons"></slot>
+      <div class="card__footer">
+        <slot name="footer"></slot>
       </div>
     </div>
   </div>
@@ -23,6 +24,12 @@
 <script>
 export default {
   name: "baseCard",
+  props: {
+    hover: {
+      type: Boolean,
+      description: "Whether card should move on hover",
+    },
+  },
 };
 </script>
 <style scoped>
@@ -32,6 +39,11 @@ export default {
     0 1px 3px 1px rgba(66, 66, 66, 0.16);
 }
 
+.card-lift--hover:hover {
+  transform: translateY(-3px) translateX(-3px);
+  transition: all 0.2s ease-in-out;
+}
+
 .card__title {
   line-height: 1.5;
   word-wrap: break-word;
@@ -39,13 +51,14 @@ export default {
 
 .card__title h1 {
   font-size: 1.2rem;
+  font-weight: 400;
 }
 
 .card__body {
   padding: 2rem;
 }
 
-.card__buttons {
+.card__footer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
