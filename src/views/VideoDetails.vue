@@ -1,11 +1,7 @@
 <template>
   <div class="details" :class="notesSize > 0 ? 'details__with-notes' : 'details__with-no-notes'">
     <div class="details__top-controls">
-      <ButtonPrimary
-        :disabled="notStarted"
-        @click.native="addNote"
-        class="details__add-note"
-      >Add note</ButtonPrimary>
+      <base-button :disabled="notStarted" @click.native="addNote" class="details__add-note">Add note</base-button>
     </div>
     <video-player v-if="show" :url="videoUrl" :playerHolder="playerHolder" class="details__video" />
     <notes :url="videoUrl" class="details__notes" :playerHolder="playerHolder" />
@@ -16,7 +12,7 @@ import VideoPlayer from "@/components/VideoPlayer.vue";
 
 import Notes from "@/components/Notes.vue";
 import { mapGetters } from "vuex";
-import ButtonPrimary from "@/components/ButtonPrimary.vue";
+import BaseButton from "@/components/BaseButton.vue";
 
 export default {
   name: "VideoDetails",
@@ -24,31 +20,31 @@ export default {
     let video;
     return {
       playerHolder: {
-        set: vid => (video = vid),
+        set: (vid) => (video = vid),
         get: () => video,
-        notify: e => {
+        notify: (e) => {
           if (e === "firstplay") {
             this.notStarted = false;
           }
-        }
+        },
       },
       notStarted: true,
-      show: true
+      show: true,
     };
   },
   components: {
     VideoPlayer,
     Notes,
-    ButtonPrimary
+    BaseButton,
   },
   computed: {
-    videoUrl: function() {
+    videoUrl: function () {
       return this.$route.params["slug"];
     },
-    notesSize: function() {
+    notesSize: function () {
       const video = this.$store.getters.video(this.videoUrl);
       return video.notes.length;
-    }
+    },
   },
   methods: {
     addNote() {
@@ -57,10 +53,10 @@ export default {
       this.$store.commit("addNote", {
         video,
         time: this.playerHolder.get().currentTime(),
-        duration: this.playerHolder.get().duration()
+        duration: this.playerHolder.get().duration(),
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

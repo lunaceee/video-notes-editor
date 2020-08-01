@@ -1,17 +1,25 @@
 <template>
   <ul class="videos">
     <li v-for="(video, index) in videos" :key="index">
-      <figure class="video-thumbnail">
-        <router-link
-          :to="{
+      <base-card>
+        <template v-slot:media>
+          <figure class="video-thumbnail">
+            <router-link
+              :to="{
               name: 'VideoDetails',
               params: { slug: video.url },
             }"
-        >
-          <img :src="getVideoThumbnail(video.url)" :url="video.url" alt="video thumbnail" />
-        </router-link>
-      </figure>
-      <ButtonPrimary class="btn__delete" @click.native="deleteVideo(video.videoId)">delete</ButtonPrimary>
+            >
+              <img :src="getVideoThumbnail(video.url)" :url="video.url" alt="video thumbnail" />
+            </router-link>
+          </figure>
+        </template>
+        <template v-slot:card-title>This is a title asdfadfadsfadfasdfasdadfasdfasfd</template>
+
+        <template v-slot:buttons>
+          <base-button class="btn__delete" @click.native="deleteVideo(video.videoId)">delete</base-button>
+        </template>
+      </base-card>
     </li>
   </ul>
 </template>
@@ -19,14 +27,15 @@
 <script>
 import { mapState } from "vuex";
 import { getVideoId } from "../utils";
-import ButtonPrimary from "@/components/ButtonPrimary.vue";
+import BaseButton from "@/components/BaseButton.vue";
+import BaseCard from "@/components/BaseCard.vue";
 
 export default {
-  name: "Videos",
+  name: "VideosList",
   computed: {
-    ...mapState(["videos"])
+    ...mapState(["videos"]),
   },
-  components: { ButtonPrimary },
+  components: { BaseButton, BaseCard },
   methods: {
     getVideoThumbnail(url) {
       const videoId = getVideoId(url);
@@ -37,24 +46,16 @@ export default {
     },
     deleteVideo(videoId) {
       this.$store.commit("deleteVideo", videoId);
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>
 .videos {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
-  padding: 0;
-}
-
-li {
-  display: grid;
-  justify-items: center;
-}
-
-.video-thumbnail {
-  overflow: hidden;
+  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+  grid-gap: 4rem;
+  margin: 3rem 3rem 0 0;
 }
 
 .video-thumbnail img {
@@ -62,32 +63,23 @@ li {
   -moz-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   transition: all 0.5s ease;
+  width: 100%;
+}
+
+/** create zoom effect on hover */
+.video-thumbnail {
+  overflow: hidden;
+  width: 100%;
+  margin: 0;
 }
 
 .video-thumbnail img:hover {
-  transform: rotate(2deg) scale(1.1);
+  transform: scale(1.1);
 }
 
 .btn__delete {
   background-color: var(--btn-delete-bg);
   box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-delete-border);
   cursor: pointer;
-}
-
-@media (max-width: 30rem) {
-  .videos {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .video-thumbnail {
-    transform: scale(0.8);
-  }
-}
-
-@media (min-width: 30rem) {
-  .video-thumbnail {
-    transform: scale(0.8);
-  }
 }
 </style>

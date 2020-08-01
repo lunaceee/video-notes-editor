@@ -26,8 +26,8 @@
       ></textarea>
     </div>
     <div class="note__bottom-controls">
-      <ButtonPrimary @click.native="save" v-if="mode === 'editing'" class="btn__save">Save</ButtonPrimary>
-      <ButtonPrimary @click.native="cancel" v-if="mode === 'editing'" class="btn__cancel">Cancel</ButtonPrimary>
+      <base-button @click.native="save" v-if="mode === 'editing'" class="btn__save">Save</base-button>
+      <base-button @click.native="cancel" v-if="mode === 'editing'" class="btn__cancel">Cancel</base-button>
     </div>
   </div>
 </template>
@@ -36,74 +36,74 @@ import { bus } from "../main";
 import IconPlay from "@/assets/icons/IconPlay.svg";
 import IconEdit from "@/assets/icons/IconEdit.svg";
 import IconTrash from "@/assets/icons/IconTrash.svg";
-import ButtonPrimary from "@/components/ButtonPrimary.vue";
+import BaseButton from "@/components/BaseButton.vue";
 
 export default {
-  name: "note",
+  name: "videoNote",
   data() {
     return {
       mode: "showing",
-      editingContent: this.note.text
+      editingContent: this.note.text,
     };
   },
   components: {
     IconPlay,
     IconEdit,
     IconTrash,
-    ButtonPrimary
+    BaseButton,
   },
   props: {
     placeholder: {
       default: "Curiosity nourishes the cat...",
-      type: String
+      type: String,
     },
     playerHolder: {
-      type: Object
+      type: Object,
     },
     video: {
       default: () => {},
-      type: Object
+      type: Object,
     },
     note: {
       default: () => {},
-      type: Object
+      type: Object,
     },
     noteIndex: {
       default: 0,
-      type: Number
+      type: Number,
     },
     duration: {
-      type: Number
-    }
+      type: Number,
+    },
   },
   methods: {
-    edit: function() {
+    edit: function () {
       this.editingContent = this.note.text;
       this.mode = "editing";
     },
-    cancel: function() {
+    cancel: function () {
       this.mode = "showing";
     },
-    save: function() {
+    save: function () {
       this.$store.commit("updateNote", {
         note: this.note,
-        text: this.editingContent
+        text: this.editingContent,
       });
       this.mode = "showing";
     },
-    deleteNote: function() {
+    deleteNote: function () {
       this.$store.commit("deleteNote", {
         video: this.video,
-        noteIndex: this.noteIndex
+        noteIndex: this.noteIndex,
       });
     },
-    play: function() {
+    play: function () {
       const player = this.playerHolder.get();
       player.pause();
       player.currentTime(this.note.time);
       player.play();
     },
-    formatTimestamp: function(time) {
+    formatTimestamp: function (time) {
       const dateObj = new Date(time * 1000);
       const minutes = dateObj.getUTCMinutes();
       const seconds = dateObj.getSeconds();
@@ -112,8 +112,8 @@ export default {
         ":" +
         seconds.toString().padStart(2, "0")
       );
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

@@ -6,7 +6,7 @@
 </template>
 <script>
 export default {
-  name: "feedback"
+  name: "feedbackForm",
 };
 </script>
 <style scoped>

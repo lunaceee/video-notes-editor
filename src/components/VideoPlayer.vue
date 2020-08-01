@@ -7,22 +7,22 @@ import videojs from "video.js";
 import "@devmobiliza/videojs-vimeo/dist/videojs-vimeo.esm";
 
 export default {
-  name: "VideoPlayer",
+  name: "videoPlayer",
   data() {
     return {
       player: null,
       startTime: {
-        type: Number
-      }
+        type: Number,
+      },
     };
   },
   props: {
     url: { type: String, required: true },
     controls: {
       default: true,
-      type: Boolean
+      type: Boolean,
     },
-    playerHolder: { type: Object }
+    playerHolder: { type: Object },
   },
   mounted() {
     this.player = videojs(this.$refs.videoPlayer, {
@@ -35,14 +35,14 @@ export default {
       sources: [
         {
           type: "video/youtube",
-          src: this.url
-        }
-      ]
+          src: this.url,
+        },
+      ],
     });
 
     const playerHolder = this.playerHolder;
 
-    this.player.on("firstplay", function() {
+    this.player.on("firstplay", function () {
       console.log("playerholder notify");
       if (playerHolder) {
         playerHolder.notify("firstplay");
@@ -57,6 +57,6 @@ export default {
     if (this.player) {
       this.player.dispose();
     }
-  }
+  },
 };
 </script>

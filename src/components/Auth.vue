@@ -1,12 +1,12 @@
 <template>
   <div class="auth">
     <div class="auth__dropdown--trigger">
-      <ButtonPrimary
+      <base-button
         class="btn__default"
         aria-expanded="false"
         aria-labelledby="dropdownMenuButton"
         @click.native="toggleDropdown"
-      >Account</ButtonPrimary>
+      >Account</base-button>
       <button class="btn__icon--mobile btn__icon" @click="toggleDropdown">
         <IconUser />
       </button>
@@ -26,17 +26,17 @@
 </template>
 <script>
 import { mapState } from "vuex";
-import ButtonPrimary from "@/components/ButtonPrimary.vue";
+import BaseButton from "@/components/BaseButton.vue";
 import IconUser from "@/assets/icons/IconUser.svg";
 
 export default {
-  name: "authentication",
+  name: "authDropdown",
   data() {
     return {
-      isActive: false
+      isActive: false,
     };
   },
-  components: { ButtonPrimary, IconUser },
+  components: { BaseButton, IconUser },
   computed: {
     ...mapState(["username", "videos"]),
     showSignup() {
@@ -47,15 +47,14 @@ export default {
     },
     showLogout() {
       return this.username && this.username !== null;
-    }
+    },
   },
   methods: {
     onResize(event) {
-      const ro = new ResizeObserver(entries => {
+      const ro = new ResizeObserver((entries) => {
         const btnDefault = document.querySelector(".btn__default");
         const btnMobile = document.querySelector(".btn__icon--mobile");
         for (let entry of entries) {
-          console.log(entry);
           if (window.innerWidth < 768) {
             btnDefault.style.visibility = "hidden";
             btnMobile.style.visibility = "visible";
@@ -65,7 +64,6 @@ export default {
           }
         }
       });
-      // Only observe the second box
       ro.observe(document.querySelector(".auth__dropdown--trigger"));
     },
     logOut() {
@@ -77,7 +75,7 @@ export default {
     },
     toggleDropdown() {
       this.isActive = !this.isActive;
-    }
+    },
   },
   mounted() {
     // Register an event listener when the Vue component is ready
@@ -86,7 +84,7 @@ export default {
   beforeDestroy() {
     // Unregister the event listener before destroying this Vue instance
     window.removeEventListener("resize", this.onResize);
-  }
+  },
 };
 </script>
 <style scoped>
