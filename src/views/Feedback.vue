@@ -13,6 +13,5 @@ export default {
 .form__feedback {
   display: grid;
   justify-items: center;
-  color: var(--teal);
 }
 </style>

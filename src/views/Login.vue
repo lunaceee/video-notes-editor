@@ -24,14 +24,12 @@
 <script>
 import { db } from "../firebase";
 import { mapState } from "vuex";
-import BaseButton from "@/components/BaseButton.vue";
 
 export default {
   name: "loginForm",
   data() {
     return { username: null, password: null };
   },
-  components: { BaseButton },
   computed: {
     ...mapState(["videos"]),
   },

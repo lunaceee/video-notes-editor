@@ -6,7 +6,7 @@
   </ul>
 </template>
 <script>
-import { bus } from "../main";
+import { bus } from "@/main";
 import Note from "./Note.vue";
 
 export default {

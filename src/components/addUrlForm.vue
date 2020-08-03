@@ -1,7 +1,7 @@
 <template>
   <form class="form__add-url" @submit.prevent="onSubmit" id="addUrlForm">
     <input class="form__input" type="text" placeholder="Paste in a video URL..." />
-    <input class="form__btn-submit" type="submit" value="Add video" />
+    <base-button type="submit" primary>add video</base-button>
   </form>
 </template>
 <script>
@@ -16,8 +16,8 @@ export default {
       } else {
         alert("Please insert an URL");
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

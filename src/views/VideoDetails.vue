@@ -9,10 +9,8 @@
 </template>
 <script>
 import VideoPlayer from "@/components/VideoPlayer.vue";
-
 import Notes from "@/components/Notes.vue";
 import { mapGetters } from "vuex";
-import BaseButton from "@/components/BaseButton.vue";
 
 export default {
   name: "VideoDetails",
@@ -35,7 +33,6 @@ export default {
   components: {
     VideoPlayer,
     Notes,
-    BaseButton,
   },
   computed: {
     videoUrl: function () {

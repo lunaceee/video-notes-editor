@@ -1,7 +1,6 @@
 <template>
-  <div class="card" :class="[
-         {'card-lift--hover': hover}]">
-    <div class="card__media">
+  <div class="card">
+    <div class="card__media" :class="{'card__media--hover' : hover}">
       <slot name="media"></slot>
     </div>
     <div class="card__body">
@@ -23,7 +22,7 @@
 </template>
 <script>
 export default {
-  name: "baseCard",
+  name: "card",
   props: {
     hover: {
       type: Boolean,
@@ -37,11 +36,13 @@ export default {
   border-radius: 0.2rem;
   box-shadow: 0 1px 1px 0 rgba(66, 66, 66, 0.08),
     0 1px 3px 1px rgba(66, 66, 66, 0.16);
+  position: relative;
+  overflow: hidden;
 }
 
-.card-lift--hover:hover {
-  transform: translateY(-3px) translateX(-3px);
-  transition: all 0.2s ease-in-out;
+.card__media--hover:hover {
+  transform: scale(1.1);
+  transition: all 0.4s ease-in-out;
 }
 
 .card__title {

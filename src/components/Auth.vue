@@ -1,17 +1,15 @@
 <template>
   <div class="auth">
-    <div class="auth__dropdown--trigger">
+    <div class="auth__dropdown--toggle">
       <base-button
-        class="btn__default"
         aria-expanded="false"
         aria-labelledby="dropdownMenuButton"
         @click.native="toggleDropdown"
-      >Account</base-button>
-      <button class="btn__icon--mobile btn__icon" @click="toggleDropdown">
-        <IconUser />
-      </button>
+        v-click-outside="closeDropdown"
+        text="Account"
+      ></base-button>
     </div>
-    <ul :class="[isActive ? 'active' : '', 'auth__dropdown--list']">
+    <ul :class="[isOpen ? 'active' : '', 'auth__dropdown--list']">
       <li @click="toggleDropdown" class="auth__dropdown--item">
         <router-link :to="{ name: 'signup' }" v-if="showSignup">Sign up</router-link>
       </li>
@@ -26,17 +24,14 @@
 </template>
 <script>
 import { mapState } from "vuex";
-import BaseButton from "@/components/BaseButton.vue";
-import IconUser from "@/assets/icons/IconUser.svg";
 
 export default {
   name: "authDropdown",
   data() {
     return {
-      isActive: false,
+      isOpen: false,
     };
   },
-  components: { BaseButton, IconUser },
   computed: {
     ...mapState(["username", "videos"]),
     showSignup() {
@@ -50,22 +45,16 @@ export default {
     },
   },
   methods: {
-    onResize(event) {
-      const ro = new ResizeObserver((entries) => {
-        const btnDefault = document.querySelector(".btn__default");
-        const btnMobile = document.querySelector(".btn__icon--mobile");
-        for (let entry of entries) {
-          if (window.innerWidth < 768) {
-            btnDefault.style.visibility = "hidden";
-            btnMobile.style.visibility = "visible";
-          } else {
-            btnDefault.style.visibility = "visible";
-            btnMobile.style.visibility = "hidden";
-          }
-        }
-      });
-      ro.observe(document.querySelector(".auth__dropdown--trigger"));
-    },
+    // onResize(event) {
+    //   const ro = new ResizeObserver((entries) => {
+    //     for (let entry of entries) {
+    //       if (window.innerWidth < 768) {
+    //         this.props.mobile;
+    //       }
+    //     }
+    //   });
+    //   ro.observe(document.querySelector(".auth__dropdown--toggle"));
+    // },
     logOut() {
       this.$store.commit("deleteAllVideos");
       this.$store.commit("unsetUsername");
@@ -74,24 +63,28 @@ export default {
         : this.$router.push("/");
     },
     toggleDropdown() {
-      this.isActive = !this.isActive;
+      this.isOpen = !this.isOpen;
+    },
+    closeDropdown() {
+      this.isOpen = false;
+      this.$emit("change", this.isOpen);
     },
   },
-  mounted() {
-    // Register an event listener when the Vue component is ready
-    window.addEventListener("resize", this.onResize);
-  },
-  beforeDestroy() {
-    // Unregister the event listener before destroying this Vue instance
-    window.removeEventListener("resize", this.onResize);
-  },
+  // mounted() {
+  //   // Register an event listener when the Vue component is ready
+  //   window.addEventListener("resize", this.onResize);
+  // },
+  // beforeDestroy() {
+  //   // Unregister the event listener before destroying this Vue instance
+  //   window.removeEventListener("resize", this.onResize);
+  // },
 };
 </script>
-<style scoped>
+<style>
 .auth {
   display: inline-block;
 }
-.auth__dropdown--trigger {
+.auth__dropdown--toggle {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;

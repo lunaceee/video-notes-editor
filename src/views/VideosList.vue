@@ -1,7 +1,7 @@
 <template>
   <ul class="videos">
     <li v-for="(video, index) in videos" :key="index">
-      <base-card hover="hover">
+      <card hover="hover">
         <template v-slot:media>
           <figure class="video-thumbnail">
             <router-link
@@ -14,12 +14,12 @@
             </router-link>
           </figure>
         </template>
-        <template v-slot:card-title>This is a title asdfadfadsfadfasdfasdadfasdfasfd</template>
+        <template v-slot:card-title>This is a title</template>
 
         <template v-slot:footer>
           <base-button danger @click.native="deleteVideo(video.videoId)">delete</base-button>
         </template>
-      </base-card>
+      </card>
     </li>
   </ul>
 </template>
@@ -27,15 +27,12 @@
 <script>
 import { mapState } from "vuex";
 import { getVideoId } from "../utils";
-import BaseButton from "@/components/BaseButton.vue";
-import BaseCard from "@/components/BaseCard.vue";
 
 export default {
   name: "VideosList",
   computed: {
     ...mapState(["videos"]),
   },
-  components: { BaseButton, BaseCard },
   methods: {
     getVideoThumbnail(url) {
       const videoId = getVideoId(url);

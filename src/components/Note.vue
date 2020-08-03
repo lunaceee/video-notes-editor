@@ -36,7 +36,6 @@ import { bus } from "../main";
 import IconPlay from "@/assets/icons/IconPlay.svg";
 import IconEdit from "@/assets/icons/IconEdit.svg";
 import IconTrash from "@/assets/icons/IconTrash.svg";
-import BaseButton from "@/components/BaseButton.vue";
 
 export default {
   name: "videoNote",
@@ -50,7 +49,6 @@ export default {
     IconPlay,
     IconEdit,
     IconTrash,
-    BaseButton,
   },
   props: {
     placeholder: {
@@ -199,7 +197,7 @@ textarea:invalid {
 }
 
 textarea::placeholder {
-  color: var(--color-dark);
+  color: var(--dark-brown);
 }
 
 /* custom scrollbar */
