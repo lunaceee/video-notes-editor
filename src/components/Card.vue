@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div class="card__media" :class="{'card__media--hover' : hover}">
+    <div class="card__media">
       <slot name="media"></slot>
     </div>
     <div class="card__body">
@@ -23,12 +23,6 @@
 <script>
 export default {
   name: "card",
-  props: {
-    hover: {
-      type: Boolean,
-      description: "Whether card should move on hover",
-    },
-  },
 };
 </script>
 <style scoped>
@@ -40,9 +34,8 @@ export default {
   overflow: hidden;
 }
 
-.card__media--hover:hover {
-  transform: scale(1.1);
-  transition: all 0.4s ease-in-out;
+.card__media {
+  overflow: hidden;
 }
 
 .card__title {

@@ -1,18 +1,21 @@
 <template>
   <ul class="videos">
     <li v-for="(video, index) in videos" :key="index">
-      <card hover="hover">
+      <card>
         <template v-slot:media>
-          <figure class="video-thumbnail">
-            <router-link
-              :to="{
+          <router-link
+            :to="{
               name: 'VideoDetails',
               params: { slug: video.url },
             }"
-            >
-              <img :src="getVideoThumbnail(video.url)" :url="video.url" alt="video thumbnail" />
-            </router-link>
-          </figure>
+          >
+            <img
+              class="media__image"
+              :src="getVideoThumbnail(video.url)"
+              :url="video.url"
+              alt="video thumbnail"
+            />
+          </router-link>
         </template>
         <template v-slot:card-title>This is a title</template>
 
@@ -55,18 +58,12 @@ export default {
   margin-top: 3rem;
 }
 
-.video-thumbnail img {
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+.media__image {
+  transition: all 0.5s ease-in-out;
   width: 100%;
 }
 
-/** create zoom effect on hover */
-.video-thumbnail {
-  overflow: hidden;
-  width: 100%;
-  margin: 0;
+.media__image:hover {
+  transform: scale(1.1);
 }
 </style>
