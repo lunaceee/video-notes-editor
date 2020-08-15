@@ -16,6 +16,10 @@ body {
 	position: relative;
 }
 
+body * {
+	box-sizing: border-box;
+}
+
 ul {
 	list-style: none;
 	padding: 0;
@@ -26,7 +30,6 @@ input {
 	display: inline-block;
 	font-family: inherit;
 	font-size: 100%;
-	box-sizing: border-box;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 }
