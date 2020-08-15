@@ -11,6 +11,26 @@ function pushToServer(videos, username) {
 	db.collection('users').doc(username).update({ videos: videos });
 }
 
+async function getVideoTitle(newUrl) {
+	console.log('get video title');
+	try {
+		console.log('deploy prime url', process.env.DEPLOY_PRIME_URL);
+		console.log('deploy BASE url', process.env.BASE_URL);
+		console.log('deploy FOO url', process.env.VUE_APP_FOO);
+		console.log('deploy BAR url', process.env.BAR);
+		const response = await fetch(
+			`https://refactor-name-css--cool-cuttle.netlify.app/.netlify/functions/getTitle?url=${newUrl}`
+		);
+		console.log({ response });
+		const data = await response.text();
+		console.log({ data });
+		return data;
+	} catch (e) {
+		console.log(e);
+		return '';
+	}
+}
+
 export const store = new Vuex.Store({
 	state: { videos: [], username: null },
 	getters: {
@@ -43,6 +63,7 @@ export const store = new Vuex.Store({
 			state.username = null;
 		},
 		addVideo: (state, newUrl) => {
+			console.log('mutation add video', newUrl);
 			const videoId = getVideoId(newUrl);
 			const video = { url: newUrl, notes: [], videoId };
 			let videos = state.videos || [];
@@ -90,6 +111,15 @@ export const store = new Vuex.Store({
 		deleteNote: (state, { video, noteIndex }) => {
 			video.notes.splice(noteIndex, 1);
 			pushToServer(state.videos, state.username);
+		}
+	},
+	actions: {
+		async addVideo(context, { newUrl }) {
+			// call gettitle
+			const videoTitle = await getVideoTitle(newUrl);
+			console.log('we got title', videoTitle);
+			context.commit('addVideo', newUrl);
+			console.log({ context });
 		}
 	}
 });

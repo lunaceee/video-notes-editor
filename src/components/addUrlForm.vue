@@ -11,7 +11,7 @@ export default {
     onSubmit(e) {
       const newUrl = e.target[0].value || "";
       if (newUrl) {
-        this.$store.commit("addVideo", newUrl);
+        this.$store.dispatch("addVideo", { newUrl });
         document.getElementById("addUrlForm").reset();
       } else {
         alert("Please insert an URL");
