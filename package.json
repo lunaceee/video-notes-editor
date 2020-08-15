@@ -41,10 +41,7 @@
 		"env": {
 			"node": true
 		},
-		"extends": [
-			"plugin:vue/essential",
-			"eslint:recommended"
-		],
+		"extends": [ "plugin:vue/essential", "eslint:recommended" ],
 		"parserOptions": {
 			"parser": "babel-eslint"
 		},
@@ -54,9 +51,5 @@
 			"vue/no-unused-components": 0
 		}
 	},
-	"browserslist": [
-		"> 1%",
-		"last 2 versions",
-		"not dead"
-	]
+	"browserslist": [ "> 1%", "last 2 versions", "not dead" ]
 }

@@ -24,7 +24,7 @@
             </div>
           </router-link>
         </template>
-        <template #title>This is a title</template>
+        <template #title>{{ video.videoTitle }}</template>
         <template
           #description
         >Work like you don't need the money. Love like you've never been hurt. Dance like nobody's watching.</template>
