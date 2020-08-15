@@ -14,9 +14,9 @@
           <slot name="description"></slot>
         </p>
       </div>
-      <div class="card__bottom" v-if="$slots.bottom">
-        <slot name="bottom"></slot>
-      </div>
+    </div>
+    <div class="card__bottom" v-if="$slots.bottom">
+      <slot name="bottom"></slot>
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
   name: "card",
 };
 </script>
-<style scoped>
+<style>
 .card {
   position: relative;
   border-radius: 0.5rem;
@@ -43,7 +43,8 @@ export default {
   border-radius: 0.5rem 0.5rem 0 0;
 }
 
-.card__title {
+.card__title,
+.card__description {
   line-height: 1.5;
   word-wrap: break-word;
 }
@@ -58,6 +59,7 @@ export default {
 }
 
 .card__bottom {
+  padding: 0 2rem 2rem 2rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }

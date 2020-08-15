@@ -1,7 +1,7 @@
 <template>
   <form class="form__add-url" @submit.prevent="onSubmit" id="addUrlForm">
     <input class="form__input" type="text" placeholder="Paste in a video URL..." />
-    <base-button type="submit" primary>add video</base-button>
+    <base-button type="submit" primary class="form__btn-submit">add video</base-button>
   </form>
 </template>
 <script>
@@ -24,7 +24,6 @@ export default {
 .form__add-url {
   display: flex;
   flex-flow: column;
-  align-items: center;
   justify-content: center;
 }
 
@@ -43,7 +42,6 @@ export default {
 .form__btn-submit {
   min-width: auto;
   max-width: 30rem;
-  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-primary-border);
 }
 
 .form__input::placeholder {

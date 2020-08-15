@@ -1,7 +1,12 @@
 <template>
   <div class="details" :class="notesSize > 0 ? 'details__with-notes' : 'details__with-no-notes'">
     <div class="details__top-controls">
-      <base-button :disabled="notStarted" @click.native="addNote" class="details__add-note">Add note</base-button>
+      <div v-if="notStarted">
+        <base-button mute>Add note</base-button>
+      </div>
+      <div v-else>
+        <base-button primary @click.native="addNote" class="details__add-note">Add note</base-button>
+      </div>
     </div>
     <video-player v-if="show" :url="videoUrl" :playerHolder="playerHolder" class="details__video" />
     <notes :url="videoUrl" class="details__notes" :playerHolder="playerHolder" />
@@ -60,14 +65,6 @@ export default {
 .details {
   display: grid;
   justify-items: center;
-}
-
-.details__add-note[disabled="disabled"] {
-  background-color: var(--btn-mute-bg);
-  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-mute-color);
-  color: var(--btn-mute-color);
-  cursor: not-allowed;
-  top: 0;
 }
 
 .details__video {

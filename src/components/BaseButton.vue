@@ -5,16 +5,17 @@
     {'btn__primary': primary},
     {'btn__danger': danger}, 
     {'btn__mute': mute},
+    {'btn__cancel': cancel},
     {'btn__mobile': mobile},
     {'btn__secondary': secondary}
     ]"
   >
     <slot v-if="mobile">
-      <base-icon>
+      <base-icon name="icon" v-if="$slots.icon">
         <slot></slot>
       </base-icon>
     </slot>
-    <slot>{{text}}</slot>
+    <slot>{{ text }}</slot>
   </button>
 </template>
 
@@ -41,6 +42,10 @@ export default {
       type: Boolean,
       description: "Whether it's a muted button",
     },
+    cancel: {
+      type: Boolean,
+      description: "Whether it's a cancel button",
+    },
     mobile: {
       type: Boolean,
       description: "Whether it's for mobile device",
@@ -55,6 +60,7 @@ export default {
 </script>
 <style>
 .btn {
+  cursor: pointer;
   display: inline-block;
   font-family: inherit;
   font-size: 100%;
@@ -73,14 +79,41 @@ export default {
 }
 
 .btn__primary {
-  background-color: var(--btn-primary-bg);
+  background: var(--btn-primary-bg);
   color: var(--btn-primary-color);
   box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-primary-border);
-  font-weight: 600;
+}
+
+.btn__primary:hover {
+  background-image: linear-gradient(
+    to right,
+    #f78ca0 0%,
+    #f9748f 19%,
+    #fd868c 60%,
+    #fe9a8b 100%
+  );
+}
+
+.btn__secondary {
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-color);
+  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-secondary-border);
 }
 
 .btn:focus {
   outline: none;
+}
+
+.btn__mute {
+  background-color: var(--btn-mute-bg);
+  color: var(--btn-mute-color);
+  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-mute-border);
+}
+
+.btn__cancel {
+  background-color: var(--btn-cancel-bg);
+  color: var(--btn-cancel-color);
+  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-cancel-border);
 }
 
 .btn:active {
@@ -92,6 +125,10 @@ export default {
   background-color: var(--btn-delete-bg);
   box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-delete-border);
   cursor: pointer;
+}
+
+.btn__mobile {
+  width: 100%;
 }
 
 .btn__default,

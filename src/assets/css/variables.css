@@ -4,7 +4,17 @@
 
 	/* Colors */
 
-	/* Primary color */
+	--darkest-red: #6a040f;
+	--darker-red: #ab001b;
+	--red: #e63946;
+	--light-red: #ee7374;
+	--lightest-red: #f6ada2;
+
+	--light-blue: #cdeae5;
+	--blue: #a8dadc;
+	--dark-blue: #457b9d;
+	--darkest-blue: #1d3557;
+
 	--grey-50: #fafafa;
 	--lightest-grey: #f5f5f5;
 	--lighter-grey: #e0e0e0e0;
@@ -24,24 +34,38 @@
 	--darker-yellow: #fbc02d;
 	--darkest-yellow: #f9a825;
 
-	--body: var(--darker-grey);
+	--body: var(--light-blue);
 
 	/* Buttons */
-	--btn-primary-color: var(--darker-grey);
-	--btn-primary-bg: var(--darkest-yellow);
-	--btn-primary-border: var(--darkest-grey);
-	--btn-mute-bg: var(--lightest-grey);
 	--btn-color: var(--lightest-grey);
-	--btn-mute-color: var(--darker-grey);
-	--btn-cancel-color: var(--darker-grey);
+	--btn-primary-color: var(--grey-50);
+	--btn-primary-bg: var(--light-red);
+	--btn-primary-border: var(--darker-red);
+
+	--btn-secondary-color: var(--light-blue);
+	--btn-secondary-bg: var(--dark-blue);
+	--btn-secondary-border: var(--darkest-blue);
+
+	--btn-mute-bg: var(--dark-blue);
+	--btn-mute-border: var(--darkest-blue);
+	--btn-mute-color: var(--darkest-blue);
+
+	--btn-cancel-color: var(--dark-blue);
+	--btn-cancel-bg: var(--light-blue);
+	--btn-cancel-border: var(--blue);
+
 	--btn-delete-bg: var(--darker-grey);
 	--btn-delete-color: var(--lighter-grey);
 	--btn-delete-border: var(--darkest-grey);
+
 	--color-placeholder: var(--darker-grey);
 
+	/* Link */
+	--link-color: var(--dark-blue);
+
 	/* Footer */
-	--footer-bg: var(--darkest-grey);
-	--footer-color: var(--grey-50);
+	--footer-bg: var(--darkest-blue);
+	--footer-color: var(--lightest-red);
 
 	--border: var(--lighter-grey);
 }

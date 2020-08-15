@@ -6,20 +6,27 @@
         aria-labelledby="dropdownMenuButton"
         @click.native="toggleDropdown"
         v-click-outside="closeDropdown"
+        secondary
         text="Account"
       ></base-button>
     </div>
-    <ul :class="[isOpen ? 'active' : '', 'auth__dropdown--list']">
-      <li @click="toggleDropdown" class="auth__dropdown--item">
-        <router-link :to="{ name: 'signup' }" v-if="showSignup">Sign up</router-link>
-      </li>
-      <li @click="toggleDropdown" class="auth__dropdown--item">
-        <router-link :to="{ name: 'login' }" v-if="showLogin">Log in</router-link>
-      </li>
-      <li @click="toggleDropdown" class="auth__dropdown--item">
-        <a @click="logOut" v-if="showLogout">Log out</a>
-      </li>
-    </ul>
+    <div v-if="!showLogout">
+      <ul :class="[isOpen ? 'active' : '', 'auth__dropdown--list']">
+        <li @click="toggleDropdown" class="auth__dropdown--item">
+          <router-link :to="{ name: 'signup' }" v-if="showSignup">Sign up</router-link>
+        </li>
+        <li @click="toggleDropdown" class="auth__dropdown--item">
+          <router-link :to="{ name: 'login' }" v-if="showLogin">Log in</router-link>
+        </li>
+      </ul>
+    </div>
+    <div v-else>
+      <ul :class="[isOpen ? 'active' : '', 'auth__dropdown--list']">
+        <li @click="toggleDropdown" class="auth__dropdown--item">
+          <a @click="logOut" v-if="showLogout">Log out</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
@@ -81,24 +88,26 @@ export default {
 };
 </script>
 <style>
-.auth {
-  display: inline-block;
-}
 .auth__dropdown--toggle {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
 }
+
 .btn__default,
 .btn__icon--mobile {
   grid-area: 1 / 1 / 2 / 2;
 }
 
 .auth__dropdown--list {
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
   visibility: hidden;
   background-color: var(--btn-mute-bg);
   margin-top: 0;
   border-radius: 0.2rem;
+  color: var(--light-blue);
 }
 
 .active {
@@ -106,8 +115,7 @@ export default {
 }
 
 .auth__dropdown--item {
-  padding: 0.4rem;
-  margin: auto;
+  padding: 0.6rem;
 }
 
 .auth__dropdown--item > a {

@@ -10,11 +10,11 @@
           <input type="text" placeholder="Username" v-model="username" required />
           <input type="password" placeholder="Password" v-model="password" required />
         </div>
-        <base-button class="btn__signup" id="sign-up-btn" type="submit">Sign up</base-button>
+        <base-button primary mobile type="submit" text="Sign up"></base-button>
         <span class="divider line one-line" contenteditable>or</span>
         <p>Already have an account?</p>
         <router-link :to="{ name: 'login' }">
-          <base-button class="btn__login">Log in</base-button>
+          <base-button secondary mobile text="Log in"></base-button>
         </router-link>
       </form>
     </div>

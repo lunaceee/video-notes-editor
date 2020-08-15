@@ -26,8 +26,8 @@
       ></textarea>
     </div>
     <div class="note__bottom-controls">
-      <base-button @click.native="save" v-if="mode === 'editing'" class="btn__save">Save</base-button>
-      <base-button @click.native="cancel" v-if="mode === 'editing'" class="btn__cancel">Cancel</base-button>
+      <base-button @click.native="save" v-if="mode === 'editing'" primary>Save</base-button>
+      <base-button @click.native="cancel" v-if="mode === 'editing'" cancel>Cancel</base-button>
     </div>
   </div>
 </template>
@@ -157,15 +157,6 @@ export default {
 .note__bottom-controls {
   grid-area: bottom-controls;
   margin-bottom: 1rem;
-}
-
-.btn__cancel {
-  background-color: var(--btn-mute-bg);
-  color: var(--btn-cancel-color);
-}
-
-.btn__save {
-  background-color: var(--btn-primary-bg);
 }
 
 .note__content,
