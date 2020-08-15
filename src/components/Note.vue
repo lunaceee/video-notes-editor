@@ -2,7 +2,9 @@
   <div class="note">
     <div class="note__top-controls">
       <button @click="play" class="btn__icon icon-group__play">
-        <IconPlay />
+        <base-icon icon-color="blue">
+          <icon-play />
+        </base-icon>
         <span class="note__timestamp">{{ formatTimestamp(note.time) }}</span>
       </button>
       <div class="icon-group__edit">
@@ -33,9 +35,10 @@
 </template>
 <script>
 import { bus } from "../main";
-import IconPlay from "@/assets/icons/IconPlay.svg";
 import IconEdit from "@/assets/icons/IconEdit.svg";
 import IconTrash from "@/assets/icons/IconTrash.svg";
+import BaseIcon from "@/components/BaseIcon.vue";
+import IconPlay from "@/components/icons/IconPlay.vue";
 
 export default {
   name: "videoNote",

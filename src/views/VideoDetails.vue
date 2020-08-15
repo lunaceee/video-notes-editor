@@ -2,10 +2,10 @@
   <div class="details" :class="notesSize > 0 ? 'details__with-notes' : 'details__with-no-notes'">
     <div class="details__top-controls">
       <div v-if="notStarted">
-        <base-button mute>Add note</base-button>
+        <base-button mute disabled class="details__add-note--disabled">Add note</base-button>
       </div>
       <div v-else>
-        <base-button primary @click.native="addNote" class="details__add-note">Add note</base-button>
+        <base-button primary @click.native="addNote">Add note</base-button>
       </div>
     </div>
     <video-player v-if="show" :url="videoUrl" :playerHolder="playerHolder" class="details__video" />
@@ -79,6 +79,11 @@ export default {
 .details__top-controls {
   grid-area: top-controls;
   width: inherit;
+}
+
+.details__add-note--disabled {
+  cursor: not-allowed;
+  top: 0;
 }
 
 @media (max-width: 20rem) {

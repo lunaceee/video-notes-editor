@@ -4,10 +4,10 @@
     :width="width"
     :height="height"
     viewBox="0 0 20 20"
-    :aria-labelledby="iconName"
+    :aria-labelledby="iconType"
     role="presentation"
   >
-    <title :id="iconName" lang="en">{{ iconName }} icon</title>
+    <title :id="iconType" lang="en">{{ iconType }} icon</title>
     <g :fill="iconColor">
       <slot />
     </g>
@@ -32,7 +32,7 @@ export default {
     },
     iconColor: {
       type: String,
-      default: "currentColor",
+      default: "red",
     },
   },
 };

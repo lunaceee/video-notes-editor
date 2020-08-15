@@ -54,9 +54,9 @@
 	--btn-cancel-bg: var(--light-blue);
 	--btn-cancel-border: var(--blue);
 
-	--btn-delete-bg: var(--darker-grey);
+	--btn-delete-bg: var(--darker-red);
 	--btn-delete-color: var(--lighter-grey);
-	--btn-delete-border: var(--darkest-grey);
+	--btn-delete-border: var(--darkest-red);
 
 	--color-placeholder: var(--darker-grey);
 
@@ -65,7 +65,7 @@
 
 	/* Footer */
 	--footer-bg: var(--darkest-blue);
-	--footer-color: var(--lightest-red);
+	--footer-color: var(--light-blue);
 
 	--border: var(--lighter-grey);
 }
