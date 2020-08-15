@@ -1,21 +1,21 @@
 <template>
   <div class="card">
-    <div class="card__media">
-      <slot name="media"></slot>
+    <div class="card__thumbnail" v-if="$slots.thumbnail">
+      <slot name="thumbnail"></slot>
     </div>
     <div class="card__body">
-      <div class="card__title">
+      <div class="card__title" v-if="$slots.title">
         <h1>
-          <slot name="card-title"></slot>
+          <slot name="title"></slot>
         </h1>
       </div>
-      <div class="card__supporting-text">
+      <div class="card__description" v-if="$slots.description">
         <p>
-          <slot name="supporting-text"></slot>
+          <slot name="description"></slot>
         </p>
       </div>
-      <div class="card__footer">
-        <slot name="footer"></slot>
+      <div class="card__bottom" v-if="$slots.bottom">
+        <slot name="bottom"></slot>
       </div>
     </div>
   </div>
@@ -27,15 +27,20 @@ export default {
 </script>
 <style scoped>
 .card {
-  border-radius: 0.2rem;
-  box-shadow: 0 1px 1px 0 rgba(66, 66, 66, 0.08),
-    0 1px 3px 1px rgba(66, 66, 66, 0.16);
+  position: relative;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px 0 var(--lighter-grey);
+  cursor: pointer;
+  z-index: 1;
+}
+
+.card .card__thumbnail {
   position: relative;
   overflow: hidden;
 }
 
-.card__media {
-  overflow: hidden;
+.card__thumbnail {
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .card__title {
@@ -52,7 +57,7 @@ export default {
   padding: 2rem;
 }
 
-.card__footer {
+.card__bottom {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
