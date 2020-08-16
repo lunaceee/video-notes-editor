@@ -136,6 +136,10 @@ a:hover {
 	cursor: pointer;
 }
 
+.btn__icon svg:hover {
+	stroke: var(--light-red);
+}
+
 /*
 authentication
  */

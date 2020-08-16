@@ -37,7 +37,6 @@
 	--body: var(--light-blue);
 
 	/* Buttons */
-	--btn-color: var(--lightest-grey);
 	--btn-primary-color: var(--grey-50);
 	--btn-primary-bg: var(--light-red);
 	--btn-primary-border: var(--darker-red);

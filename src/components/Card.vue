@@ -30,7 +30,6 @@ export default {
   position: relative;
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px 0 var(--lighter-grey);
-  cursor: pointer;
   z-index: 1;
 }
 

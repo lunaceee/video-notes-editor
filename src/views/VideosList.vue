@@ -25,9 +25,6 @@
           </router-link>
         </template>
         <template #title>{{ video.videoTitle }}</template>
-        <template
-          #description
-        >Work like you don't need the money. Love like you've never been hurt. Dance like nobody's watching.</template>
         <template #bottom>
           <base-button danger @click.native="deleteVideo(video.videoId)">delete</base-button>
         </template>

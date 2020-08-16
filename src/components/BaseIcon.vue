@@ -6,6 +6,11 @@
     viewBox="0 0 20 20"
     :aria-labelledby="iconType"
     role="presentation"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    :class="['feather', `feather-${iconType}`]"
   >
     <title :id="iconType" lang="en">{{ iconType }} icon</title>
     <g :fill="iconColor">
@@ -18,7 +23,7 @@
 export default {
   name: "baseIcon",
   props: {
-    iconName: {
+    iconType: {
       type: String,
       default: "user",
     },
@@ -32,7 +37,7 @@ export default {
     },
     iconColor: {
       type: String,
-      default: "red",
+      default: "currentColor",
     },
   },
 };

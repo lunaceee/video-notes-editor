@@ -64,12 +64,12 @@ export default {
   display: inline-block;
   font-family: inherit;
   font-size: 100%;
-  box-sizing: border-box;
   text-decoration: none;
   text-transform: uppercase;
   font-size: 0.8rem;
   padding: 0.7em 1.4em;
   margin: 0 0.3em 0.3em 0;
+  min-width: 6rem;
   border-radius: 0.3rem;
   border-style: none;
   text-align: center;

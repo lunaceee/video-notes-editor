@@ -14,11 +14,9 @@ function pushToServer(videos, username) {
 async function getVideoTitle(newUrl) {
 	//const lambda_dev = 'http://localhost:8888/';
 	const build_env = process.env.BASE_URL;
-	console.log('get video title');
 	try {
 		const response = await fetch(`${build_env}/.netlify/functions/getTitle?url=${newUrl}`);
 		const data = await response.text();
-		console.log({ data });
 		return data;
 	} catch (e) {
 		console.log(e);
@@ -59,11 +57,9 @@ export const store = new Vuex.Store({
 			state.username = null;
 		},
 		addVideo: (state, { newUrl, videoTitle }) => {
-			console.log(state);
 			const videoId = getVideoId(newUrl);
 			const video = { url: newUrl, notes: [], videoId, videoTitle };
 			let videos = state.videos || [];
-			console.log('title', videoTitle);
 			for (const vid of videos) {
 				if (getVideoId(vid.url) === videoId) {
 					alert('Video already exists');
@@ -112,7 +108,6 @@ export const store = new Vuex.Store({
 	actions: {
 		async addVideo({ commit }, { newUrl }) {
 			const videoTitle = await getVideoTitle(newUrl);
-			console.log(videoTitle);
 			commit('addVideo', { newUrl, videoTitle });
 		}
 	}

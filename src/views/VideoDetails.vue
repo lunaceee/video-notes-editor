@@ -1,5 +1,5 @@
 <template>
-  <div class="details" :class="notesSize > 0 ? 'details__with-notes' : 'details__with-no-notes'">
+  <div class="details">
     <div class="details__top-controls">
       <div v-if="notStarted">
         <base-button mute disabled class="details__add-note--disabled">Add note</base-button>
@@ -8,8 +8,18 @@
         <base-button primary @click.native="addNote">Add note</base-button>
       </div>
     </div>
-    <video-player v-if="show" :url="videoUrl" :playerHolder="playerHolder" class="details__video" />
-    <notes :url="videoUrl" class="details__notes" :playerHolder="playerHolder" />
+    <div
+      class="details__main"
+      :class="[notesSize > 0 ? 'details__with-notes' : 'details__with-no-notes']"
+    >
+      <video-player
+        v-if="show"
+        :url="videoUrl"
+        :playerHolder="playerHolder"
+        class="details__video"
+      />
+      <notes :url="videoUrl" class="details__notes" :playerHolder="playerHolder" />
+    </div>
   </div>
 </template>
 <script>
@@ -63,22 +73,34 @@ export default {
 </script>
 <style scoped>
 .details {
-  display: grid;
-  justify-items: center;
-}
-
-.details__video {
-  grid-area: video;
-}
-
-.details__notes {
-  grid-area: notes;
-  padding: 0;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-gap: 1rem;
 }
 
 .details__top-controls {
-  grid-area: top-controls;
-  width: inherit;
+  display: flex;
+  justify-content: center;
+}
+
+.details__main {
+  display: grid;
+}
+
+.details__with-notes .details__notes {
+  margin: 1rem;
+}
+
+.details__with-no-notes {
+  display: flex;
+  justify-content: center;
+}
+
+.details__video {
+  width: 100%;
+  height: 18rem;
 }
 
 .details__add-note--disabled {
@@ -86,91 +108,32 @@ export default {
   top: 0;
 }
 
-@media (max-width: 20rem) {
-  .details {
-    display: flex;
-    flex-direction: column;
-  }
-
+@media (min-width: 46rem) {
   .details__video {
-    width: 100vw;
-  }
-}
-
-@media (min-width: 20rem) {
-  .details {
-    grid-template-areas:
-      "top-controls"
-      "video"
-      "notes";
-    grid-gap: 1rem;
-  }
-
-  .details__video {
-    width: 100vw;
-    height: 16rem;
-  }
-
-  .details__notes {
-    width: 80vw;
-  }
-}
-
-@media (min-width: 30rem) {
-  .details__video {
-    height: 24rem;
-  }
-}
-
-@media (min-width: 48rem) {
-  .details__video {
-    width: 80vw;
-    height: 28rem;
-  }
-}
-
-@media (min-width: 65rem) {
-  .details {
-    grid-template-areas:
-      "top-controls top-controls ."
-      "video video notes";
-  }
-
-  .details__with-no-notes {
-    grid-template-areas:
-      "top-controls"
-      "video";
-  }
-
-  .details__with-no-notes > .details__notes {
-    display: none;
-  }
-
-  .details__video {
-    width: 40rem;
     height: 25rem;
   }
+}
 
-  .details__notes {
-    width: 20rem;
+@media (min-width: 60rem) {
+  .details__video {
+    width: 52rem;
+    height: 32rem;
   }
 }
 
-@media (min-width: 80rem) {
-  .details__video {
-    width: 43rem;
-    height: 30rem;
+@media (min-width: 78rem) {
+  .note {
+    width: 26rem;
   }
 
-  .details__notes {
-    width: 28rem;
-  }
-}
-
-@media (min-width: 100rem) {
   .details__video {
-    width: 56rem;
-    height: 33rem;
+    width: 45rem;
+    height: 28rem;
+  }
+
+  .details__main {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
   }
 }
 </style>
