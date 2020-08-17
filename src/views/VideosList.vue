@@ -69,6 +69,7 @@ export default {
 
 .videos li {
   position: relative;
+  margin: 1rem;
 }
 
 .videos li::after {
@@ -130,5 +131,11 @@ export default {
 
 .thumbnail__img {
   width: 100%;
+}
+
+@media (min-width: 40rem) {
+  .videos li {
+    margin: 0;
+  }
 }
 </style>

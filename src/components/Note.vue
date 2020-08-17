@@ -182,7 +182,8 @@ export default {
 }
 
 textarea {
-  width: inherit;
+  width: 100%;
+  max-width: 100%;
   height: 15rem;
   border: 1px solid var(--border);
   border-radius: 4px;

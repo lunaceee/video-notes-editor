@@ -108,7 +108,7 @@ export default {
   top: 0;
 }
 
-@media (min-width: 46rem) {
+@media (min-width: 40rem) {
   .details__video {
     height: 25rem;
   }
@@ -121,7 +121,7 @@ export default {
   }
 }
 
-@media (min-width: 78rem) {
+@media (min-width: 80rem) {
   .note {
     width: 26rem;
   }
