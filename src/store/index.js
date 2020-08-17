@@ -7,8 +7,11 @@ import { db } from '../firebase';
 '' + youtube; // hack for linter fixing
 Vue.use(Vuex);
 
+//Todo: change it to async function
 function pushToServer(videos, username) {
-	db.collection('users').doc(username).update({ videos: videos });
+	if (username !== null) {
+		db.collection('users').doc(username).update({ videos: videos });
+	}
 }
 
 async function getVideoTitle(newUrl) {
@@ -68,9 +71,7 @@ export const store = new Vuex.Store({
 			}
 
 			videos.push(video);
-			if (state.username !== null) {
-				pushToServer(videos, state.username);
-			}
+			pushToServer(videos, state.username);
 		},
 		updateVideos: (state, newVideos) => {
 			state.videos = [ ...state.videos, ...newVideos ];

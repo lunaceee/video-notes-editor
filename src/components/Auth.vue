@@ -52,16 +52,6 @@ export default {
     },
   },
   methods: {
-    // onResize(event) {
-    //   const ro = new ResizeObserver((entries) => {
-    //     for (let entry of entries) {
-    //       if (window.innerWidth < 768) {
-    //         this.props.mobile;
-    //       }
-    //     }
-    //   });
-    //   ro.observe(document.querySelector(".auth__dropdown--toggle"));
-    // },
     logOut() {
       this.$store.commit("deleteAllVideos");
       this.$store.commit("unsetUsername");
