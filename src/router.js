@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Videos from '@/views/Videos.vue';
+import VideosList from '@/views/VideosList.vue';
 import VideoDetails from '@/views/VideoDetails.vue';
 import Login from '@/views/Login.vue';
 import Signup from '@/views/Signup.vue';
@@ -13,7 +13,7 @@ export default new VueRouter({
 		{
 			path: '/',
 			name: 'home',
-			component: Videos
+			component: VideosList
 		},
 		{
 			path: '/login',

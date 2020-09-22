@@ -1,0 +1,6 @@
+[build]
+  command = "yarn build"
+  functions = "src/lambda/"
+[dev]
+  command = "yarn serve"
+  port = 8888

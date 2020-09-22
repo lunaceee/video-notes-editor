@@ -6,13 +6,12 @@
 </template>
 <script>
 export default {
-  name: "feedback"
+  name: "feedbackForm",
 };
 </script>
 <style scoped>
 .form__feedback {
   display: grid;
   justify-items: center;
-  color: var(--teal);
 }
 </style>

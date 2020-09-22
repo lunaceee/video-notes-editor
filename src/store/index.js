@@ -7,8 +7,25 @@ import { db } from '../firebase';
 '' + youtube; // hack for linter fixing
 Vue.use(Vuex);
 
+//Todo: change it to async function
 function pushToServer(videos, username) {
-	db.collection('users').doc(username).update({ videos: videos });
+	if (username !== null) {
+		db.collection('users').doc(username).update({ videos: videos });
+	}
+}
+
+async function getVideoTitle(newUrl) {
+	//const lambda_dev = 'http://localhost:8888/';
+	const build_env = process.env.BASE_URL;
+	try {
+		const response = await fetch(`${build_env}/.netlify/functions/getTitle?url=${newUrl}`);
+		const data = await response.text();
+		return data;
+	} catch (e) {
+		console.log(e);
+		// Return empty string if there's an error
+		return '';
+	}
 }
 
 export const store = new Vuex.Store({
@@ -42,11 +59,10 @@ export const store = new Vuex.Store({
 		unsetUsername: (state) => {
 			state.username = null;
 		},
-		addVideo: (state, newUrl) => {
+		addVideo: (state, { newUrl, videoTitle }) => {
 			const videoId = getVideoId(newUrl);
-			const video = { url: newUrl, notes: [], videoId };
+			const video = { url: newUrl, notes: [], videoId, videoTitle };
 			let videos = state.videos || [];
-
 			for (const vid of videos) {
 				if (getVideoId(vid.url) === videoId) {
 					alert('Video already exists');
@@ -55,9 +71,7 @@ export const store = new Vuex.Store({
 			}
 
 			videos.push(video);
-			if (state.username !== null) {
-				pushToServer(videos, state.username);
-			}
+			pushToServer(videos, state.username);
 		},
 		updateVideos: (state, newVideos) => {
 			state.videos = [ ...state.videos, ...newVideos ];
@@ -90,6 +104,12 @@ export const store = new Vuex.Store({
 		deleteNote: (state, { video, noteIndex }) => {
 			video.notes.splice(noteIndex, 1);
 			pushToServer(state.videos, state.username);
+		}
+	},
+	actions: {
+		async addVideo({ commit }, { newUrl }) {
+			const videoTitle = await getVideoTitle(newUrl);
+			commit('addVideo', { newUrl, videoTitle });
 		}
 	}
 });
