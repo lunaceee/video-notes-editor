@@ -1,23 +1,36 @@
 <template>
-  <div class="auth">
-    <div class="auth__form">
-      <form @submit.prevent="logIn" autocomplete="false">
-        <h2 class="form-title">Welcome back!</h2>
-        <div class="autocomplete-fix">
-          <input type="password" disabled />
-        </div>
-        <div class="input-group">
-          <input required type="text" placeholder="Username" v-model="username" />
-          <input required type="password" placeholder="Password" v-model="password" />
-        </div>
-        <base-button secondary mobile type="submit" text="Log in"></base-button>
-        <span class="divider line one-line" contenteditable>or</span>
-        <p>Need an account?</p>
-        <router-link :to="{ name: 'signup' }">
-          <base-button mobile primary text="Sign up"></base-button>
-        </router-link>
-      </form>
-    </div>
+  <div class="grid justify-items-center">
+    <form
+      @submit.prevent="logIn"
+      autocomplete="false"
+      class="grid w-full p-2 gap-4 sm:w-2/4"
+    >
+      <h2 class="text-center">Welcome back!</h2>
+      <div class="grid gap-2">
+        <input
+          class="p-1 rounded border-2"
+          required
+          type="text"
+          placeholder="Username"
+          v-model="username"
+        />
+        <input
+          required
+          type="password"
+          placeholder="Password"
+          v-model="password"
+          class="p-1 rounded border-2"
+        />
+      </div>
+      <base-button variant="TEAL" type="submit"> Log in </base-button>
+      <div class="divide-solid divide-y-2 divide-gray-500">
+        <div class="text-center py-2">or</div>
+      </div>
+      <h2 class="text-center">Need an account?</h2>
+      <router-link :to="{ name: 'signup' }">
+        <base-button variant="RED" class="w-full"> Sign up </base-button>
+      </router-link>
+    </form>
   </div>
 </template>
 

@@ -16,9 +16,9 @@
 		"@firebase/firestore": "^1.15.0",
 		"core-js": "^3.6.4",
 		"node-fetch": "^2.6.1",
-		"normalize.css": "^8.0.1",
 		"postcss-preset-env": "^6.7.0",
-		"video.js": "^7.7.5",
+		"tailwindcss": "^1.8.10",
+		"video.js": "7.8.4",
 		"videojs-youtube": "^2.6.1",
 		"vue": "^2.6.11",
 		"vue-firestore": "^0.3.30",
@@ -41,7 +41,10 @@
 		"env": {
 			"node": true
 		},
-		"extends": [ "plugin:vue/essential", "eslint:recommended" ],
+		"extends": [
+			"plugin:vue/essential",
+			"eslint:recommended"
+		],
 		"parserOptions": {
 			"parser": "babel-eslint"
 		},
@@ -51,5 +54,9 @@
 			"vue/no-unused-components": 0
 		}
 	},
-	"browserslist": [ "> 1%", "last 2 versions", "not dead" ]
+	"browserslist": [
+		"> 1%",
+		"last 2 versions",
+		"not dead"
+	]
 }

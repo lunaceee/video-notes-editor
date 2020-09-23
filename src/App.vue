@@ -1,31 +1,36 @@
 <template>
-  <div id="app" class="app__container">
-    <header class="app__header">
-      <div class="header__back">
-        <GoBack :class="[isHomePage ? 'hide' : '']" />
+  <div id="app" class="flex flex-col min-h-screen">
+    <header class="grid grid-cols-3 m-2 md:m-8 h-56">
+      <div class="col-span-1">
+        <GoBack :class="[isHomePage ? 'invisible' : 'visible']" />
       </div>
-      <div class="app__logo app__logo-mobile">
-        <router-link :to="{name: 'home'}">
-          <Logo />
+      <div class="flex justify-center mt-20">
+        <router-link :to="{ name: 'home' }">
+          <Logo class="h-12 sm:h-16 md:h-24" />
         </router-link>
       </div>
-      <div class="header__auth">
-        <Auth />
+      <div class="flex col-span-1 col-start-3 justify-end">
+        <AuthDropDown :class="[isHomePage ? 'visible' : 'invisible']" />
       </div>
     </header>
-    <main class="app__main">
-      <div class="app__logo app__logo-default">
-        <router-link :to="{name: 'home'}">
-          <Logo />
-        </router-link>
-      </div>
-      <AddURLForm v-show="isHomePage" />
-      <router-view :key="$route.path" />
+    <main class="grid sm:px-4 sm:p-8 flex-grow mb-6">
+      <AddVideo v-show="isHomePage" class="mb-10" />
+      <router-view
+        class="grid grid-flow-col xs:grid-flow-row sm:grid-flow-row md:grid-flow-col-dense lg:grid-flow-row-dense xl:grid-flow-col"
+        :key="$route.path"
+      />
     </main>
-    <footer class="app__footer">
+    <footer
+      class="grid grid-row-3 h-32 items-center y-10 bg-teal-600 text-white text-center"
+    >
       <span>
-        Made for you by
-        <a href="https://github.com/lunaceee">lunaceee</a>
+        Made by
+        <a
+          href="https://github.com/lunaceee"
+          class="underline text-red-300 hover:text-teal-200 font-black"
+          >lunaceee</a
+        >
+        ・ Powered by Vue, Firebase, Video.js, and Tailwind CSS
       </span>
     </footer>
   </div>
@@ -33,8 +38,8 @@
 
 <script>
 import GoBack from "@/components/GoBack.vue";
-import AddURLForm from "@/components/addUrlForm.vue";
-import Auth from "@/components/Auth.vue";
+import AddVideo from "@/components/addVideo.vue";
+import AuthDropDown from "@/components/AuthDropDown.vue";
 import Logo from "@/assets/icons/logo.svg";
 
 export default {
@@ -45,9 +50,9 @@ export default {
     };
   },
   components: {
-    AddURLForm,
+    AddVideo,
     GoBack,
-    Auth,
+    AuthDropDown,
     Logo,
   },
   computed: {
@@ -57,50 +62,3 @@ export default {
   },
 };
 </script>
-
-<style lang="postcss">
-@media (max-width: 20rem) {
-  .app__logo-mobile {
-    visibility: visible;
-  }
-
-  .app__logo {
-    min-width: 4rem;
-  }
-
-  .header__back {
-    margin-top: 1rem;
-  }
-}
-
-@media (min-width: 20rem) {
-  .auth__form {
-    width: 20rem;
-  }
-
-  .app__logo-mobile {
-    visibility: visible;
-  }
-
-  .header__back {
-    padding-top: 0.8rem;
-  }
-
-  .app__logo {
-    min-width: 6rem;
-  }
-}
-
-@media (min-width: 40rem) {
-  .app__main {
-    margin: 5rem;
-  }
-  .app__logo-mobile {
-    visibility: hidden;
-  }
-
-  .app__logo-default {
-    display: block;
-  }
-}
-</style>

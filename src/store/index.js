@@ -95,7 +95,6 @@ export const store = new Vuex.Store({
 			});
 			pushToServer(state.videos, state.username);
 		},
-
 		updateNote: (state, { note, text }) => {
 			note.text = text;
 			pushToServer(state.videos, state.username);

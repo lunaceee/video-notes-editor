@@ -1,7 +1,11 @@
 <template>
-  <div class="form__feedback">
+  <div class="grid text-center">
     <h2>Welcome to Cuttle!</h2>
-    <router-link :to="{ name: 'home' }">Go to homepage</router-link>
+    <p class="m-4">
+      <router-link :to="{ name: 'home' }" class="underline"
+        >Go to homepage</router-link
+      >
+    </p>
   </div>
 </template>
 <script>
@@ -9,9 +13,3 @@ export default {
   name: "feedbackForm",
 };
 </script>
-<style scoped>
-.form__feedback {
-  display: grid;
-  justify-items: center;
-}
-</style>

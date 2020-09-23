@@ -1,7 +1,12 @@
 <template>
   <ul>
     <li v-for="(note, index) in notes" :key="index">
-      <Note :note="note" :noteIndex="index" :video="video" :playerHolder="playerHolder" />
+      <Note
+        :note="note"
+        :noteIndex="index"
+        :video="video"
+        :playerHolder="playerHolder"
+      />
     </li>
   </ul>
 </template>
@@ -29,12 +34,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.hidden {
-  display: none;
-}
-
-.active {
-  display: inline-block;
-}
-</style>

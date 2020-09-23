@@ -1,0 +1,32 @@
+/* purgecss start ignore */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+/* purgecss end ignore */
+
+@import "tailwindcss/utilities";
+@import url("https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Lato&display=swap");
+
+@layer base {
+  h1 {
+    @apply text-2xl;
+  }
+
+  h2 {
+    @apply text-xl;
+  }
+
+  h3 {
+    @apply text-lg;
+  }
+
+  p {
+    @apply text-teal-900;
+  }
+
+}
+
+@layer components {
+  .btn {
+    @apply rounded uppercase w-full py-2 px-4 font-bold border-b-4 h-10 text-white transition duration-300 ease-in-out;
+  }
+}

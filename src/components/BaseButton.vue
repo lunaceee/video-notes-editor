@@ -1,138 +1,38 @@
 <template>
   <button
-    class="btn"
-    :class="[
-    {'btn__primary': primary},
-    {'btn__danger': danger}, 
-    {'btn__mute': mute},
-    {'btn__cancel': cancel},
-    {'btn__mobile': mobile},
-    {'btn__secondary': secondary}
-    ]"
+    class="rounded border-b-4 text-white text-sm focus:outline-none focus:shadow-outline transition duration-300 ease-in-out uppercase h-10"
+    :class="VARIANT_MAPS[variant]"
   >
-    <slot v-if="mobile">
-      <base-icon name="icon" v-if="$slots.icon">
-        <slot></slot>
-      </base-icon>
-    </slot>
-    <slot>{{ text }}</slot>
+    <slot />
   </button>
 </template>
-
 <script>
-import IconUser from "@/components/icons/IconUser.vue";
-
 export default {
   name: "baseButton",
-  components: { IconUser },
+  data() {
+    return {
+      VARIANT_MAPS: {
+        GRAY: "bg-gray-500 border-gray-700",
+        LIGHTGRAY:
+          "bg-gray-300 border-gray-400 hover:bg-gray-200 hover:border-fray-300 text-gray-700",
+        RED: "bg-red-500 border-red-700 hover:bg-red-300 hover:border-red-400",
+        ORANGE: "bg-orange-500 border-orange-700",
+        YELLOW: "bg-yellow-500 border-yellow-700",
+        GREEN: "bg-green-500 border-green-700",
+        TEAL:
+          "bg-teal-500 border-teal-700 hover:bg-teal-300 hover:border-teal-400",
+        BLUE: "bg-blue-500 border-blue-700",
+        INDIGO: "bg-indigo-500 border-indigo-700",
+        PURPLE: "bg-purple-500 border-purple-700",
+        PINK: "bg-pink-500 border-pink-700",
+      },
+    };
+  },
   props: {
-    secondary: {
-      type: Boolean,
-      description: "Whether it's a secondary button",
-    },
-    primary: {
-      type: Boolean,
-      description: "Whether it's a primary button",
-    },
-    danger: {
-      type: Boolean,
-      description: "Whether it's a danger button",
-    },
-    mute: {
-      type: Boolean,
-      description: "Whether it's a muted button",
-    },
-    cancel: {
-      type: Boolean,
-      description: "Whether it's a cancel button",
-    },
-    mobile: {
-      type: Boolean,
-      description: "Whether it's for mobile device",
-    },
-    text: {
+    variant: {
       type: String,
-      default: "",
-      description: "Button text in case not provided via default slot",
+      default: "TEAL",
     },
   },
 };
 </script>
-<style>
-.btn {
-  cursor: pointer;
-  display: inline-block;
-  font-family: inherit;
-  font-size: 100%;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  padding: 0.7em 1.4em;
-  margin: 0 0.3em 0.3em 0;
-  min-width: 6rem;
-  border-radius: 0.3rem;
-  border-style: none;
-  text-align: center;
-  position: relative;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-.btn__primary {
-  background: var(--btn-primary-bg);
-  color: var(--btn-primary-color);
-  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-primary-border);
-}
-
-.btn__primary:hover {
-  background-image: linear-gradient(
-    to right,
-    #f78ca0 0%,
-    #f9748f 19%,
-    #fd868c 60%,
-    #fe9a8b 100%
-  );
-}
-
-.btn__secondary {
-  background-color: var(--btn-secondary-bg);
-  color: var(--btn-secondary-color);
-  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-secondary-border);
-}
-
-.btn:focus {
-  outline: none;
-}
-
-.btn__mute {
-  background-color: var(--btn-mute-bg);
-  color: var(--btn-mute-color);
-  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-mute-border);
-}
-
-.btn__cancel {
-  background-color: var(--btn-cancel-bg);
-  color: var(--btn-cancel-color);
-  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-cancel-border);
-}
-
-.btn:active {
-  top: 0.1em;
-}
-
-.btn__danger {
-  color: var(--btn-delete-color);
-  background-color: var(--btn-delete-bg);
-  box-shadow: inset 0 -0.6em 0 -0.35em var(--btn-delete-border);
-  cursor: pointer;
-}
-
-.btn__mobile {
-  width: 100%;
-}
-
-.btn__default,
-.btn__icon--mobile {
-  grid-area: 1 / 1 / 2 / 2;
-}
-</style>

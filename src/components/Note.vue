@@ -1,33 +1,46 @@
 <template>
-  <div class="note">
-    <div class="note__top-controls">
-      <button @click="play" class="btn__icon icon-group__play">
-        <IconPlay />
-        <span class="note__timestamp">{{ formatTimestamp(note.time) }}</span>
+  <div class="flex flex-col border-b-2 border-teal-600 mb-8">
+    <div class="flex flex-row justify-between">
+      <button @click="play" class="flex">
+        <IconPlay class="hover:text-red-500" />
+        <span class="text-teal-500 hover:text-red-500 mx-1">{{
+          formatTimestamp(note.time)
+        }}</span>
       </button>
-      <div class="icon-group__edit">
-        <button class="btn__icon" v-if="mode === 'showing'" @click="edit">
-          <IconEdit />
+      <div>
+        <button v-if="mode === 'showing'" @click="edit" class="px-2">
+          <IconEdit class="hover:text-red-500" />
         </button>
-        <button class="btn__icon" @click="deleteNote">
-          <IconTrash />
+        <button @click="deleteNote">
+          <IconTrash class="hover:text-red-500" />
         </button>
       </div>
     </div>
-    <div class="note__content">
-      <p v-if="mode === 'showing'">{{note.text}}</p>
-    </div>
-    <div class="note__input">
-      <textarea
-        wrap="hard"
+    <p class="py-4" v-if="mode === 'showing'">{{ note.text }}</p>
+    <textarea
+      wrap="hard"
+      v-if="mode === 'editing'"
+      :placeholder="placeholder"
+      v-model="editingContent"
+      class="w-full h-64 p-4 my-8 border-2 rounded focus:outline-none focus:shadow-outline focus:border-teal-500"
+    ></textarea>
+    <div class="flex justify-between mb-4">
+      <base-button
+        variant="TEAL"
+        @click.native="save"
         v-if="mode === 'editing'"
-        :placeholder="placeholder"
-        v-model="editingContent"
-      ></textarea>
-    </div>
-    <div class="note__bottom-controls">
-      <base-button @click.native="save" v-if="mode === 'editing'" primary>Save</base-button>
-      <base-button @click.native="cancel" v-if="mode === 'editing'" cancel>Cancel</base-button>
+        class="w-1/3"
+      >
+        Save
+      </base-button>
+      <base-button
+        variant="LIGHTGRAY"
+        @click.native="cancel"
+        v-if="mode === 'editing'"
+        class="w-1/3"
+      >
+        Cancel
+      </base-button>
     </div>
   </div>
 </template>
@@ -91,6 +104,7 @@ export default {
     },
     play: function () {
       const player = this.playerHolder.get();
+
       player.pause();
       player.currentTime(this.note.time);
       player.play();
@@ -114,91 +128,7 @@ export default {
   },
 };
 </script>
-<style scoped>
-.note {
-  display: grid;
-  grid-template-areas:
-    "top-controls"
-    "content"
-    "bottom-controls";
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 1rem;
-}
-
-.note__top-controls {
-  grid-area: top-controls;
-  display: flex;
-  justify-content: space-between;
-}
-
-.note__timestamp {
-  font-weight: 600;
-  align-self: center;
-  margin-left: 0.3rem;
-  color: var(--dark-blue);
-}
-
-.note__timestamp:hover {
-  color: var(--light-red);
-}
-
-.icon-group__play {
-  display: flex;
-  justify-content: flex-start;
-  align-self: center;
-}
-
-.icon-group__edit {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.note__bottom-controls {
-  grid-area: bottom-controls;
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: space-between;
-}
-
-.note__content,
-.note__input {
-  grid-area: content;
-  width: inherit;
-  margin: 0 0.5rem;
-}
-
-.note__input {
-  display: flex;
-  justify-items: center;
-}
-
-.note__content > p {
-  overflow-x: auto;
-  max-height: 10rem;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  word-break: break-all;
-  padding: 0 2rem 0 0;
-}
-
-textarea {
-  width: 100%;
-  max-width: 100%;
-  height: 15rem;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  margin: 2rem 0;
-  padding: 1rem;
-}
-
-textarea:invalid {
-  border: 2px solid var(--btn-delete-bg);
-}
-
-textarea::placeholder {
-  color: var(--dark-blue);
-}
-
+<style scoped lang="postcss">
 /* custom scrollbar */
 ::-webkit-scrollbar {
   width: 0.5rem;

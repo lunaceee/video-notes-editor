@@ -1,19 +1,35 @@
 <template>
-  <video ref="videoPlayer" class="video-js"></video>
+  <div>
+    <video
+      class="video-js w-full h-vhxs md:h-vhmd xl:h-vhxl"
+      ref="videoPlayer"
+    ></video>
+    <add-note-button
+      :playerHolder="playerHolder"
+      :url="url"
+      :addNote="addNote"
+      :clickedPlay="clickedPlay"
+    />
+  </div>
 </template>
 
 <script>
 import videojs from "video.js";
 import "@devmobiliza/videojs-vimeo/dist/videojs-vimeo.esm";
+import addNoteButton from "@/components/addNoteButton.vue";
 
 export default {
   name: "videoPlayer",
+  components: {
+    addNoteButton,
+  },
   data() {
     return {
       player: null,
       startTime: {
         type: Number,
       },
+      clickedPlay: false,
     };
   },
   props: {
@@ -23,6 +39,18 @@ export default {
       type: Boolean,
     },
     playerHolder: { type: Object },
+  },
+  methods: {
+    clickPlay() {
+      this.clickedPlay = true;
+    },
+    addNote() {
+      this.$store.commit("addNote", {
+        video: this.$store.getters.video(this.url),
+        time: this.playerHolder.get().currentTime(),
+        duration: this.playerHolder.get().duration(),
+      });
+    },
   },
   mounted() {
     this.player = videojs(this.$refs.videoPlayer, {
@@ -41,9 +69,18 @@ export default {
     });
 
     const playerHolder = this.playerHolder;
+    const clickPlay = this.clickPlay;
+
+    //A hacky way to ensure player is loaded. Mainly for the purpose of starting the video at a specific timestamp, without having to click twice on the play button
+    this.player.ready(() => {
+      this.player.play();
+      setTimeout(() => {
+        this.player.pause();
+      }, 1000);
+    });
 
     this.player.on("firstplay", function () {
-      console.log("playerholder notify");
+      clickPlay();
       if (playerHolder) {
         playerHolder.notify("firstplay");
       }
