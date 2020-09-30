@@ -22,7 +22,7 @@
             <h4 class="font-bold text-xl mb-2">
               {{ video.videoTitle }}
             </h4>
-            <div class="p-2">
+            <!-- <div class="p-2">
               <base-button
                 variant="RED"
                 class="w-2/5"
@@ -31,7 +31,7 @@
               >
                 delete
               </base-button>
-            </div>
+            </div> -->
           </div>
         </div>
       </router-link>
