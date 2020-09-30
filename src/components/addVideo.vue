@@ -5,13 +5,11 @@
     id="addVideo"
   >
     <input
-      class="sm:w-2/3 w-full my-2 sm:mx-4 sm:my-0 h-10 placeholder-gray-500 border rounded px-2"
+      class="sm:w-2/3 w-full my-2 sm:mx-4 sm:my-0 h-10 placeholder-gray-500 border rounded px-2 focus:outline-none focus:shadow-outline"
       type="text"
       placeholder="Paste in a video URL..."
     />
-    <base-button variant="RED" class="w-full sm:w-1/5" type="submit">
-      add video
-    </base-button>
+    <base-button variant="RED" class="w-full sm:w-1/5"> add video </base-button>
   </form>
 </template>
 <script>

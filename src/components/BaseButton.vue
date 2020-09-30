@@ -15,7 +15,11 @@ export default {
         GRAY: "bg-gray-500 border-gray-700",
         LIGHTGRAY:
           "bg-gray-300 border-gray-400 hover:bg-gray-200 hover:border-fray-300 text-gray-700",
+        DARKGRAY:
+          "bg-gray-700 border-gray-900 hover:bg-gray-500 hover:border-gray-600",
         RED: "bg-red-500 border-red-700 hover:bg-red-300 hover:border-red-400",
+        DARKRED:
+          "bg-red-800 border-red-900 hover:bg-red-500 hover:border-red-600",
         ORANGE: "bg-orange-500 border-orange-700",
         YELLOW: "bg-yellow-500 border-yellow-700",
         GREEN: "bg-green-500 border-green-700",

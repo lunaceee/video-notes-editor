@@ -6,7 +6,7 @@
       </base-button>
     </div>
     <div v-else>
-      <base-button @click.native="addNote" variant="TEAL" class="w-full">
+      <base-button @click.native="addNote" variant="RED" class="w-full">
         add note
       </base-button>
     </div>

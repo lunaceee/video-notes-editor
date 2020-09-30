@@ -16,17 +16,10 @@
   }
 
   h3 {
-    @apply text-lg;
+    @apply text-lg font-bold;
   }
 
   p {
     @apply text-teal-900;
-  }
-
-}
-
-@layer components {
-  .btn {
-    @apply rounded uppercase w-full py-2 px-4 font-bold border-b-4 h-10 text-white transition duration-300 ease-in-out;
   }
 }

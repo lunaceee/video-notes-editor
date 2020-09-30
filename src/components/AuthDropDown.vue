@@ -5,8 +5,8 @@
       aria-labelledby="dropdownMenuButton"
       @click.native="toggleDropdown"
       v-click-outside="closeDropdown"
-      variant="TEAL"
-      class="w-32"
+      variant="DARKGRAY"
+      class="w-24"
     >
       Account
     </base-button>
@@ -18,11 +18,11 @@
       <router-link
         :to="{ name: 'signup' }"
         v-if="showSignup"
-        class="block px-4 py-2 text-gray-800 hover:bg-teal-500 hover:text-white"
+        class="block px-4 py-2 text-gray-800 hover:bg-gray-500 hover:text-white"
         >Sign up</router-link
       >
       <router-link
-        class="block px-4 py-2 text-gray-800 hover:bg-teal-500 hover:text-white"
+        class="block px-4 py-2 text-gray-800 hover:bg-gray-500 hover:text-white"
         :to="{ name: 'login' }"
         v-if="showLogin"
         >Log in</router-link
@@ -34,8 +34,8 @@
       :class="[isOpen ? 'visible' : 'invisible']"
     >
       <a
-        class="block px-4 py-2 text-gray-800 hover:bg-teal-500 hover:text-white"
-        @click.native="logOut"
+        class="block px-4 py-2 text-gray-800 hover:bg-gray-500 hover:text-white"
+        @click="logOut"
         v-if="showLogout"
         >Log out</a
       >

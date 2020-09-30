@@ -22,13 +22,13 @@
           required
         />
       </div>
-      <base-button variant="RED" type="submit"> Sign up </base-button>
+      <base-button variant="RED"> Sign up </base-button>
       <div class="divide-dotted divide-y-2 divide-gray-500">
         <div class="text-center py-2">or</div>
       </div>
       <h2 class="text-center">Already have an account?</h2>
       <router-link :to="{ name: 'login' }">
-        <base-button variant="TEAL" class="w-full"> Log in </base-button>
+        <base-button variant="DARKGRAY" class="w-full"> Log in </base-button>
       </router-link>
     </form>
   </div>

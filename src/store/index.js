@@ -4,7 +4,6 @@ import youtube from 'videojs-youtube';
 import { getVideoId } from '../utils';
 import { db } from '../firebase';
 
-'' + youtube; // hack for linter fixing
 Vue.use(Vuex);
 
 //Todo: change it to async function

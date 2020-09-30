@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import videojs from "video.js";
+import videojs from "videojs-youtube/node_modules/video.js/dist/video.es";
 import "@devmobiliza/videojs-vimeo/dist/videojs-vimeo.esm";
 import addNoteButton from "@/components/addNoteButton.vue";
 

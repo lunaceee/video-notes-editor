@@ -19,19 +19,18 @@
             alt="video thumbnail"
           />
           <div class="p-4">
-            <h4 class="font-bold text-xl mb-2">
+            <h3 class="mb-2">
               {{ video.videoTitle }}
-            </h4>
-            <!-- <div class="p-2">
+            </h3>
+            <div class="p-2">
               <base-button
-                variant="RED"
+                variant="DARKRED"
                 class="w-2/5"
-                @click.native="deleteVideo(video.videoId)"
-                type="submit"
+                @click.native.prevent="deleteVideo(video.videoId)"
               >
                 delete
               </base-button>
-            </div> -->
+            </div>
           </div>
         </div>
       </router-link>

@@ -21,7 +21,7 @@
       />
     </main>
     <footer
-      class="grid grid-row-3 h-32 items-center y-10 bg-teal-600 text-white text-center"
+      class="grid grid-row-3 h-32 items-center y-10 bg-gray-900 text-white text-center"
     >
       <span>
         Made by

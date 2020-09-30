@@ -22,7 +22,7 @@
           class="p-1 rounded border-2"
         />
       </div>
-      <base-button variant="TEAL" type="submit"> Log in </base-button>
+      <base-button variant="DARKGRAY"> Log in </base-button>
       <div class="divide-solid divide-y-2 divide-gray-500">
         <div class="text-center py-2">or</div>
       </div>

@@ -1,32 +1,36 @@
 <template>
-  <div class="flex flex-col border-b-2 border-teal-600 mb-8">
+  <div class="flex flex-col border-b-2 border-red-600 mb-8">
     <div class="flex flex-row justify-between">
       <button @click="play" class="flex">
-        <IconPlay class="hover:text-red-500" />
-        <span class="text-teal-500 hover:text-red-500 mx-1">{{
+        <IconPlay class="hover:text-red-400" />
+        <span class="text-red-500 hover:text-red-400 mx-1">{{
           formatTimestamp(note.time)
         }}</span>
       </button>
       <div>
         <button v-if="mode === 'showing'" @click="edit" class="px-2">
-          <IconEdit class="hover:text-red-500" />
+          <IconEdit class="hover:text-red-400" />
         </button>
         <button @click="deleteNote">
-          <IconTrash class="hover:text-red-500" />
+          <IconTrash class="hover:text-red-400" />
         </button>
       </div>
     </div>
-    <p class="py-4" v-if="mode === 'showing'">{{ note.text }}</p>
+    <article
+      class="py-4 break-all whitespace-pre-wrap overflow-auto"
+      v-if="mode === 'showing'"
+    >
+      {{ note.text }}
+    </article>
     <textarea
-      wrap="hard"
       v-if="mode === 'editing'"
       :placeholder="placeholder"
       v-model="editingContent"
-      class="w-full h-64 p-4 my-8 border-2 rounded focus:outline-none focus:shadow-outline focus:border-teal-500"
+      class="w-full h-64 p-4 my-8 border-2 rounded focus:outline-none focus:shadow-outline focus:border-red-500"
     ></textarea>
     <div class="flex justify-between mb-4">
       <base-button
-        variant="TEAL"
+        variant="RED"
         @click.native="save"
         v-if="mode === 'editing'"
         class="w-1/3"
@@ -128,28 +132,3 @@ export default {
   },
 };
 </script>
-<style scoped lang="postcss">
-/* custom scrollbar */
-::-webkit-scrollbar {
-  width: 0.5rem;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  -webkit-border-radius: 0.5rem;
-  border-radius: 0.5rem;
-  margin-right: 0.2rem;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 0.5rem;
-  border-radius: 0.5rem;
-  background: var(--light-blue);
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-}
-::-webkit-scrollbar-thumb:window-inactive {
-  background: var(--light-blue);
-}
-</style>
