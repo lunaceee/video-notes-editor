@@ -9,6 +9,7 @@ import Feedback from '@/views/Feedback.vue';
 Vue.use(VueRouter);
 
 export default new VueRouter({
+	mode: 'history',//remove trailing hash from url
 	routes: [
 		{
 			path: '/',

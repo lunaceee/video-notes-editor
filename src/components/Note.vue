@@ -1,8 +1,9 @@
 <template>
   <div class="flex flex-col border-b-2 border-red-600 mb-8">
     <div class="flex flex-row justify-between">
-      <button @click="play" class="flex">
-        <IconPlay class="hover:text-red-400" />
+      <button @click="togglePlay" class="flex content-center">
+        <IconPlay v-show="!isPlaying" class="hover:text-red-400" />
+        <IconPause v-show="isPlaying" />
         <span class="text-red-500 hover:text-red-400 mx-1">{{
           formatTimestamp(note.time)
         }}</span>
@@ -23,10 +24,12 @@
       {{ note.text }}
     </article>
     <textarea
+      v-on:change="onChangeNote"
+      v-on:keyup="onChangeNote"
       v-if="mode === 'editing'"
       :placeholder="placeholder"
       v-model="editingContent"
-      class="w-full h-64 p-4 my-8 border-2 rounded focus:outline-none focus:shadow-outline focus:border-red-500"
+      class="w-full h-64 p-4 my-8 border-2 rounded focus:outline-none focus:border-red-500"
     ></textarea>
     <div class="flex justify-between mb-4">
       <base-button
@@ -34,6 +37,7 @@
         @click.native="save"
         v-if="mode === 'editing'"
         class="w-1/3"
+        :disabled="!isChanged"
       >
         Save
       </base-button>
@@ -53,6 +57,7 @@ import { bus } from "../main";
 import IconEdit from "@/assets/icons/IconEdit.svg";
 import IconPlay from "@/assets/icons/IconPlay.svg";
 import IconTrash from "@/assets/icons/IconTrash.svg";
+import IconPause from "@/assets/icons/IconPause.svg";
 
 export default {
   name: "videoNote",
@@ -60,12 +65,15 @@ export default {
     return {
       mode: "showing",
       editingContent: this.note.text,
+      isPlaying: false,
+      isChanged: false,
     };
   },
   components: {
     IconPlay,
     IconEdit,
     IconTrash,
+    IconPause,
   },
   props: {
     placeholder: {
@@ -95,9 +103,13 @@ export default {
     edit: function () {
       this.editingContent = this.note.text;
       this.mode = "editing";
+      this.isChanged = false;
     },
     cancel: function () {
       this.mode = "showing";
+    },
+    onChangeNote: function () {
+      this.isChanged = true;
     },
     save: function () {
       this.$store.commit("updateNote", {
@@ -106,12 +118,18 @@ export default {
       });
       this.mode = "showing";
     },
-    play: function () {
+    togglePlay: function () {
       const player = this.playerHolder.get();
 
-      player.pause();
-      player.currentTime(this.note.time);
-      player.play();
+      if (this.isPlaying) {
+        player.pause();
+        this.isPlaying = false;
+      } else {
+        this.isPlaying = true;
+        player.pause();
+        player.currentTime(this.note.time);
+        player.play();
+      }
     },
     formatTimestamp: function (time) {
       const dateObj = new Date(time * 1000);

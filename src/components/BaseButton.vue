@@ -1,7 +1,11 @@
 <template>
   <button
     class="rounded border-b-4 text-white text-sm focus:outline-none focus:shadow-outline transition duration-300 ease-in-out uppercase h-10"
-    :class="VARIANT_MAPS[variant]"
+    :class="[
+      VARIANT_MAPS[variant],
+      disabled ? 'bg-opacity-50 cursor-not-allowed' : '',
+    ]"
+    :disabled="disabled"
   >
     <slot />
   </button>
@@ -36,6 +40,10 @@ export default {
     variant: {
       type: String,
       default: "TEAL",
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
 };
