@@ -2,18 +2,28 @@
   <div class="flex flex-col border-b-2 border-red-600 mb-8">
     <div class="flex flex-row justify-between">
       <button @click="togglePlay" class="flex content-center">
-        <IconPlay v-show="!isPlaying" class="hover:text-red-400" />
-        <IconPause v-show="isPlaying" />
+        <IconPlay
+          v-show="!isPlaying"
+          class="stroke-current stroke-2 text-red-500 h-6 w-6 hover:text-red-400"
+        />
+        <IconPause
+          v-show="isPlaying"
+          class="fill-current text-red-500 h-6 w-6 hover:text-red-400"
+        />
         <span class="text-red-500 hover:text-red-400 mx-1">{{
           formatTimestamp(note.time)
         }}</span>
       </button>
       <div>
         <button v-if="mode === 'showing'" @click="edit" class="px-2">
-          <IconEdit class="hover:text-red-400" />
+          <IconEdit
+            class="stroke-current stroke-2 text-red-500 h-6 w-6 hover:text-red-400"
+          />
         </button>
         <button @click="deleteNote">
-          <IconTrash class="hover:text-red-400" />
+          <IconTrash
+            class="stroke-current stroke-2 text-red-500 h-6 w-6 hover:text-red-400"
+          />
         </button>
       </div>
     </div>
