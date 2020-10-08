@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col border-b-2 border-red-600 mb-8">
     <div class="flex flex-row justify-between">
-      <button @click="togglePlay" class="flex content-center">
+      <button @click="noteTogglePlay" class="flex content-center">
         <IconPlay
           v-show="!isPlaying"
           class="stroke-current stroke-2 text-red-500 h-6 w-6 hover:text-red-400"
@@ -63,11 +63,11 @@
   </div>
 </template>
 <script>
-import { bus } from "../main";
 import IconEdit from "@/assets/icons/IconEdit.svg";
 import IconPlay from "@/assets/icons/IconPlay.svg";
 import IconTrash from "@/assets/icons/IconTrash.svg";
 import IconPause from "@/assets/icons/IconPause.svg";
+import { mapState } from "vuex";
 
 export default {
   name: "videoNote",
@@ -75,9 +75,14 @@ export default {
     return {
       mode: "showing",
       editingContent: this.note.text,
-      isPlaying: false,
       isChanged: false,
     };
+  },
+  computed: {
+    ...mapState(["playingNote"]),
+    isPlaying: function () {
+      return this.playingNote === this.noteIndex;
+    },
   },
   components: {
     IconPlay,
@@ -90,8 +95,11 @@ export default {
       default: "Curiosity nourishes the cat...",
       type: String,
     },
-    playerHolder: {
-      type: Object,
+    playNote: {
+      type: Function,
+    },
+    pauseAll: {
+      type: Function,
     },
     video: {
       default: () => {},
@@ -110,6 +118,11 @@ export default {
     },
   },
   methods: {
+    noteTogglePlay: function () {
+      if (this.playingNote === this.noteIndex) {
+        this.pauseAll();
+      } else this.playNote(this.note.time, this.noteIndex);
+    },
     edit: function () {
       this.editingContent = this.note.text;
       this.mode = "editing";
@@ -128,19 +141,7 @@ export default {
       });
       this.mode = "showing";
     },
-    togglePlay: function () {
-      const player = this.playerHolder.get();
 
-      if (this.isPlaying) {
-        player.pause();
-        this.isPlaying = false;
-      } else {
-        this.isPlaying = true;
-        player.pause();
-        player.currentTime(this.note.time);
-        player.play();
-      }
-    },
     formatTimestamp: function (time) {
       const dateObj = new Date(time * 1000);
       const minutes = dateObj.getUTCMinutes();

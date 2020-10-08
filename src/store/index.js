@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import youtube from 'videojs-youtube';
-import { getVideoId } from '../utils';
+import { isYouTube, isVimeo, getVideoId } from '../utils';
 import { db } from '../firebase';
 
 Vue.use(Vuex);
@@ -27,8 +27,21 @@ async function getVideoTitle(newUrl) {
 	}
 }
 
+async function getVimeoTitle(newUrl) {
+	const vimeoId = getVideoId(newUrl)
+		try {
+		const response = await fetch(`https://vimeo.com/api/v2/video/${vimeoId}.json`);
+			const data = await response.json();
+		return data[0].title;
+	} catch (e) {
+		console.log(e);
+		// Return empty string if there's an error
+		return '';
+	}
+}
+
 export const store = new Vuex.Store({
-	state: { videos: [], username: null },
+	state: { videos: [], username: null, playingNote: null },
 	getters: {
 		video: (state) => (url) => {
 			for (const video of state.videos) {
@@ -57,6 +70,9 @@ export const store = new Vuex.Store({
 		},
 		unsetUsername: (state) => {
 			state.username = null;
+		},
+		changePlayingNote: (state, index) => {
+			state.playingNote = index
 		},
 		addVideo: (state, { newUrl, videoTitle }) => {
 			const videoId = getVideoId(newUrl);
@@ -87,7 +103,7 @@ export const store = new Vuex.Store({
 			state.videos = [];
 		},
 		addNote: (state, { video, time, duration }) => {
-			video.notes.unshift({
+			video.notes.push({
 				text: '',
 				time,
 				duration
@@ -106,9 +122,15 @@ export const store = new Vuex.Store({
 	},
 	actions: {
 		async addVideo({ commit }, { newUrl }) {
-			const videoTitle = await getVideoTitle(newUrl);
+			let videoTitle;
+			if (isVimeo) {
+				videoTitle = await getVimeoTitle(newUrl)
+			} else if (isYouTube) {
+				videoTitle = await getVideoTitle(newUrl)
+			}
+
 			commit('addVideo', { newUrl, videoTitle });
-		}
+		},
 	}
 });
 

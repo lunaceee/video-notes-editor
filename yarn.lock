@@ -1514,14 +1514,6 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@devmobiliza/videojs-vimeo@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@devmobiliza/videojs-vimeo/-/videojs-vimeo-0.6.0.tgz#fe803914fa366ef72891ec04764cfef9bff8d1b7"
-  integrity sha512-ffJVbYqnA5+VAZguzimeLolhwpvlG3tzSO0UPZ8iQUkEF0X9WQGh0c3UryDx6H3VgnUhqIWzsEHfWbaI9Jx1Hw==
-  dependencies:
-    "@vimeo/player" "^2.10.0"
-    video.js "^7.6.6"
-
 "@firebase/analytics-types@0.3.1":
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/@firebase/analytics-types/-/analytics-types-0.3.1.tgz#3c5f5d71129c88295e17e914e34b391ffda1723c"
@@ -1990,9 +1982,9 @@
     is-function "^1.0.1"
 
 "@vimeo/player@^2.10.0":
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/@vimeo/player/-/player-2.11.0.tgz#668d3af8fb1a36af11ce024851ba10475a47eb6d"
-  integrity sha512-zmxXOI4MRN80QUGp5jwKNGgVH8k/vlwG9M+9ChLqvCmorfo08R/ry3DMgTuZCzRRe95AwUWo+1f0H1v20N3rgQ==
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/@vimeo/player/-/player-2.14.0.tgz#0d7826162ab072505e2eadb221ab9c8f79507a0d"
+  integrity sha512-hTeROVnkcyboRjetPi9tasryrjDPVsmr/73clwbYsBpSk8k5q1ygFyvkWXQShv9Rc+hvXM5RJXPd7i7Wh7dqcA==
   dependencies:
     native-promise-only "0.8.1"
     weakmap-polyfill "2.0.1"
@@ -9784,7 +9776,7 @@ video.js@7.8.4:
     videojs-font "3.2.0"
     videojs-vtt.js "^0.15.2"
 
-"video.js@^5.6.0 || ^6.2.8 || ^7.0.2", "video.js@^6.8.0 || ^7.0.0", video.js@^7.6.6:
+"video.js@^5.6.0 || ^6.2.8 || ^7.0.2", "video.js@^6.8.0 || ^7.0.0":
   version "7.7.6"
   resolved "https://registry.yarnpkg.com/video.js/-/video.js-7.7.6.tgz#f2c492387682318a21ef442cf63847d72faaa1db"
   integrity sha512-1GRhDHab2PZYqeFXJAH3ypLeq91uKbjqXrxwfZXyz6phwwyI1i5j6VeUkoVLxilrT+2KZ1IxOa0wRijnITDzWQ==
@@ -9895,6 +9887,14 @@ vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
+
+vue-vimeo-player@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/vue-vimeo-player/-/vue-vimeo-player-0.1.0.tgz#579edbed527487b31f2a2c552c8deffbcd988018"
+  integrity sha512-kozPRMBBJpIZ9SVXWwB9k6HomUmDl39+mmnjbfRLfZgI5q+Q2yCI3lzk3wJemvAbyXo44Xp75SIaNH0eWzGLSg==
+  dependencies:
+    "@vimeo/player" "^2.10.0"
+    object-assign "^4.1.1"
 
 vue@^2.6.11:
   version "2.6.11"

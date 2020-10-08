@@ -10,6 +10,23 @@ export function getVideoId(url) {
   }
 
   if (url.match(/vimeo\.com/)) {
-    return url.split("video.com/")[1];
+    return url.split("vimeo.com/")[1];
   }
 }
+
+export function isVimeo(url) {
+  if (url.match(/vimeo/)) {
+    return true
+  } else {
+    return false
+  }
+}
+
+export function isYouTube(url) {
+  if (url.match(/youtu/)) {
+    return true
+  } else {
+    return false
+  }
+}
+

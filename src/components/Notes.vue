@@ -4,14 +4,14 @@
       <Note
         :note="note"
         :noteIndex="index"
+        :playNote="playNote"
+        :pauseAll="pauseAll"
         :video="video"
-        :playerHolder="playerHolder"
       />
     </li>
   </ul>
 </template>
 <script>
-import { bus } from "@/main";
 import Note from "./Note.vue";
 
 export default {
@@ -21,7 +21,8 @@ export default {
   },
   props: {
     url: { type: String, required: true },
-    playerHolder: { type: Object },
+    playNote: { type: Function },
+    pauseAll: { type: Function },
   },
   computed: {
     video() {
@@ -29,7 +30,8 @@ export default {
     },
     notes() {
       const video = this.$store.getters.video(this.url);
-      return video.notes;
+      let copyofNotes = [...video.notes];
+      return copyofNotes.reverse();
     },
   },
 };
