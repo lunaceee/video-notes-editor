@@ -13,8 +13,8 @@ function pushToServer(videos, username) {
 	}
 }
 
-async function getVideoTitle(newUrl) {
-	//const lambda_dev = 'http://localhost:8888/';
+async function getYouTubeTitle(newUrl) {
+	//const build_env = 'http://localhost:8888/';
 	const build_env = process.env.BASE_URL;
 	try {
 		const response = await fetch(`${build_env}/.netlify/functions/getTitle?url=${newUrl}`);
@@ -30,7 +30,7 @@ async function getVideoTitle(newUrl) {
 async function getVimeoTitle(newUrl) {
 	const vimeoId = getVideoId(newUrl)
 		try {
-		const response = await fetch(`https://vimeo.com/api/v2/video/${vimeoId}.json`);
+			const response = await fetch(`https://vimeo.com/api/v2/video/${vimeoId}.json`);
 			const data = await response.json();
 		return data[0].title;
 	} catch (e) {
@@ -123,10 +123,10 @@ export const store = new Vuex.Store({
 	actions: {
 		async addVideo({ commit }, { newUrl }) {
 			let videoTitle;
-			if (isVimeo) {
+			if (isVimeo(newUrl)) {
 				videoTitle = await getVimeoTitle(newUrl)
-			} else if (isYouTube) {
-				videoTitle = await getVideoTitle(newUrl)
+			} else if (isYouTube(newUrl)) {
+				videoTitle = await getYouTubeTitle(newUrl)
 			}
 
 			commit('addVideo', { newUrl, videoTitle });
