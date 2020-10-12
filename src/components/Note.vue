@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col border-b-2 border-red-600 mb-8">
+  <div class="flex flex-col p-2 mb-8 border-b-2 border-gray-800">
     <div class="flex flex-row justify-between">
       <button @click="noteTogglePlay" class="flex content-center">
         <IconPlay

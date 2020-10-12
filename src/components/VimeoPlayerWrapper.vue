@@ -52,19 +52,22 @@ export default {
 .player-size-notes > iframe,
 .player-size > iframe {
   width: 100%;
-  height: 20rem;
+  height: auto;
 }
 
 @media (min-width: 768px) {
   .player-size-notes > iframe,
   .player-size > iframe {
-    height: 30rem;
+    height: 23rem;
   }
 }
 
 @media (min-width: 1024px) {
+  .player-size > iframe {
+    height: 35rem;
+  }
   .player-size-notes > iframe {
-    height: 24rem;
+    height: 20rem;
   }
 }
 
@@ -74,16 +77,16 @@ export default {
   }
 
   .player-size-notes > iframe {
-    height: 28rem;
+    height: 26rem;
   }
 }
 
 @media (min-width: 1440px) {
   .player-size > iframe {
-    height: 52rem;
+    height: 50rem;
   }
   .player-size-notes > iframe {
-    height: 33rem;
+    height: 29rem;
   }
 }
 </style>

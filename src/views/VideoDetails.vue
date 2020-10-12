@@ -3,22 +3,20 @@
     class="grid grid-flow-row xl:grid-flow-col gap-8"
     :class="[notesSize === 0 ? 'lg:grid-cols-1' : 'lg:grid-cols-3']"
   >
-    <div class="grid lg:col-span-2 gap-y-2">
-      <div class="bg-yellow-200">
-        <div v-if="isVimeo">
-          <vimeo-player-wrapper
-            :url="url"
-            :playerHolder="playerHolder"
-            :clickedPlay="clickedPlay"
-          />
-        </div>
-        <div v-if="isYouTube">
-          <you-tube-player
-            :url="url"
-            :playerHolder="playerHolder"
-            :clickedPlay="clickedPlay"
-          />
-        </div>
+    <div class="flex flex-col lg:col-span-2 gap-y-2 lg:sticky lg:top-0">
+      <div v-if="isVimeo">
+        <vimeo-player-wrapper
+          :url="url"
+          :playerHolder="playerHolder"
+          :clickedPlay="clickedPlay"
+        />
+      </div>
+      <div v-if="isYouTube">
+        <you-tube-player
+          :url="url"
+          :playerHolder="playerHolder"
+          :clickedPlay="clickedPlay"
+        />
       </div>
       <add-note-button
         :playerHolder="playerHolder"
